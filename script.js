@@ -20,7 +20,7 @@ const translations = {
     "nav.contact": "Contacter le desk",
     "hero.eyebrow": "Negoce physique d'energie depuis Geneve",
     "hero.title": "Un partenaire de marche discipline pour le petrole et les produits raffines.",
-    "hero.lead": "Petrair SA optimise l'approvisionnement et la commercialisation de petrole brut, Jet A-1, ULSD et EN590 en Europe, en Mediterranee, en Afrique et au Moyen-Orient, avec une discipline institutionnelle suisse.",
+    "hero.lead": "Petrair SA optimise l'approvisionnement et la commercialisation de petrole brut, Jet A-1, ULSD 10ppm et LPG en Europe, en Mediterranee, en Afrique et au Moyen-Orient, avec une discipline institutionnelle suisse.",
     "hero.cta1": "Demander une cotation",
     "hero.cta2": "Notre fonctionnement",
     "panel.executionText": "Adosse a LC, inspecte et controle par documents",
@@ -37,7 +37,7 @@ const translations = {
     "products.title": "Barils physiques, coordination logistique et execution structuree.",
     "products.text": "Petrair SA travaille avec des contreparties qualifiees sur des flux de brut et de produits raffines, avec documentation bancaire, inspection independante et controles de risque.",
     "product.crude": "Petrole brut",
-    "product.finance": "Financement structure",
+    "product.lpgText": "Gaz de petrole liquefie, combustible hydrocarbure polyvalent de propane et butane utilise dans de multiples secteurs.",
     "ops.eyebrow": "Comment Petrair opere",
     "ops.title": "Trading, banque et inspection dans un processus controle.",
     "ops.text": "Les transactions sont traitees comme des operations physiques documentees. Origine, contrepartie, inspection, assurance et banque sont controles avant l'execution commerciale.",
@@ -56,7 +56,7 @@ const translations = {
     "nav.contact": "Contactar mesa",
     "hero.eyebrow": "Trading fisico de energia desde Ginebra",
     "hero.title": "Un socio de mercado disciplinado para petroleo y productos refinados.",
-    "hero.lead": "Petrair SA optimiza el suministro y la comercializacion de crudo, Jet A-1, ULSD y EN590 en Europa, el Mediterraneo, Africa y Oriente Medio, con disciplina institucional suiza.",
+    "hero.lead": "Petrair SA optimiza el suministro y la comercializacion de crudo, Jet A-1, ULSD 10ppm y LPG en Europa, el Mediterraneo, Africa y Oriente Medio, con disciplina institucional suiza.",
     "hero.cta1": "Solicitar cotizacion",
     "hero.cta2": "Como operamos",
     "prices.eyebrow": "Referencia de mercado",
@@ -159,8 +159,8 @@ const specContent = {
   },
   diesel: {
     eyebrow: "Diesel",
-    title: "ULSD and EN590",
-    body: "Ultra-low-sulphur diesel meeting EN 590 automotive specification for European, Mediterranean and West African networks. Seasonal CFPP grades by destination.",
+    title: "ULSD 10ppm",
+    body: "Ultra Low Sulphur Diesel meeting stringent automotive, environmental and performance standards for European, Mediterranean and West African networks.",
     rows: [
       ["Cetane number", "Min 51.0"],
       ["Density at 15C", "820.0-845.0 kg/m3"],
@@ -169,16 +169,16 @@ const specContent = {
       ["FAME content", "Max 7.0% v/v"]
     ]
   },
-  finance: {
-    eyebrow: "Structured finance",
-    title: "Documentary execution",
-    body: "A disciplined back-to-back model that minimises market exposure. Settlement under LC-backed mechanisms, pricing linked to Platts benchmarks, with independent inspection at every transfer point.",
+  lpg: {
+    eyebrow: "Liquefied petroleum gas",
+    title: "LPG",
+    body: "Liquefied Petroleum Gas, principally propane and butane, used across residential, industrial, transport and petrochemical sectors worldwide.",
     rows: [
-      ["Settlement", "LC-backed, bank-controlled"],
-      ["Pricing", "Platts-linked benchmarks"],
-      ["Execution", "Back-to-back, documentary"],
-      ["Inspection", "Recognised inspectors"],
-      ["Insurance", "Transaction-based cover review"]
+      ["Product", "Propane, butane or LPG mix"],
+      ["Storage", "Pressurised or refrigerated terminal infrastructure"],
+      ["Use", "Heating, industry, transport and petrochemical feedstock"],
+      ["Controls", "Quality, quantity and documentation by contract"],
+      ["Execution", "Subject to origin, terminal, vessel and banking review"]
     ]
   }
 };

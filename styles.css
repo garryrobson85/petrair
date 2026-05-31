@@ -562,6 +562,15 @@ a { color: inherit; }
   color: #e7ebf1;
   font-weight: 700;
 }
+.map-band li strong,
+.map-band li span {
+  display: block;
+}
+.map-band li span {
+  color: #aeb8c7;
+  font-size: .88rem;
+  font-weight: 700;
+}
 
 .compliance {
   background: linear-gradient(135deg, #fff 0%, #f8f9fb 55%, #eef4f2 100%);

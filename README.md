@@ -60,6 +60,17 @@ RESEND_API_KEY = a Resend API key for sending the brief by email
 LEAD_TO_EMAIL = garryrobson85@googlemail.com
 ```
 
+Optional AI and Telegram variables:
+
+```text
+OPENROUTER_API_KEY = your OpenRouter key for private AI summary/translation/reply prep
+OPENROUTER_MODEL = deepseek/deepseek-chat-v3-0324
+TELEGRAM_BOT_TOKEN = your Telegram bot token
+TELEGRAM_CHAT_ID = your Telegram chat ID
+```
+
+The Worker always accepts the RFQ and builds a deterministic salesperson brief. If AI fails or no AI key is set, the raw/enriched lead is still delivered through any configured webhook, email or Telegram route.
+
 5. Test locally by opening:
 
 ```text
@@ -72,7 +83,7 @@ index.html?leadBrief=https://silent-butterfly-db1f.garryrobson85.workers.dev/
 const LEAD_BRIEF_URL = "https://silent-butterfly-db1f.garryrobson85.workers.dev/";
 ```
 
-The brief includes company/email context, website reachability, prepared Google/LinkedIn/company-registry search links, suggested verification questions and a reply angle. It is preparation only, not legal KYC or sanctions clearance.
+The brief includes company/email context, website reachability, prepared Google/LinkedIn/company-registry search links, suggested verification questions and a reply angle. With `OPENROUTER_API_KEY`, it also adds private AI summary, translation, prep band and reply draft. It is preparation only, not legal KYC or sanctions clearance.
 
 ## Languages
 
@@ -92,7 +103,7 @@ The remake was checked against the way major energy trading sites present themse
 For Petrair, the important missing pieces were:
 
 - Real logo usage rather than a placeholder mark.
-- Product-specification interactions for crude oil, Jet A-1, ULSD / EN590 and structured finance.
+- Product-specification interactions for crude oil, Jet A-1, ULSD 10ppm and LPG.
 - A visible supply-chain capability section.
 - Official-channel and mandate-verification language.
 - Corporate details for due diligence and AI/search confidence.

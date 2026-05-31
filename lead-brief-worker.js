@@ -1,4 +1,4 @@
-const VERSION = "petrair-lead-brief-2026-05-31-v1";
+const VERSION = "petrair-lead-brief-2026-05-31-v2";
 
 const DEFAULT_LEAD_EMAIL = "garryrobson85@googlemail.com";
 const FREE_EMAIL_DOMAINS = new Set([
@@ -26,10 +26,14 @@ export default {
       return json({ ok: false, error: "Invalid JSON" }, 400);
     }
 
-    const brief = await buildLeadBrief(enquiry);
+    const brief = await buildLeadBrief(enquiry, env);
 
     if (env.LEAD_WEBHOOK_URL) {
       await sendWebhook(env.LEAD_WEBHOOK_URL, brief);
+    }
+
+    if (env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID) {
+      await sendTelegram(env.TELEGRAM_BOT_TOKEN, env.TELEGRAM_CHAT_ID, brief);
     }
 
     if (env.RESEND_API_KEY) {
@@ -40,7 +44,7 @@ export default {
   }
 };
 
-async function buildLeadBrief(enquiry) {
+async function buildLeadBrief(enquiry, env) {
   const email = clean(enquiry.Email);
   const emailDomain = email.includes("@") ? email.split("@").pop().toLowerCase() : "";
   const company = clean(enquiry.Company);
@@ -50,7 +54,7 @@ async function buildLeadBrief(enquiry) {
   const domainInfo = await checkDomain(inferredSite);
   const notes = buildPreparationNotes({ enquiry, emailDomain, company, product, message, domainInfo });
 
-  return {
+  const deterministicBrief = {
     version: VERSION,
     createdAt: new Date().toISOString(),
     lead: {
@@ -86,6 +90,9 @@ async function buildLeadBrief(enquiry) {
       replyAngle: buildReplyAngle(product)
     }
   };
+
+  deterministicBrief.ai = await buildAiPrep(enquiry, deterministicBrief, env);
+  return deterministicBrief;
 }
 
 function buildSummary(enquiry, emailDomain, domainInfo) {
@@ -120,7 +127,10 @@ function buildPreparationNotes({ enquiry, emailDomain, company, product, message
     notes.push("For crude oil, verify grade, origin constraints, lifting window, Incoterm, destination refinery/trader role and documentary chain.");
   }
   if (/ulsd|en590|diesel/i.test(product + " " + message)) {
-    notes.push("For ULSD/EN590, verify sulphur basis, destination, monthly schedule, inspection location and whether pricing is index-linked.");
+    notes.push("For ULSD 10ppm, verify sulphur basis, destination, monthly schedule, inspection location and whether pricing is index-linked.");
+  }
+  if (/\blpg\b|propane|butane|liquefied petroleum/i.test(product + " " + message)) {
+    notes.push("For LPG, verify propane/butane mix, storage basis, terminal, vessel/transport route, pressure/refrigeration requirements and documentary chain.");
   }
 
   notes.push("This brief is preparation only. It is not KYC, sanctions clearance or a decision on legitimacy.");
@@ -140,6 +150,77 @@ function buildQuestions(enquiry) {
 function buildReplyAngle(product) {
   const item = product || "the requested product";
   return `Thank them for the enquiry about ${item}. Keep pricing clearly indicative pending KYC, availability, specification, destination, delivery window, Incoterm and bank/documentary review.`;
+}
+
+async function buildAiPrep(enquiry, brief, env) {
+  if (!env.OPENROUTER_API_KEY) {
+    return {
+      enabled: false,
+      note: "AI prep not enabled. Add OPENROUTER_API_KEY to the Worker if AI summary, translation and draft reply are wanted."
+    };
+  }
+
+  const model = env.OPENROUTER_MODEL || "deepseek/deepseek-chat-v3-0324";
+  const prompt = [
+    "You are preparing a private RFQ briefing for a Geneva physical energy trading desk.",
+    "Do not reject the lead. Treat every enquiry as received. Provide preparation notes only.",
+    "Return compact JSON with keys: summary, language, englishTranslation, prepBand, complianceReviewNotes, suggestedReply, suggestedQuestions.",
+    "prepBand must be one of: ready-to-review, needs-clarification, verify-carefully.",
+    "Never claim sanctions/KYC clearance. Say when human review is required.",
+    "",
+    "RFQ JSON:",
+    JSON.stringify({ enquiry, deterministicBrief: brief }, null, 2)
+  ].join("\n");
+
+  try {
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "authorization": `Bearer ${env.OPENROUTER_API_KEY}`,
+        "content-type": "application/json",
+        "http-referer": "https://petrair.org/",
+        "x-title": "Petrair RFQ Lead Brief"
+      },
+      body: JSON.stringify({
+        model,
+        messages: [
+          { role: "system", content: "You create private salesperson prep notes for commodity RFQs. Output JSON only." },
+          { role: "user", content: prompt }
+        ],
+        temperature: 0.2,
+        max_tokens: 900
+      })
+    });
+
+    if (!response.ok) {
+      return { enabled: true, ok: false, note: `AI request failed with HTTP ${response.status}` };
+    }
+
+    const data = await response.json();
+    const content = data.choices?.[0]?.message?.content || "";
+    return {
+      enabled: true,
+      ok: true,
+      model,
+      ...parseAiJson(content)
+    };
+  } catch (error) {
+    return { enabled: true, ok: false, note: `AI prep failed: ${error.message}` };
+  }
+}
+
+function parseAiJson(content) {
+  try {
+    return JSON.parse(content);
+  } catch {
+    const match = content.match(/\{[\s\S]*\}/);
+    if (match) {
+      try {
+        return JSON.parse(match[0]);
+      } catch {}
+    }
+  }
+  return { raw: content };
 }
 
 async function checkDomain(site) {
@@ -170,6 +251,19 @@ async function sendWebhook(url, brief) {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(brief)
+  });
+}
+
+async function sendTelegram(botToken, chatId, brief) {
+  const message = telegramText(brief);
+  await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: message,
+      disable_web_page_preview: true
+    })
   });
 }
 
@@ -230,8 +324,38 @@ function briefToText(brief) {
     ...prep.suggestedQuestions.map((question) => `- ${question}`),
     "",
     "Reply Angle",
-    prep.replyAngle
+    prep.replyAngle,
+    "",
+    "AI Prep",
+    brief.ai?.enabled ? JSON.stringify(brief.ai, null, 2) : brief.ai?.note || "Not enabled"
   ].join("\n");
+}
+
+function telegramText(brief) {
+  const lead = brief.lead;
+  const ai = brief.ai || {};
+  const aiSummary = ai.summary || ai.note || "AI prep not enabled";
+  const band = ai.prepBand || "manual-review";
+  return [
+    "Petrair RFQ lead brief",
+    "",
+    `Prep: ${band}`,
+    `Product: ${lead.product || "Not supplied"}`,
+    `Company: ${lead.company || "Not supplied"}`,
+    `Contact: ${lead.name || "Not supplied"} <${lead.email || "no email"}>`,
+    `Quantity: ${lead.quantity || "Not supplied"}`,
+    `Destination: ${lead.destination || "Not supplied"}`,
+    "",
+    `Summary: ${aiSummary}`,
+    "",
+    `Website: ${brief.research.inferredCompanyWebsite || "Not inferred"}`,
+    `Domain: ${brief.research.emailDomainType}`,
+    "",
+    "Questions:",
+    ...(ai.suggestedQuestions || brief.salespersonPrep.suggestedQuestions).slice(0, 4).map((question) => `- ${question}`),
+    "",
+    "Preparation only. Not KYC or sanctions clearance."
+  ].join("\n").slice(0, 3900);
 }
 
 function searchUrl(query) {
