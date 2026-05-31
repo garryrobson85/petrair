@@ -52,6 +52,77 @@ a { color: inherit; }
   text-transform: uppercase;
 }
 
+.market-ticker {
+  display: flex;
+  align-items: center;
+  min-height: 38px;
+  overflow: hidden;
+  background: #162235;
+  color: #eef3f8;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.ticker-label {
+  flex: 0 0 auto;
+  align-self: stretch;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 max(16px, calc((100vw - var(--max)) / 2));
+  padding-right: 18px;
+  background: var(--gold);
+  color: #111827;
+  text-decoration: none;
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.ticker-window {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+.ticker-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 26px;
+  min-width: max-content;
+  padding: 0 0 0 26px;
+  white-space: nowrap;
+  animation: ticker-scroll 42s linear infinite;
+}
+.ticker-window:hover .ticker-track { animation-play-state: paused; }
+.ticker-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 26px;
+}
+.ticker-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: .82rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.ticker-item small {
+  color: #aeb8c7;
+  font-size: .68rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.ticker-change.up { color: #75d19f; }
+.ticker-change.down { color: #ef8585; }
+.ticker-loading {
+  color: #c9d2df;
+  font-size: .78rem;
+  font-weight: 800;
+}
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -663,6 +734,13 @@ address a { color: #fff; font-weight: 800; }
 
 @media (max-width: 900px) {
   .notice { display: none; }
+  .market-ticker { min-height: 36px; }
+  .ticker-label {
+    padding-left: 14px;
+    padding-right: 12px;
+    font-size: .65rem;
+  }
+  .ticker-track, .ticker-group { gap: 20px; }
   .nav { height: 64px; }
   .menu-button {
     display: inline-flex;
@@ -706,6 +784,7 @@ address a { color: #fff; font-weight: 800; }
 
 @media (max-width: 620px) {
   .wrap, .nav { width: min(100% - 28px, var(--max)); }
+  .ticker-label { max-width: 108px; line-height: 1.15; }
   .section { padding: 68px 0; }
   .hero-grid { padding: 70px 0; }
   .hero h1 { font-size: clamp(2.35rem, 15vw, 4rem); }
@@ -716,6 +795,10 @@ address a { color: #fff; font-weight: 800; }
   .price-table { min-width: 520px; }
   .actions .button { width: 100%; }
   .map-band { padding: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

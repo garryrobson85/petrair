@@ -302,24 +302,75 @@ function buildPriceBoard() {
   }
 }
 
+function formatPrice(instrument, state) {
+  return `${state.price.toFixed(instrument.decimals)}${instrument.unit ? ` ${instrument.unit}` : ""}`;
+}
+
+function formatChange(instrument, state) {
+  const delta = state.price - state.previous;
+  const pct = state.previous ? (delta / state.previous) * 100 : 0;
+  const rising = delta >= 0;
+  return {
+    rising,
+    text: `${rising ? "+" : "-"}${Math.abs(delta).toFixed(instrument.decimals)} (${Math.abs(pct).toFixed(2)}%)`
+  };
+}
+
+function createTickerGroup(hidden) {
+  const group = document.createElement("span");
+  group.className = "ticker-group";
+  if (hidden) group.setAttribute("aria-hidden", "true");
+
+  for (const instrument of instruments) {
+    const state = priceState[instrument.id];
+    const change = formatChange(instrument, state);
+    const item = document.createElement("span");
+    item.className = "ticker-item";
+
+    const name = document.createElement("small");
+    name.textContent = instrument.name;
+    const price = document.createElement("span");
+    price.textContent = formatPrice(instrument, state);
+    const move = document.createElement("span");
+    move.className = `ticker-change ${change.rising ? "up" : "down"}`;
+    move.textContent = change.text;
+
+    item.append(name, price, move);
+    group.append(item);
+  }
+
+  return group;
+}
+
+function renderTicker() {
+  const track = document.querySelector("#market-ticker-track");
+  if (!track) return;
+  track.textContent = "";
+  track.append(createTickerGroup(false), createTickerGroup(true));
+}
+
 function renderPrices() {
   for (const instrument of instruments) {
     const row = document.querySelector(`[data-instrument="${instrument.id}"]`);
     if (!row) continue;
     const state = priceState[instrument.id];
+    const changeData = formatChange(instrument, state);
     const delta = state.price - state.previous;
     const pct = state.previous ? (delta / state.previous) * 100 : 0;
-    const rising = delta >= 0;
+    const rising = changeData.rising;
     const last = row.querySelector('[data-field="last"]');
     const change = row.querySelector('[data-field="change"]');
     const trend = row.querySelector('[data-field="trend"]');
 
-    last.textContent = state.price.toFixed(instrument.decimals);
-    change.className = `price-change ${rising ? "up" : "down"}`;
+    last.textContent = formatPrice(instrument, state);
+    change.className = `price-change ${changeData.rising ? "up" : "down"}`;
     change.textContent = `${rising ? "▲" : "▼"} ${Math.abs(delta).toFixed(instrument.decimals)} (${Math.abs(pct).toFixed(2)}%)`;
+    change.textContent = changeData.text;
     trend.textContent = "";
     trend.append(createSparkline(state.history));
   }
+
+  renderTicker();
 
   const updated = document.querySelector("#price-updated");
   if (updated) {
