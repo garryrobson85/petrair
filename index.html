@@ -9,6 +9,7 @@
   <meta name="theme-color" content="#111827">
   <link rel="canonical" href="https://petrair.org/">
   <link rel="icon" type="image/png" href="petrair-logo.png">
+  <link rel="preload" as="image" href="petrair-hero-custom.jpg">
   <link rel="stylesheet" href="styles.css">
   <link rel="manifest" href="site.webmanifest">
   <meta property="og:type" content="website">
@@ -16,11 +17,11 @@
   <meta property="og:title" content="Petrair SA | Geneva Energy & Commodities Trading">
   <meta property="og:description" content="Physical crude oil and refined-products trading from Geneva, with disciplined logistics, banking, inspection and compliance.">
   <meta property="og:url" content="https://petrair.org/">
-  <meta property="og:image" content="https://petrair.org/petrair-logo.png">
+  <meta property="og:image" content="https://petrair.org/petrair-hero-custom.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Petrair SA | Geneva Energy & Commodities Trading">
   <meta name="twitter:description" content="Geneva-based physical energy trading for crude oil, Jet A-1, ULSD and EN590.">
-  <meta name="twitter:image" content="https://petrair.org/petrair-logo.png">
+  <meta name="twitter:image" content="https://petrair.org/petrair-hero-custom.jpg">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -28,9 +29,10 @@
       {
         "@type": "Organization",
         "@id": "https://petrair.org/#organization",
-        "name": "Petrair SA",
-        "url": "https://petrair.org/",
-        "logo": "https://petrair.org/petrair-logo.png",
+      "name": "Petrair SA",
+      "url": "https://petrair.org/",
+      "logo": "https://petrair.org/petrair-logo.png",
+      "image": "https://petrair.org/petrair-hero-custom.jpg",
         "legalName": "Petrair SA",
         "foundingLocation": "Geneva, Switzerland",
         "address": {
@@ -142,7 +144,7 @@
   <main id="main">
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero-media" aria-hidden="true">
-        <img src="art-hero.svg" alt="">
+        <img src="petrair-hero-custom.jpg" alt="">
       </div>
       <div class="wrap hero-grid">
         <div class="hero-copy">
@@ -205,25 +207,25 @@
         </div>
         <div class="card-grid">
           <article class="product-card">
-            <img src="art-crude.svg" alt="" loading="lazy">
+            <img src="petrair-crude-custom.jpg" alt="Oil tanker at dusk representing Petrair SA crude oil trading corridors" loading="lazy" width="1100" height="720">
             <h3 data-i18n="product.crude">Crude Oil</h3>
             <p data-i18n="product.crudeText">Origination and distribution of light sweet and medium sour crude streams for refining systems and trading channels.</p>
             <button class="text-button" type="button" data-spec="crude">View specification</button>
           </article>
           <article class="product-card">
-            <img src="art-jet.svg" alt="" loading="lazy">
+            <img src="petrair-jet-custom.jpg" alt="Jet A-1 fuel hydrant on an airport apron representing aviation fuel supply" loading="lazy" width="1100" height="720">
             <h3>Jet A-1</h3>
             <p data-i18n="product.jetText">Aviation turbine fuel handled against recognised specifications, bank-controlled documentation and independent quality inspection.</p>
             <button class="text-button" type="button" data-spec="jet">View specification</button>
           </article>
           <article class="product-card">
-            <img src="art-diesel.svg" alt="" loading="lazy">
+            <img src="petrair-diesel-custom.jpg" alt="Clean refined-products terminal valves and storage tanks for ULSD and EN590" loading="lazy" width="1100" height="720">
             <h3>ULSD and EN590</h3>
             <p data-i18n="product.dieselText">Ultra-low-sulphur diesel and EN590 diesel for European, Mediterranean and West African industrial and transport networks.</p>
             <button class="text-button" type="button" data-spec="diesel">View specification</button>
           </article>
           <article class="product-card">
-            <img src="art-finance.svg" alt="" loading="lazy">
+            <img src="petrair-finance-custom.jpg" alt="Structured trade finance documents and market screen in a Geneva-style office" loading="lazy" width="1100" height="720">
             <h3 data-i18n="product.finance">Structured Finance</h3>
             <p data-i18n="product.financeText">LC-backed settlement, index-linked pricing and back-to-back execution designed to reduce unmanaged market exposure.</p>
             <button class="text-button" type="button" data-spec="finance">View detail</button>
@@ -273,7 +275,39 @@
           <h2 id="reach-title">Supply and marketing across established energy routes.</h2>
         </div>
         <div class="map-band">
-          <img src="world-dots-crop.png" alt="Dotted world map representing Petrair SA trading corridors" loading="lazy">
+          <div class="route-map" role="img" aria-label="Petrair SA route map from Geneva to European, Mediterranean, African, Middle Eastern and Asian energy corridors">
+            <img src="world-dots-crop.png" alt="" loading="lazy" width="1400" height="521">
+            <svg class="route-overlay" viewBox="0 0 1400 521" aria-hidden="true">
+              <defs>
+                <marker id="route-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z"></path>
+                </marker>
+              </defs>
+              <g class="route-lines">
+                <path d="M 690 190 C 635 160 585 158 538 178"></path>
+                <path d="M 690 190 C 646 210 622 250 594 308"></path>
+                <path d="M 690 190 C 736 202 775 226 820 255"></path>
+                <path d="M 690 190 C 804 180 934 216 1038 270"></path>
+                <path d="M 690 190 C 600 212 492 220 382 238"></path>
+              </g>
+              <g class="route-points">
+                <circle class="hub" cx="690" cy="190" r="8"></circle>
+                <circle cx="538" cy="178" r="5"></circle>
+                <circle cx="594" cy="308" r="5"></circle>
+                <circle cx="820" cy="255" r="5"></circle>
+                <circle cx="1038" cy="270" r="5"></circle>
+                <circle cx="382" cy="238" r="5"></circle>
+              </g>
+              <g class="route-labels">
+                <text x="704" y="178">Geneva desk</text>
+                <text x="470" y="162">Europe / Med</text>
+                <text x="520" y="338">Africa</text>
+                <text x="836" y="250">Middle East</text>
+                <text x="1055" y="285">Asia</text>
+                <text x="300" y="232">Atlantic</text>
+              </g>
+            </svg>
+          </div>
           <ul>
             <li>Europe and Mediterranean hubs</li>
             <li>North and West African demand markets</li>
