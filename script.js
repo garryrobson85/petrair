@@ -3,6 +3,9 @@ const menu = document.querySelector("#menu");
 const PRICE_FEED_URL =
   new URLSearchParams(location.search).get("feed") ||
   "https://petrair-prices.garryrobson85.workers.dev/";
+const LEAD_BRIEF_URL =
+  new URLSearchParams(location.search).get("leadBrief") ||
+  "https://silent-butterfly-db1f.garryrobson85.workers.dev/";
 const PRICE_REFRESH_MS = 60000;
 const RTL_LANGUAGES = new Set(["ar"]);
 
@@ -494,6 +497,18 @@ form?.addEventListener("submit", (event) => {
   for (const [key, value] of data.entries()) {
     const text = String(value).trim();
     if (text) lines.push(`${key}: ${text}`);
+  }
+
+  if (LEAD_BRIEF_URL) {
+    const payload = Object.fromEntries([...data.entries()].map(([key, value]) => [key, String(value).trim()]));
+    payload.Page = location.href;
+    payload.SubmittedAt = new Date().toISOString();
+    fetch(LEAD_BRIEF_URL, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(payload),
+      keepalive: true
+    }).catch(() => {});
   }
 
   const subject = encodeURIComponent(`Petrair SA enquiry - ${data.get("Product") || "Trading"}`);

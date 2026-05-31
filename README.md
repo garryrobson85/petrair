@@ -40,6 +40,40 @@ The latest Worker code is included in `cloudflare-worker.js`. Use that file as t
 https://petrair-prices.garryrobson85.workers.dev/?debug=1
 ```
 
+## Private Lead Brief Setup
+
+The RFQ form can also send a private salesperson prep brief. This is not visible to the website visitor and does not reject or rank enquiries publicly.
+
+1. Create another Cloudflare Worker.
+2. Paste in the contents of `lead-brief-worker.js`.
+3. Deploy it.
+4. Add one of these Worker variables:
+
+```text
+LEAD_WEBHOOK_URL = a private Zapier / Make / Google Apps Script webhook
+```
+
+or:
+
+```text
+RESEND_API_KEY = a Resend API key for sending the brief by email
+LEAD_TO_EMAIL = garryrobson85@googlemail.com
+```
+
+5. Test locally by opening:
+
+```text
+index.html?leadBrief=https://silent-butterfly-db1f.garryrobson85.workers.dev/
+```
+
+6. When ready, set the Worker URL permanently near the top of `script.js`:
+
+```js
+const LEAD_BRIEF_URL = "https://silent-butterfly-db1f.garryrobson85.workers.dev/";
+```
+
+The brief includes company/email context, website reachability, prepared Google/LinkedIn/company-registry search links, suggested verification questions and a reply angle. It is preparation only, not legal KYC or sanctions clearance.
+
 ## Languages
 
 The language selector is in the top navigation. It stores the selected language in the browser so returning visitors keep their choice.
