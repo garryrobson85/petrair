@@ -152,7 +152,7 @@
           <h1 id="hero-title" data-i18n="hero.title">A global market for oil and energy products.</h1>
           <p class="lead" data-i18n="hero.lead">Petrair SA optimises the supply and marketing of crude oil and refined products from Geneva across Europe, the Mediterranean, Africa and the Middle East.</p>
           <div class="actions">
-            <a class="button primary" href="#contact" data-i18n="hero.cta1">Request a quotation</a>
+            <a class="button primary" href="#contact" data-open-rfq data-i18n="hero.cta1">Request a quotation</a>
             <a class="button secondary" href="#products" data-i18n="hero.cta2">Explore our trading</a>
           </div>
         </div>
@@ -410,7 +410,39 @@
             <a href="tel:+41223196403">+41 22 319 64 03</a>
           </address>
         </div>
-        <form class="rfq-form" id="rfq-form">
+        <div class="rfq-panel">
+          <p class="eyebrow">RFQ intake</p>
+          <h3>Prepare a concise enquiry for the Geneva desk.</h3>
+          <p>Product, quantity, destination, delivery timing and settlement expectations are enough to start a qualified review.</p>
+          <button class="button primary" type="button" data-open-rfq>Open RFQ form</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div>
+        <img class="footer-logo" src="petrair-logo.png" alt="" width="40" height="38">
+        <strong>Petrair SA</strong>
+        <p data-i18n="footer.tagline">Geneva energy and commodities trading.</p>
+      </div>
+      <div>
+        <a href="#products" data-i18n="nav.products">Products</a>
+        <a href="#prices" data-i18n="nav.prices">Prices</a>
+        <a href="#operations" data-i18n="nav.operations">Operations</a>
+        <a href="#compliance" data-i18n="nav.compliance">Compliance</a>
+        <a href="#contact" data-i18n="footer.contact">Contact</a>
+      </div>
+      <p data-i18n="footer.legal">Copyright 2026 Petrair SA. Information only. Not an offer to transact.</p>
+    </div>
+  </footer>
+  <div class="modal" id="rfq-modal" hidden>
+    <div class="modal-panel rfq-modal-panel" role="dialog" aria-modal="true" aria-labelledby="rfq-modal-title">
+      <button class="modal-close rfq-modal-close" type="button" aria-label="Close RFQ form">×</button>
+      <p class="eyebrow" data-i18n="contact.eyebrow">Trading desk</p>
+      <h2 id="rfq-modal-title" data-i18n="contact.title">Request a quotation.</h2>
+      <form class="rfq-form" id="rfq-form">
           <label><span data-i18n="form.product">Product</span>
             <select name="Product">
               <option>Crude Oil</option>
@@ -441,27 +473,8 @@
           <button class="button primary" type="submit" data-i18n="form.submit">Open email enquiry</button>
           <p class="form-note" id="form-note" role="status"></p>
         </form>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="wrap footer-grid">
-      <div>
-        <img class="footer-logo" src="petrair-logo.png" alt="" width="40" height="38">
-        <strong>Petrair SA</strong>
-        <p data-i18n="footer.tagline">Geneva energy and commodities trading.</p>
-      </div>
-      <div>
-        <a href="#products" data-i18n="nav.products">Products</a>
-        <a href="#prices" data-i18n="nav.prices">Prices</a>
-        <a href="#operations" data-i18n="nav.operations">Operations</a>
-        <a href="#compliance" data-i18n="nav.compliance">Compliance</a>
-        <a href="#contact" data-i18n="footer.contact">Contact</a>
-      </div>
-      <p data-i18n="footer.legal">Copyright 2026 Petrair SA. Information only. Not an offer to transact.</p>
     </div>
-  </footer>
+  </div>
   <div class="modal" id="spec-modal" hidden>
     <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <button class="modal-close" type="button" aria-label="Close specification">×</button>

@@ -846,9 +846,9 @@ a { color: inherit; }
 }
 .contact-grid {
   display: grid;
-  grid-template-columns: .84fr 1.16fr;
+  grid-template-columns: 1fr .82fr;
   gap: 44px;
-  align-items: start;
+  align-items: center;
 }
 .contact p { color: #d9e1ea; }
 address {
@@ -857,20 +857,49 @@ address {
   font-style: normal;
 }
 address a { color: #fff; font-weight: 800; }
+.rfq-panel {
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 8px;
+  padding: 28px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.11), rgba(255,255,255,.035)),
+    radial-gradient(circle at 86% 18%, rgba(185,134,47,.22), transparent 34%);
+  box-shadow: 0 24px 70px rgba(0,0,0,.22);
+}
+.rfq-panel h3 {
+  margin: 10px 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  font-size: clamp(1.55rem, 3vw, 2.35rem);
+  line-height: 1.05;
+}
+.rfq-panel p:not(.eyebrow) {
+  margin-bottom: 22px;
+}
+.rfq-modal-panel {
+  width: min(900px, 100%);
+  padding: 22px;
+}
+.rfq-modal-panel h2 {
+  margin: 8px 46px 16px 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+}
 .rfq-form {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
+  gap: 10px 12px;
   background: #fff;
   color: var(--ink);
-  padding: 24px;
+  padding: 0;
   border-radius: 8px;
 }
 .rfq-form label {
   display: grid;
-  gap: 7px;
+  gap: 5px;
   color: var(--muted);
-  font-size: .82rem;
+  font-size: .72rem;
   text-transform: uppercase;
   letter-spacing: .08em;
   font-weight: 900;
@@ -880,15 +909,20 @@ address a { color: #fff; font-weight: 800; }
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 6px;
-  padding: 12px;
+  padding: 9px 10px;
   font: inherit;
+  font-size: .92rem;
   color: var(--ink);
   background: #fff;
 }
-.rfq-form textarea { resize: vertical; }
+.rfq-form textarea {
+  min-height: 82px;
+  resize: vertical;
+}
 .form-note {
   margin: 0;
-  min-height: 1.2em;
+  min-height: 1em;
+  font-size: .88rem;
   color: var(--muted) !important;
   text-transform: none;
 }
@@ -1047,12 +1081,20 @@ address a { color: #fff; font-weight: 800; }
   .card-grid, .doc-grid, .checks, .rfq-form, .capability-grid, .product-showcase { grid-template-columns: 1fr; }
   .feature-card {
     grid-column: auto;
+    background: rgba(255,255,255,.94);
+    color: var(--ink);
   }
   .product-showcase .product-card:nth-child(4) {
     grid-column: auto;
   }
   .feature-card img {
     aspect-ratio: 11 / 7;
+  }
+  .feature-card .product-card-body {
+    background: linear-gradient(180deg, #fff, #fbfcfd);
+  }
+  .feature-card p {
+    color: var(--muted);
   }
   .corp-list div { grid-template-columns: 1fr; gap: 4px; }
   .hide-sm { display: none; }

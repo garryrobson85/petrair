@@ -605,7 +605,7 @@ if (languageSelect) {
 }
 applyLanguage(savedLanguage);
 
-const revealTargets = document.querySelectorAll(".section-head, .product-card, .price-board, .capability-grid article, .process-list div, .map-band, .checks div, .doc-grid a, .rfq-form");
+const revealTargets = document.querySelectorAll(".section-head, .product-card, .price-board, .capability-grid article, .process-list div, .map-band, .checks div, .doc-grid a, .rfq-panel");
 revealTargets.forEach((element) => element.classList.add("reveal"));
 if ("IntersectionObserver" in window) {
   const revealObserver = new IntersectionObserver(
@@ -850,7 +850,9 @@ const modalTitle = document.querySelector("#modal-title");
 const modalEyebrow = document.querySelector("#modal-eyebrow");
 const modalBody = document.querySelector("#modal-body");
 const modalTable = document.querySelector("#modal-table");
-const modalClose = document.querySelector(".modal-close");
+const modalClose = modal?.querySelector(".modal-close");
+const rfqModal = document.querySelector("#rfq-modal");
+const rfqModalClose = rfqModal?.querySelector(".rfq-modal-close");
 
 function openSpec(key) {
   const spec = specContent[key];
@@ -876,6 +878,16 @@ function closeSpec() {
   if (modal) modal.hidden = true;
 }
 
+function openRfq() {
+  if (!rfqModal) return;
+  rfqModal.hidden = false;
+  rfqModal.querySelector("select, input, textarea, button")?.focus();
+}
+
+function closeRfq() {
+  if (rfqModal) rfqModal.hidden = true;
+}
+
 document.querySelectorAll("[data-spec]").forEach((button) => {
   button.addEventListener("click", () => openSpec(button.dataset.spec));
 });
@@ -883,8 +895,21 @@ modalClose?.addEventListener("click", closeSpec);
 modal?.addEventListener("click", (event) => {
   if (event.target === modal) closeSpec();
 });
+document.querySelectorAll("[data-open-rfq]").forEach((button) => {
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+    openRfq();
+  });
+});
+rfqModalClose?.addEventListener("click", closeRfq);
+rfqModal?.addEventListener("click", (event) => {
+  if (event.target === rfqModal) closeRfq();
+});
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") closeSpec();
+  if (event.key === "Escape") {
+    closeSpec();
+    closeRfq();
+  }
 });
 
 const form = document.querySelector("#rfq-form");
