@@ -605,6 +605,25 @@ if (languageSelect) {
 }
 applyLanguage(savedLanguage);
 
+const revealTargets = document.querySelectorAll(".section-head, .product-card, .price-board, .capability-grid article, .process-list div, .map-band, .checks div, .doc-grid a, .rfq-form");
+revealTargets.forEach((element) => element.classList.add("reveal"));
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.16, rootMargin: "0px 0px -40px 0px" }
+  );
+  revealTargets.forEach((element) => revealObserver.observe(element));
+} else {
+  revealTargets.forEach((element) => element.classList.add("in-view"));
+}
+
 function playClickSound() {
   try {
     clickAudioContext ||= new (window.AudioContext || window.webkitAudioContext)();

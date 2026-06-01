@@ -1,4 +1,4 @@
-const VERSION = "petrair-lead-brief-2026-05-31-v2";
+const VERSION = "petrair-lead-brief-2026-06-01-v8";
 
 const DEFAULT_LEAD_EMAIL = "garryrobson85@googlemail.com";
 const FREE_EMAIL_DOMAINS = new Set([
@@ -53,6 +53,7 @@ async function buildLeadBrief(enquiry, env) {
   const inferredSite = inferCompanySite(emailDomain);
   const domainInfo = await checkDomain(inferredSite);
   const notes = buildPreparationNotes({ enquiry, emailDomain, company, product, message, domainInfo });
+  const prepBand = buildPrepBand({ emailDomain, company, domainInfo, message });
 
   const deterministicBrief = {
     version: VERSION,
@@ -84,6 +85,7 @@ async function buildLeadBrief(enquiry, env) {
       }
     },
     salespersonPrep: {
+      prepBand,
       summary: buildSummary(enquiry, emailDomain, domainInfo),
       notes,
       suggestedQuestions: buildQuestions(enquiry),
@@ -137,12 +139,26 @@ function buildPreparationNotes({ enquiry, emailDomain, company, product, message
   return notes;
 }
 
+function buildPrepBand({ emailDomain, company, domainInfo, message }) {
+  if (!company || FREE_EMAIL_DOMAINS.has(emailDomain)) return "needs-company-verification";
+  if (!domainInfo.reachable) return "verify-company-domain";
+  if (/mandate|allocation|urgent|procedure|working with refinery|seller mandate|buyer mandate/i.test(message)) {
+    return "verify-authority";
+  }
+  return "ready-for-sales-review";
+}
+
 function buildQuestions(enquiry) {
   const questions = [
     "Please confirm the legal buyer/seller entity, registration country and your role in the transaction.",
     "Please confirm product specification, quantity, destination, delivery window and preferred Incoterm.",
     "Please confirm expected payment instrument, issuing bank route and inspection requirements."
   ];
+  const email = clean(enquiry.Email);
+  const emailDomain = email.includes("@") ? email.split("@").pop().toLowerCase() : "";
+  if (FREE_EMAIL_DOMAINS.has(emailDomain)) {
+    questions.unshift("Please reply from an official company email address or provide a corporate website and profile for verification.");
+  }
   if (!clean(enquiry.Company)) questions.unshift("What is the full legal company name and website?");
   return questions;
 }
@@ -153,24 +169,92 @@ function buildReplyAngle(product) {
 }
 
 async function buildAiPrep(enquiry, brief, env) {
-  if (!env.OPENROUTER_API_KEY) {
-    return {
-      enabled: false,
-      note: "AI prep not enabled. Add OPENROUTER_API_KEY to the Worker if AI summary, translation and draft reply are wanted."
-    };
+  const prompt = buildAiPrompt(enquiry, brief);
+
+  if (env.ANTHROPIC_API_KEY) {
+    return buildAnthropicPrep(prompt, env);
   }
 
-  const model = env.OPENROUTER_MODEL || "deepseek/deepseek-chat-v3-0324";
-  const prompt = [
+  if (env.OPENROUTER_API_KEY) {
+    return buildOpenRouterPrep(prompt, env);
+  }
+
+  return {
+    enabled: false,
+    note: "AI enrichment not enabled. Deterministic sales prep, verification prompts and research links are still included."
+  };
+}
+
+function buildAiPrompt(enquiry, brief) {
+  return [
     "You are preparing a private RFQ briefing for a Geneva physical energy trading desk.",
     "Do not reject the lead. Treat every enquiry as received. Provide preparation notes only.",
-    "Return compact JSON with keys: summary, language, englishTranslation, prepBand, complianceReviewNotes, suggestedReply, suggestedQuestions.",
+    "You must return one valid JSON object only, with no markdown and no prose outside JSON.",
+    "Required keys: summary, language, englishTranslation, prepBand, companyResearch, personResearch, associationAssessment, complianceReviewNotes, suggestedReply, suggestedQuestions, sourceUrls.",
     "prepBand must be one of: ready-to-review, needs-clarification, verify-carefully.",
+    "companyResearch should summarize public evidence for the company, website, activity and location. If not found, say not found from available public sources.",
+    "personResearch should summarize public evidence for the named person, especially LinkedIn or professional profiles. If not found, say not found from available public sources.",
+    "associationAssessment should say whether public evidence connects the person to the company, is inconclusive, or suggests mismatch. Never overstate certainty.",
+    "sourceUrls must be an array of the most relevant public URLs used. If web search is unavailable or no source is useful, return an empty array.",
+    "Keep summary, companyResearch, personResearch, associationAssessment and suggestedReply each under 420 characters. Keep suggestedQuestions to 4 items or fewer. Keep complianceReviewNotes to 3 items or fewer.",
     "Never claim sanctions/KYC clearance. Say when human review is required.",
     "",
     "RFQ JSON:",
     JSON.stringify({ enquiry, deterministicBrief: brief }, null, 2)
   ].join("\n");
+}
+
+async function buildAnthropicPrep(prompt, env) {
+  const model = env.ANTHROPIC_MODEL || "claude-sonnet-4-6";
+  const useWebSearch = String(env.ANTHROPIC_WEB_SEARCH || "").toLowerCase() === "true";
+  const maxSearches = Math.max(1, Math.min(Number(env.ANTHROPIC_WEB_SEARCH_MAX || 4), 6));
+  const body = {
+    model,
+    system: "You create private salesperson prep notes for commodity RFQs. Output JSON only.",
+    messages: [{ role: "user", content: prompt }],
+    temperature: 0.2,
+    max_tokens: 2400
+  };
+
+  if (useWebSearch) {
+    body.tools = [{ type: "web_search_20250305", name: "web_search", max_uses: maxSearches }];
+  }
+
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "x-api-key": env.ANTHROPIC_API_KEY,
+        "anthropic-version": "2023-06-01",
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(body)
+    });
+
+    if (!response.ok) {
+      return { enabled: true, ok: false, provider: "anthropic", model, note: `Claude request failed with HTTP ${response.status}` };
+    }
+
+    const data = await response.json();
+    const content = data.content?.map((part) => part.text || "").join("\n") || "";
+    const parsed = parseAiJson(content);
+    return {
+      enabled: true,
+      ok: true,
+      provider: "anthropic",
+      model,
+      webSearch: useWebSearch,
+      webSearchRequests: data.usage?.server_tool_use?.web_search_requests || 0,
+      ...parsed,
+      ...(parsed.parseFailed ? { rawPreview: content.slice(0, 500) } : {})
+    };
+  } catch (error) {
+    return { enabled: true, ok: false, provider: "anthropic", model, note: `Claude prep failed: ${error.message}` };
+  }
+}
+
+async function buildOpenRouterPrep(prompt, env) {
+  const model = env.OPENROUTER_MODEL || "deepseek/deepseek-chat-v3-0324";
 
   try {
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
@@ -193,7 +277,7 @@ async function buildAiPrep(enquiry, brief, env) {
     });
 
     if (!response.ok) {
-      return { enabled: true, ok: false, note: `AI request failed with HTTP ${response.status}` };
+      return { enabled: true, ok: false, provider: "openrouter", model, note: `OpenRouter request failed with HTTP ${response.status}` };
     }
 
     const data = await response.json();
@@ -201,11 +285,12 @@ async function buildAiPrep(enquiry, brief, env) {
     return {
       enabled: true,
       ok: true,
+      provider: "openrouter",
       model,
       ...parseAiJson(content)
     };
   } catch (error) {
-    return { enabled: true, ok: false, note: `AI prep failed: ${error.message}` };
+    return { enabled: true, ok: false, provider: "openrouter", model, note: `OpenRouter prep failed: ${error.message}` };
   }
 }
 
@@ -220,7 +305,7 @@ function parseAiJson(content) {
       } catch {}
     }
   }
-  return { raw: content };
+  return { parseFailed: true, summary: content.slice(0, 600), raw: content };
 }
 
 async function checkDomain(site) {
@@ -334,9 +419,18 @@ function briefToText(brief) {
 function telegramText(brief) {
   const lead = brief.lead;
   const ai = brief.ai || {};
-  const aiSummary = ai.summary || ai.note || "AI prep not enabled";
-  const band = ai.prepBand || "manual-review";
-  return [
+  const summaryProducer = ai.ok
+    ? `Summary produced by ${ai.provider === "anthropic" ? "Claude" : "AI"}${ai.webSearch ? " with web research" : ""}`
+    : "Summary produced by manual prep";
+  const aiSummary = ai.parseFailed
+    ? brief.salespersonPrep.summary
+    : ai.enabled && !ai.ok
+    ? ai.note || "AI enrichment failed; manual prep used."
+    : ai.summary || brief.salespersonPrep.summary || ai.note || "Manual sales prep generated.";
+  const band = ai.prepBand || brief.salespersonPrep.prepBand || "manual-review";
+  const notes = brief.salespersonPrep.notes.filter((note) => !/^This brief is preparation only/i.test(note)).slice(0, 3);
+  const search = brief.research.searchLinks.companySearch;
+  const lines = [
     "Petrair RFQ lead brief",
     "",
     `Prep: ${band}`,
@@ -346,16 +440,35 @@ function telegramText(brief) {
     `Quantity: ${lead.quantity || "Not supplied"}`,
     `Destination: ${lead.destination || "Not supplied"}`,
     "",
+    summaryProducer,
     `Summary: ${aiSummary}`,
     "",
     `Website: ${brief.research.inferredCompanyWebsite || "Not inferred"}`,
     `Domain: ${brief.research.emailDomainType}`,
+    search ? `Search: ${search}` : "",
+    "",
+    ai.companyResearch ? `Company research: ${oneLine(ai.companyResearch)}` : "",
+    ai.personResearch ? `Person research: ${oneLine(ai.personResearch)}` : "",
+    ai.associationAssessment ? `Association: ${oneLine(ai.associationAssessment)}` : "",
+    ai.sourceUrls?.length ? `Sources: ${ai.sourceUrls.slice(0, 3).join(" | ")}` : "",
+    ai.parseFailed ? "AI format warning: Claude response was cut off or not valid JSON. Manual prep is shown; redeploy the latest Worker and retest." : "",
+    ai.webSearch && !ai.companyResearch && !ai.personResearch && !ai.associationAssessment && !ai.parseFailed
+      ? "Research: web search ran, but Claude did not return company/person evidence. Use the search link before reply."
+      : "",
+    ai.companyResearch || ai.personResearch || ai.associationAssessment || ai.parseFailed || ai.webSearch ? "" : "",
+    "Prep notes:",
+    ...notes.map((note) => `- ${note}`),
     "",
     "Questions:",
     ...(ai.suggestedQuestions || brief.salespersonPrep.suggestedQuestions).slice(0, 4).map((question) => `- ${question}`),
     "",
     "Preparation only. Not KYC or sanctions clearance."
-  ].join("\n").slice(0, 3900);
+  ];
+  return lines.filter((line, index, arr) => line || (arr[index - 1] && arr[index + 1])).join("\n").slice(0, 3900);
+}
+
+function oneLine(value) {
+  return clean(Array.isArray(value) ? value.join("; ") : value).replace(/\s+/g, " ").slice(0, 550);
 }
 
 function searchUrl(query) {

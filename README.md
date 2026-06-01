@@ -63,13 +63,17 @@ LEAD_TO_EMAIL = garryrobson85@googlemail.com
 Optional AI and Telegram variables:
 
 ```text
-OPENROUTER_API_KEY = your OpenRouter key for private AI summary/translation/reply prep
-OPENROUTER_MODEL = deepseek/deepseek-chat-v3-0324
+ANTHROPIC_API_KEY = your Claude API key for private AI summary/translation/reply prep
+ANTHROPIC_MODEL = claude-sonnet-4-6
+ANTHROPIC_WEB_SEARCH = true
+ANTHROPIC_WEB_SEARCH_MAX = 4
+OPENROUTER_API_KEY = optional fallback OpenRouter key
+OPENROUTER_MODEL = google/gemini-2.5-flash
 TELEGRAM_BOT_TOKEN = your Telegram bot token
 TELEGRAM_CHAT_ID = your Telegram chat ID
 ```
 
-The Worker always accepts the RFQ and builds a deterministic salesperson brief. If AI fails or no AI key is set, the raw/enriched lead is still delivered through any configured webhook, email or Telegram route.
+The Worker always accepts the RFQ and builds a deterministic salesperson brief. If `ANTHROPIC_API_KEY` is set, it uses Claude first. If `ANTHROPIC_WEB_SEARCH=true`, Claude can also perform limited public web research and return company research, person/LinkedIn context, association assessment and source URLs. If Claude is not set but `OPENROUTER_API_KEY` is set, it uses OpenRouter. If AI fails or no AI key is set, the raw/enriched lead is still delivered through any configured webhook, email or Telegram route.
 
 5. Test locally by opening:
 
@@ -83,7 +87,7 @@ index.html?leadBrief=https://contactform.garryrobson85.workers.dev/
 const LEAD_BRIEF_URL = "https://contactform.garryrobson85.workers.dev/";
 ```
 
-The brief includes company/email context, website reachability, prepared Google/LinkedIn/company-registry search links, suggested verification questions and a reply angle. With `OPENROUTER_API_KEY`, it also adds private AI summary, translation, prep band and reply draft. It is preparation only, not legal KYC or sanctions clearance.
+The brief includes company/email context, website reachability, prepared Google/LinkedIn/company-registry search links, suggested verification questions and a reply angle. With `ANTHROPIC_API_KEY` or `OPENROUTER_API_KEY`, it also adds private AI summary, translation, prep band and reply draft. With Anthropic web search enabled, Telegram also includes compact company/person research and whether the person appears publicly associated with the company. It is preparation only, not legal KYC or sanctions clearance.
 
 ## Languages
 
