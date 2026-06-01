@@ -150,20 +150,12 @@
         <div class="hero-copy">
           <p class="eyebrow" data-i18n="hero.eyebrow">Physical trading from Geneva</p>
           <h1 id="hero-title" data-i18n="hero.title">A global market for oil and energy products.</h1>
-          <p class="lead" data-i18n="hero.lead">Petrair SA optimises the supply and marketing of crude oil and refined products from Geneva across Europe, the Mediterranean, Africa and the Middle East, under Swiss institutional discipline.</p>
+          <p class="lead" data-i18n="hero.lead">Petrair SA optimises the supply and marketing of crude oil and refined products from Geneva across Europe, the Mediterranean, Africa and the Middle East.</p>
           <div class="actions">
             <a class="button primary" href="#contact" data-i18n="hero.cta1">Request a quotation</a>
             <a class="button secondary" href="#products" data-i18n="hero.cta2">Explore our trading</a>
           </div>
         </div>
-        <aside class="market-panel" aria-label="Trading scope">
-          <p class="panel-kicker">Core scope</p>
-          <dl>
-            <div><dt data-i18n="panel.products">Products</dt><dd>Crude Oil, Jet A-1, ULSD 10ppm, LPG</dd></div>
-            <div><dt data-i18n="panel.execution">Execution</dt><dd data-i18n="panel.executionText">LC-backed, inspected and document-controlled</dd></div>
-            <div><dt data-i18n="panel.regions">Regions</dt><dd>Europe, Mediterranean, Africa, Middle East, Asia</dd></div>
-          </dl>
-        </aside>
       </div>
     </section>
 
@@ -172,7 +164,7 @@
         <div class="section-head">
           <p class="eyebrow" data-i18n="prices.eyebrow">Market reference</p>
           <h2 id="prices-title" data-i18n="prices.title">Crude oil and refined-product reference prices.</h2>
-          <p data-i18n="prices.text">Front-month benchmark lines and indicative refined-product assessments used for market context. Figures shown here are information only and are not executable prices.</p>
+          <p data-i18n="prices.text">Streaming front-month futures for the benchmarks Petrair SA trades against. Changes are measured against the previous settlement or prior close from the feed.</p>
         </div>
         <div class="price-board" aria-live="polite">
           <div class="price-board-head">
@@ -184,8 +176,8 @@
               <thead>
                 <tr>
                   <th data-i18n="prices.instrument">Instrument</th>
-                  <th data-i18n="prices.last">Last</th>
-                  <th data-i18n="prices.change">Change</th>
+                  <th data-i18n="prices.last">Last price</th>
+                  <th data-i18n="prices.change">Change vs prior close</th>
                   <th class="hide-sm" data-i18n="prices.trend">Trend</th>
                   <th data-i18n="prices.type">Type</th>
                 </tr>
@@ -193,7 +185,7 @@
               <tbody id="price-rows"></tbody>
             </table>
           </div>
-          <p class="price-foot" data-i18n="prices.foot">Source: configured market feed when available. Refined-product lines are indicative assessments. Information only; not an offer to transact.</p>
+          <p class="price-foot" data-i18n="prices.foot">Source: front-month futures via configured public market feed. Prices are shown in USD per listed unit. Changes reference the previous settlement or prior close supplied by the feed. Indicative, non-tradable and not an offer to transact.</p>
         </div>
       </div>
     </section>

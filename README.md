@@ -74,13 +74,13 @@ The Worker always accepts the RFQ and builds a deterministic salesperson brief. 
 5. Test locally by opening:
 
 ```text
-index.html?leadBrief=https://silent-butterfly-db1f.garryrobson85.workers.dev/
+index.html?leadBrief=https://contactform.garryrobson85.workers.dev/
 ```
 
 6. When ready, set the Worker URL permanently near the top of `script.js`:
 
 ```js
-const LEAD_BRIEF_URL = "https://silent-butterfly-db1f.garryrobson85.workers.dev/";
+const LEAD_BRIEF_URL = "https://contactform.garryrobson85.workers.dev/";
 ```
 
 The brief includes company/email context, website reachability, prepared Google/LinkedIn/company-registry search links, suggested verification questions and a reply angle. With `OPENROUTER_API_KEY`, it also adds private AI summary, translation, prep band and reply draft. It is preparation only, not legal KYC or sanctions clearance.

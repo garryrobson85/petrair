@@ -5,7 +5,7 @@ const PRICE_FEED_URL =
   "https://petrair-prices.garryrobson85.workers.dev/";
 const LEAD_BRIEF_URL =
   new URLSearchParams(location.search).get("leadBrief") ||
-  "https://silent-butterfly-db1f.garryrobson85.workers.dev/";
+  "https://contactform.garryrobson85.workers.dev/";
 const PRICE_REFRESH_MS = 60000;
 const RTL_LANGUAGES = new Set(["ar"]);
 
@@ -20,19 +20,19 @@ const translations = {
     "nav.contact": "Contacter le desk",
     "hero.eyebrow": "Negoce physique d'energie depuis Geneve",
     "hero.title": "Un partenaire de marche discipline pour le petrole et les produits raffines.",
-    "hero.lead": "Petrair SA optimise l'approvisionnement et la commercialisation de petrole brut, Jet A-1, ULSD 10ppm et LPG en Europe, en Mediterranee, en Afrique et au Moyen-Orient, avec une discipline institutionnelle suisse.",
+    "hero.lead": "Petrair SA optimise l'approvisionnement et la commercialisation de petrole brut et de produits raffines depuis Geneve en Europe, en Mediterranee, en Afrique et au Moyen-Orient.",
     "hero.cta1": "Demander une cotation",
     "hero.cta2": "Notre fonctionnement",
     "panel.executionText": "Adosse a LC, inspecte et controle par documents",
     "prices.eyebrow": "Reference marche",
     "prices.title": "Prix de reference du brut et des produits raffines.",
-    "prices.text": "References front-month et evaluations indicatives de produits raffines pour le contexte de marche. Les chiffres sont informatifs et non executables.",
+    "prices.text": "Contrats a terme front-month pour les references suivies par Petrair SA. Les variations sont mesurees face au precedent settlement ou prior close du flux.",
     "prices.instrument": "Instrument",
-    "prices.last": "Dernier",
-    "prices.change": "Variation",
+    "prices.last": "Dernier prix",
+    "prices.change": "Variation vs prior close",
     "prices.trend": "Tendance",
     "prices.type": "Type",
-    "prices.foot": "Source : flux de marche configure lorsqu'il est disponible. Produits raffines indicatifs. Information uniquement; pas une offre de transaction.",
+    "prices.foot": "Source : contrats front-month via flux de marche public configure. Prix en USD par unite indiquee. Variations face au previous settlement ou prior close fourni par le flux. Indicatif, non negociable et pas une offre de transaction.",
     "products.eyebrow": "Produits et services",
     "products.title": "Barils physiques, coordination logistique et execution structuree.",
     "products.text": "Petrair SA travaille avec des contreparties qualifiees sur des flux de brut et de produits raffines, avec documentation bancaire, inspection independante et controles de risque.",
@@ -56,12 +56,12 @@ const translations = {
     "nav.contact": "Contactar mesa",
     "hero.eyebrow": "Trading fisico de energia desde Ginebra",
     "hero.title": "Un socio de mercado disciplinado para petroleo y productos refinados.",
-    "hero.lead": "Petrair SA optimiza el suministro y la comercializacion de crudo, Jet A-1, ULSD 10ppm y LPG en Europa, el Mediterraneo, Africa y Oriente Medio, con disciplina institucional suiza.",
+    "hero.lead": "Petrair SA optimiza el suministro y la comercializacion de crudo y productos refinados desde Ginebra en Europa, el Mediterraneo, Africa y Oriente Medio.",
     "hero.cta1": "Solicitar cotizacion",
     "hero.cta2": "Como operamos",
     "prices.eyebrow": "Referencia de mercado",
     "prices.title": "Precios de referencia de crudo y productos refinados.",
-    "prices.text": "Referencias front-month y evaluaciones indicativas de productos refinados para contexto de mercado. Las cifras son informativas y no ejecutables.",
+    "prices.text": "Futuros front-month de los benchmarks contra los que opera Petrair SA. Las variaciones se miden frente al settlement previo o prior close del feed.",
     "products.eyebrow": "Productos y servicios",
     "products.title": "Barriles fisicos, coordinacion logistica y ejecucion estructurada.",
     "ops.eyebrow": "Como opera Petrair",
@@ -184,11 +184,11 @@ const specContent = {
 };
 
 const instruments = [
-  { id: "brent", name: "ICE Brent", sub: "Front-month crude", live: true, seed: 82.44, unit: "", decimals: 2 },
-  { id: "wti", name: "NYMEX WTI", sub: "Front-month crude", live: true, seed: 77.91, unit: "", decimals: 2 },
-  { id: "diesel", name: "Diesel (proxy)", sub: "NY ULSD futures", live: true, seed: 2.55, unit: "$/gal", decimals: 3 },
-  { id: "jet", name: "Jet A-1 CIF Med", sub: "Indicative assessment", live: false, seed: 845.25, unit: "$/MT", decimals: 2 },
-  { id: "ulsd", name: "ULSD 10ppm", sub: "Indicative assessment", live: false, seed: 812.25, unit: "$/MT", decimals: 2 }
+  { id: "brent", symbol: "CB.F", name: "ICE Brent Crude", sub: "Front-month futures", live: true, seed: 82.44, unit: "USD/bbl", decimals: 2 },
+  { id: "wti", symbol: "CL.F", name: "NYMEX WTI Crude", sub: "Front-month futures", live: true, seed: 77.91, unit: "USD/bbl", decimals: 2 },
+  { id: "ulsdHarbor", symbol: "HO.F", name: "ULSD NY Harbor", sub: "Front-month futures", live: true, seed: 2.55, unit: "USD/gal", decimals: 3 },
+  { id: "rbobGasoline", symbol: "RB.F", name: "RBOB Gasoline", sub: "Front-month futures", live: true, seed: 2.48, unit: "USD/gal", decimals: 3 },
+  { id: "naturalGas", symbol: "NG.F", name: "Natural Gas (Henry Hub)", sub: "Front-month futures", live: true, seed: 3.21, unit: "USD/MMBtu", decimals: 2 }
 ];
 
 const priceState = Object.fromEntries(

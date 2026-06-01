@@ -1,15 +1,19 @@
-const VERSION = "petrair-prices-2026-05-31-v3";
+const VERSION = "petrair-prices-2026-06-01-v4";
 
 const SYMBOLS = {
   brent: "BZ=F",
   wti: "CL=F",
-  diesel: "HO=F"
+  ulsdHarbor: "HO=F",
+  rbobGasoline: "RB=F",
+  naturalGas: "NG=F"
 };
 
 const FALLBACK = {
   brent: { price: 82.44, prev: 82.12, source: "fallback-indicative" },
   wti: { price: 77.91, prev: 77.55, source: "fallback-indicative" },
-  diesel: { price: 2.55, prev: 2.53, source: "fallback-indicative" }
+  ulsdHarbor: { price: 2.55, prev: 2.53, source: "fallback-indicative" },
+  rbobGasoline: { price: 2.48, prev: 2.46, source: "fallback-indicative" },
+  naturalGas: { price: 3.21, prev: 3.18, source: "fallback-indicative" }
 };
 
 export default {
