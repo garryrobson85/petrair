@@ -591,7 +591,7 @@ a { color: inherit; }
   overflow: hidden;
   padding-bottom: 84px;
   background:
-    linear-gradient(180deg, rgba(255,255,255,.78), rgba(248,250,251,.86)),
+    linear-gradient(180deg, rgba(255,255,255,.96), rgba(248,250,251,.94)),
     url("../images/supply-flow-bg.jpg") center / cover no-repeat;
 }
 .supply::before {
@@ -600,9 +600,9 @@ a { color: inherit; }
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(255,255,255,.9), rgba(255,255,255,.54) 48%, rgba(255,255,255,.84)),
+    linear-gradient(90deg, rgba(255,255,255,.96), rgba(255,255,255,.72) 48%, rgba(255,255,255,.92)),
     radial-gradient(circle at 72% 34%, rgba(185,134,47,.16), transparent 34%),
-    linear-gradient(180deg, transparent 34%, rgba(255,255,255,.74));
+    linear-gradient(180deg, rgba(255,255,255,.96) 0 22%, rgba(255,255,255,.34) 45%, rgba(255,255,255,.9) 100%);
 }
 .supply .wrap {
   position: relative;
@@ -618,13 +618,13 @@ a { color: inherit; }
   z-index: 1;
   left: 0;
   right: 0;
-  top: 188px;
+  top: 218px;
   width: 100%;
-  height: clamp(330px, 32vw, 440px);
+  height: clamp(300px, 29vw, 390px);
   margin: 0;
   border-radius: 8px;
   overflow: hidden;
-  opacity: .78;
+  opacity: .64;
   box-shadow: 0 28px 90px rgba(17,24,39,.12);
 }
 .supply-art::after {
@@ -632,8 +632,8 @@ a { color: inherit; }
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(255,255,255,.72), rgba(255,255,255,.36) 48%, rgba(255,255,255,.66)),
-    linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,.88));
+    linear-gradient(90deg, rgba(255,255,255,.86), rgba(255,255,255,.46) 48%, rgba(255,255,255,.82)),
+    linear-gradient(180deg, rgba(255,255,255,.32), rgba(255,255,255,.92));
 }
 .supply-art img {
   width: 100%;
@@ -646,7 +646,7 @@ a { color: inherit; }
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 14px;
-  margin-top: 82px;
+  margin-top: 92px;
   padding-top: 56px;
 }
 .flow-rail {
@@ -670,11 +670,12 @@ a { color: inherit; }
   min-height: 270px;
   padding: 34px 20px 22px;
   background:
-    linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.72)),
+    linear-gradient(180deg, rgba(255,255,255,.97), rgba(255,255,255,.9)),
     radial-gradient(circle at 50% 0%, rgba(185,134,47,.12), transparent 44%);
   border: 1px solid var(--line);
   border-radius: 8px;
-  box-shadow: 0 16px 44px rgba(17,24,39,.06);
+  box-shadow: 0 18px 50px rgba(17,24,39,.09);
+  backdrop-filter: blur(3px);
 }
 .capability-flow article::after {
   content: "";
