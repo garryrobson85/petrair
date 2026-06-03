@@ -117,7 +117,7 @@ if (languageSelect) {
 }
 applyLanguage(savedLanguage);
 
-const revealTargets = document.querySelectorAll(".section-head, .product-card, .price-board, .capability-grid article, .process-list div, .map-band, .checks div, .doc-grid a, .rfq-panel");
+const revealTargets = document.querySelectorAll(".section-head, .product-card, .price-board, .capability-flow article, .process-list div, .map-band, .checks div, .doc-grid a, .rfq-panel");
 revealTargets.forEach((element) => element.classList.add("reveal"));
 if ("IntersectionObserver" in window) {
   const revealObserver = new IntersectionObserver(
@@ -200,9 +200,9 @@ function buildPriceBoard() {
 
     const symbol = document.createElement("td");
     symbol.className = "price-symbol";
-    symbol.textContent = instrument.symbol;
+    symbol.textContent = instrument.name;
     const sub = document.createElement("small");
-    sub.textContent = `${instrument.name} / ${instrument.unit}`;
+    sub.textContent = `${instrument.symbol} / ${instrument.unit}`;
     symbol.append(sub);
 
     const last = document.createElement("td");
@@ -253,15 +253,18 @@ function createTickerGroup(hidden) {
     const item = document.createElement("span");
     item.className = "ticker-item";
 
-    const name = document.createElement("small");
-    name.textContent = instrument.symbol;
+    const name = document.createElement("span");
+    name.className = "ticker-name";
+    name.textContent = instrument.name;
+    const symbol = document.createElement("small");
+    symbol.textContent = instrument.symbol;
     const price = document.createElement("span");
     price.textContent = formatPrice(instrument, state);
     const move = document.createElement("span");
     move.className = `ticker-change ${change.rising ? "up" : "down"}`;
     move.textContent = change.text;
 
-    item.append(name, price, move);
+    item.append(name, symbol, price, move);
     group.append(item);
   }
 
