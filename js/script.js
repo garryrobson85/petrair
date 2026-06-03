@@ -1,0 +1,462 @@
+const menuButton = document.querySelector(".menu-button");
+const menu = document.querySelector("#menu");
+const PRICE_FEED_URL =
+  new URLSearchParams(location.search).get("feed") ||
+  "https://petrair-prices.garryrobson85.workers.dev/";
+const LEAD_BRIEF_URL =
+  new URLSearchParams(location.search).get("leadBrief") ||
+  "https://contactform.garryrobson85.workers.dev/";
+const PRICE_REFRESH_MS = 60000;
+const RTL_LANGUAGES = new Set(["ar"]);
+let clickAudioContext;
+
+const translations = window.PETRAIR_TRANSLATIONS || {};
+
+const specContent = {
+  crude: {
+    eyebrow: "Crude oil",
+    title: "Crude Oil",
+    body: "Origination and distribution of light sweet and medium sour crude streams for Mediterranean and Northwest European refineries.",
+    rows: [
+      ["API gravity", "32-42 degrees typical"],
+      ["Sulphur", "0.1-1.5% grade dependent"],
+      ["Pricing", "Dated Brent / Platts-linked"],
+      ["Inspection", "Recognised inspector at load and discharge"],
+      ["Settlement", "LC / documentary"]
+    ]
+  },
+  jet: {
+    eyebrow: "Aviation fuel",
+    title: "Jet A-1",
+    body: "Aviation turbine fuel to AFQRJOS / DEF STAN 91-091 / ASTM D1655 reference, delivered against bank-controlled documentation with independent quality inspection.",
+    rows: [
+      ["Density at 15C", "775.0-840.0 kg/m3"],
+      ["Flash point", "Min 38C"],
+      ["Freezing point", "Max -47C"],
+      ["Sulphur total", "Max 0.30% m/m"],
+      ["Net heat of combustion", "Min 42.8 MJ/kg"]
+    ]
+  },
+  diesel: {
+    eyebrow: "Diesel",
+    title: "ULSD 10ppm",
+    body: "Ultra Low Sulphur Diesel meeting stringent automotive, environmental and performance standards for European, Mediterranean and West African networks.",
+    rows: [
+      ["Cetane number", "Min 51.0"],
+      ["Density at 15C", "820.0-845.0 kg/m3"],
+      ["Sulphur", "Max 10.0 mg/kg"],
+      ["Flash point", "Above 55C"],
+      ["FAME content", "Max 7.0% v/v"]
+    ]
+  },
+  lpg: {
+    eyebrow: "Liquefied petroleum gas",
+    title: "LPG",
+    body: "Liquefied Petroleum Gas, principally propane and butane, used across residential, industrial, transport and petrochemical sectors worldwide.",
+    rows: [
+      ["Product", "Propane, butane or LPG mix"],
+      ["Storage", "Pressurised or refrigerated terminal infrastructure"],
+      ["Use", "Heating, industry, transport and petrochemical feedstock"],
+      ["Controls", "Quality, quantity and documentation by contract"],
+      ["Execution", "Subject to origin, terminal, vessel and banking review"]
+    ]
+  }
+};
+
+const instruments = [
+  { id: "brent", symbol: "CB.F", name: "ICE Brent Crude", sub: "Front-month futures", live: true, seed: 82.44, unit: "USD/bbl", decimals: 2 },
+  { id: "wti", symbol: "CL.F", name: "NYMEX WTI Crude", sub: "Front-month futures", live: true, seed: 77.91, unit: "USD/bbl", decimals: 2 },
+  { id: "ulsdHarbor", symbol: "HO.F", name: "ULSD NY Harbor", sub: "Front-month futures", live: true, seed: 2.55, unit: "USD/gal", decimals: 3 },
+  { id: "rbobGasoline", symbol: "RB.F", name: "RBOB Gasoline", sub: "Front-month futures", live: true, seed: 2.48, unit: "USD/gal", decimals: 3 },
+  { id: "naturalGas", symbol: "NG.F", name: "Natural Gas (Henry Hub)", sub: "Front-month futures", live: true, seed: 3.21, unit: "USD/MMBtu", decimals: 2 }
+];
+
+const priceState = Object.fromEntries(
+  instruments.map((instrument) => [
+    instrument.id,
+    {
+      price: instrument.seed,
+      previous: instrument.seed,
+      history: Array.from({ length: 12 }, () => instrument.seed * (1 + (Math.random() - 0.5) * 0.01))
+    }
+  ])
+);
+
+menuButton?.addEventListener("click", () => {
+  const isOpen = menu.classList.toggle("open");
+  menuButton.setAttribute("aria-expanded", String(isOpen));
+});
+
+menu?.addEventListener("click", (event) => {
+  if (event.target instanceof HTMLAnchorElement) {
+    menu.classList.remove("open");
+    menuButton?.setAttribute("aria-expanded", "false");
+  }
+});
+
+function applyLanguage(lang) {
+  const dictionary = translations[lang] || {};
+  document.documentElement.lang = lang;
+  document.documentElement.dir = RTL_LANGUAGES.has(lang) ? "rtl" : "ltr";
+  localStorage.setItem("petrair_lang", lang);
+
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    if (!element.dataset.i18nDefault) {
+      element.dataset.i18nDefault = element.textContent;
+    }
+    const key = element.dataset.i18n;
+    element.textContent = dictionary[key] || element.dataset.i18nDefault;
+  });
+}
+
+const languageSelect = document.querySelector("#language-select");
+const savedLanguage = localStorage.getItem("petrair_lang") || "en";
+if (languageSelect) {
+  languageSelect.value = savedLanguage;
+  languageSelect.addEventListener("change", () => applyLanguage(languageSelect.value));
+}
+applyLanguage(savedLanguage);
+
+const revealTargets = document.querySelectorAll(".section-head, .product-card, .price-board, .capability-grid article, .process-list div, .map-band, .checks div, .doc-grid a, .rfq-panel");
+revealTargets.forEach((element) => element.classList.add("reveal"));
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.16, rootMargin: "0px 0px -40px 0px" }
+  );
+  revealTargets.forEach((element) => revealObserver.observe(element));
+} else {
+  revealTargets.forEach((element) => element.classList.add("in-view"));
+}
+
+function playClickSound() {
+  try {
+    clickAudioContext ||= new (window.AudioContext || window.webkitAudioContext)();
+    const now = clickAudioContext.currentTime;
+    const oscillator = clickAudioContext.createOscillator();
+    const gain = clickAudioContext.createGain();
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(640, now);
+    oscillator.frequency.exponentialRampToValueAtTime(420, now + 0.08);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.035, now + 0.012);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.11);
+    oscillator.connect(gain);
+    gain.connect(clickAudioContext.destination);
+    oscillator.start(now);
+    oscillator.stop(now + 0.12);
+  } catch {}
+}
+
+document.addEventListener("click", (event) => {
+  const target = event.target.closest?.("a, button, select, input, textarea");
+  if (target && !target.closest("#language-select")) playClickSound();
+});
+
+function createSparkline(history) {
+  const width = 84;
+  const height = 28;
+  const min = Math.min(...history);
+  const max = Math.max(...history);
+  const range = max - min || 1;
+  const points = history
+    .map((value, index) => {
+      const x = (index / (history.length - 1)) * width;
+      const y = height - ((value - min) / range) * (height - 5) - 2.5;
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    })
+    .join(" ");
+  const rising = history[history.length - 1] >= history[0];
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  const line = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
+  svg.setAttribute("class", "spark");
+  svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+  svg.setAttribute("aria-hidden", "true");
+  line.setAttribute("points", points);
+  line.setAttribute("fill", "none");
+  line.setAttribute("stroke", rising ? "#75d19f" : "#ef8585");
+  line.setAttribute("stroke-width", "1.8");
+  line.setAttribute("stroke-linecap", "round");
+  line.setAttribute("stroke-linejoin", "round");
+  svg.append(line);
+  return svg;
+}
+
+function buildPriceBoard() {
+  const rows = document.querySelector("#price-rows");
+  if (!rows) return;
+  rows.textContent = "";
+
+  for (const instrument of instruments) {
+    const row = document.createElement("tr");
+    row.dataset.instrument = instrument.id;
+
+    const symbol = document.createElement("td");
+    symbol.className = "price-symbol";
+    symbol.textContent = instrument.symbol;
+    const sub = document.createElement("small");
+    sub.textContent = `${instrument.name} / ${instrument.unit}`;
+    symbol.append(sub);
+
+    const last = document.createElement("td");
+    last.className = "price-last";
+    last.dataset.field = "last";
+
+    const change = document.createElement("td");
+    change.className = "price-change";
+    change.dataset.field = "change";
+
+    const trend = document.createElement("td");
+    trend.className = "hide-sm";
+    trend.dataset.field = "trend";
+
+    const type = document.createElement("td");
+    const tag = document.createElement("span");
+    tag.className = "price-tag";
+    tag.textContent = "Live";
+    type.append(tag);
+
+    row.append(symbol, last, change, trend, type);
+    rows.append(row);
+  }
+}
+
+function formatPrice(instrument, state) {
+  return `${state.price.toFixed(instrument.decimals)} ${instrument.unit}`;
+}
+
+function formatChange(instrument, state) {
+  const delta = state.price - state.previous;
+  const pct = state.previous ? (delta / state.previous) * 100 : 0;
+  const rising = delta >= 0;
+  return {
+    rising,
+    text: `${rising ? "+" : "-"}${Math.abs(delta).toFixed(instrument.decimals)} (${Math.abs(pct).toFixed(2)}%)`
+  };
+}
+
+function createTickerGroup(hidden) {
+  const group = document.createElement("span");
+  group.className = "ticker-group";
+  if (hidden) group.setAttribute("aria-hidden", "true");
+
+  for (const instrument of instruments) {
+    const state = priceState[instrument.id];
+    const change = formatChange(instrument, state);
+    const item = document.createElement("span");
+    item.className = "ticker-item";
+
+    const name = document.createElement("small");
+    name.textContent = instrument.symbol;
+    const price = document.createElement("span");
+    price.textContent = formatPrice(instrument, state);
+    const move = document.createElement("span");
+    move.className = `ticker-change ${change.rising ? "up" : "down"}`;
+    move.textContent = change.text;
+
+    item.append(name, price, move);
+    group.append(item);
+  }
+
+  return group;
+}
+
+function renderTicker() {
+  const track = document.querySelector("#market-ticker-track");
+  if (!track) return;
+  track.textContent = "";
+  track.append(createTickerGroup(false), createTickerGroup(true));
+}
+
+function renderPrices() {
+  for (const instrument of instruments) {
+    const row = document.querySelector(`[data-instrument="${instrument.id}"]`);
+    if (!row) continue;
+    const state = priceState[instrument.id];
+    const changeData = formatChange(instrument, state);
+    const last = row.querySelector('[data-field="last"]');
+    const change = row.querySelector('[data-field="change"]');
+    const trend = row.querySelector('[data-field="trend"]');
+
+    last.textContent = formatPrice(instrument, state);
+    change.className = `price-change ${changeData.rising ? "up" : "down"}`;
+    change.textContent = changeData.text;
+    trend.textContent = "";
+    trend.append(createSparkline(state.history));
+  }
+
+  renderTicker();
+
+  const updated = document.querySelector("#price-updated");
+  if (updated) {
+    updated.textContent = `Updated ${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
+  }
+}
+
+function setPriceStatus(label, mode) {
+  const status = document.querySelector("#price-status");
+  const dot = document.querySelector("#price-status-dot");
+  if (status) status.textContent = label;
+  if (dot) {
+    dot.style.background = mode === "live" ? "#75d19f" : mode === "error" ? "#aeb8c7" : "var(--gold)";
+  }
+}
+
+function applyDemoMove() {
+  for (const instrument of instruments) {
+    const state = priceState[instrument.id];
+    state.previous = state.price;
+    state.price = Number((state.price * (1 + (Math.random() - 0.5) * 0.004)).toFixed(4));
+    state.history.push(state.price);
+    if (state.history.length > 12) state.history.shift();
+  }
+}
+
+async function refreshPrices() {
+  if (!document.querySelector("#price-rows")) return;
+
+  if (!PRICE_FEED_URL) {
+    applyDemoMove();
+    setPriceStatus("Demo prices", "demo");
+    renderPrices();
+    return;
+  }
+
+  try {
+    const response = await fetch(PRICE_FEED_URL, { cache: "no-store" });
+    if (!response.ok) throw new Error(`Price feed returned ${response.status}`);
+    const data = await response.json();
+
+    for (const id of instruments.map((instrument) => instrument.id)) {
+      if (data[id] && typeof data[id].price === "number") {
+        const state = priceState[id];
+        state.previous = typeof data[id].prev === "number" ? data[id].prev : state.price;
+        state.price = data[id].price;
+        state.history.push(state.price);
+        if (state.history.length > 12) state.history.shift();
+      }
+    }
+
+    setPriceStatus("Streaming", "live");
+    renderPrices();
+  } catch {
+    applyDemoMove();
+    setPriceStatus("Indicative fallback", "error");
+    renderPrices();
+  }
+}
+
+buildPriceBoard();
+refreshPrices();
+setInterval(refreshPrices, PRICE_REFRESH_MS);
+
+const modal = document.querySelector("#spec-modal");
+const modalTitle = document.querySelector("#modal-title");
+const modalEyebrow = document.querySelector("#modal-eyebrow");
+const modalBody = document.querySelector("#modal-body");
+const modalTable = document.querySelector("#modal-table");
+const modalClose = modal?.querySelector(".modal-close");
+const rfqModal = document.querySelector("#rfq-modal");
+const rfqModalClose = rfqModal?.querySelector(".rfq-modal-close");
+
+function openSpec(key) {
+  const spec = specContent[key];
+  if (!spec || !modal) return;
+  modalEyebrow.textContent = spec.eyebrow;
+  modalTitle.textContent = spec.title;
+  modalBody.textContent = spec.body;
+  modalTable.textContent = "";
+  for (const row of spec.rows) {
+    const tr = document.createElement("tr");
+    const keyCell = document.createElement("td");
+    const valueCell = document.createElement("td");
+    keyCell.textContent = row[0];
+    valueCell.textContent = row[1];
+    tr.append(keyCell, valueCell);
+    modalTable.append(tr);
+  }
+  modal.hidden = false;
+  modalClose?.focus();
+}
+
+function closeSpec() {
+  if (modal) modal.hidden = true;
+}
+
+function openRfq() {
+  if (!rfqModal) return;
+  rfqModal.hidden = false;
+  rfqModal.querySelector("select, input, textarea, button")?.focus();
+}
+
+function closeRfq() {
+  if (rfqModal) rfqModal.hidden = true;
+}
+
+document.querySelectorAll("[data-spec]").forEach((button) => {
+  button.addEventListener("click", () => openSpec(button.dataset.spec));
+});
+modalClose?.addEventListener("click", closeSpec);
+modal?.addEventListener("click", (event) => {
+  if (event.target === modal) closeSpec();
+});
+document.querySelectorAll("[data-open-rfq]").forEach((button) => {
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+    openRfq();
+  });
+});
+rfqModalClose?.addEventListener("click", closeRfq);
+rfqModal?.addEventListener("click", (event) => {
+  if (event.target === rfqModal) closeRfq();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeSpec();
+    closeRfq();
+  }
+});
+
+const form = document.querySelector("#rfq-form");
+const note = document.querySelector("#form-note");
+
+form?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const data = new FormData(form);
+  const email = String(data.get("Email") || "").trim();
+
+  if (!email || !email.includes("@")) {
+    note.textContent = "Please add a valid email address first.";
+    return;
+  }
+
+  const lines = [];
+  for (const [key, value] of data.entries()) {
+    const text = String(value).trim();
+    if (text) lines.push(`${key}: ${text}`);
+  }
+
+  if (LEAD_BRIEF_URL) {
+    const payload = Object.fromEntries([...data.entries()].map(([key, value]) => [key, String(value).trim()]));
+    payload.Page = location.href;
+    payload.SubmittedAt = new Date().toISOString();
+    fetch(LEAD_BRIEF_URL, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(payload),
+      keepalive: true
+    }).catch(() => {});
+  }
+
+  const subject = encodeURIComponent(`Petrair SA enquiry - ${data.get("Product") || "Trading"}`);
+  const body = encodeURIComponent(lines.join("\n"));
+  window.location.href = `mailto:sales@petrairsa.com?subject=${subject}&body=${body}`;
+  note.textContent = "Opening your email client with the enquiry prepared.";
+});

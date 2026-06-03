@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Petrair SA | Geneva Energy & Commodities Trading</title>
+  <meta name="description" content="Petrair SA is a Geneva-based physical energy trading company focused on crude oil, Jet A-1, ULSD 10ppm and LPG across Europe, the Mediterranean, Africa and the Middle East.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <meta name="theme-color" content="#111827">
+  <link rel="canonical" href="https://petrair.org/">
+  <link rel="icon" type="image/png" href="images/petrair-logo.png">
+  <link rel="preload" as="image" href="images/petrair-hero-custom.jpg">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="manifest" href="site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Petrair SA">
+  <meta property="og:title" content="Petrair SA | Geneva Energy & Commodities Trading">
+  <meta property="og:description" content="Physical crude oil and refined-products trading from Geneva, with disciplined logistics, banking, inspection and compliance.">
+  <meta property="og:url" content="https://petrair.org/">
+  <meta property="og:image" content="https://petrair.org/images/petrair-hero-custom.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Petrair SA | Geneva Energy & Commodities Trading">
+  <meta name="twitter:description" content="Geneva-based physical energy trading for crude oil, Jet A-1, ULSD 10ppm and LPG.">
+  <meta name="twitter:image" content="https://petrair.org/images/petrair-hero-custom.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://petrair.org/#organization",
+      "name": "Petrair SA",
+      "url": "https://petrair.org/",
+      "logo": "https://petrair.org/images/petrair-logo.png",
+      "image": "https://petrair.org/images/petrair-hero-custom.jpg",
+        "legalName": "Petrair SA",
+        "foundingLocation": "Geneva, Switzerland",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Rue du Marche 18",
+          "postalCode": "1204",
+          "addressLocality": "Geneva",
+          "addressCountry": "CH"
+        },
+        "email": "sales@petrairsa.com",
+        "telephone": "+41 22 319 64 03",
+        "areaServed": ["Europe", "Mediterranean", "Africa", "Middle East", "Asia"],
+        "knowsAbout": ["Crude oil trading", "Jet A-1", "ULSD 10ppm", "LPG", "Physical commodities", "Letters of credit", "KYC", "AML"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://petrair.org/#website",
+        "url": "https://petrair.org/",
+        "name": "Petrair SA",
+        "publisher": {"@id": "https://petrair.org/#organization"},
+        "inLanguage": "en"
+      },
+      {
+        "@type": "Service",
+        "@id": "https://petrair.org/#trading-service",
+        "name": "Physical energy commodities trading",
+        "provider": {"@id": "https://petrair.org/#organization"},
+        "serviceType": "Crude oil and refined-products trading",
+        "areaServed": ["Europe", "Mediterranean", "Africa", "Middle East", "Asia"],
+        "description": "Supply, marketing, logistics coordination and documentary execution for crude oil, Jet A-1, ULSD 10ppm and LPG."
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://petrair.org/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What products does Petrair SA trade?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Petrair SA focuses on crude oil, Jet A-1 aviation fuel, ULSD 10ppm diesel and LPG, supported by documented physical execution."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where does Petrair SA operate?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Petrair SA is based in Geneva and works across Europe, the Mediterranean, Africa, the Middle East and Asia."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How are enquiries handled?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Qualified counterparties can submit an enquiry to the Geneva desk. Indicative responses are subject to KYC, AML, sanctions screening, product availability and contract terms."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="notice">
+      <span>Geneva, Switzerland</span>
+      <span>Information only. Not an offer to transact.</span>
+    </div>
+    <div class="market-ticker" aria-label="Energy market indicators">
+      <a class="ticker-label" href="#prices">Market indicators</a>
+      <div class="ticker-window" aria-live="polite">
+        <div class="ticker-track" id="market-ticker-track">
+          <span class="ticker-loading">Loading market indicators...</span>
+        </div>
+      </div>
+    </div>
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Petrair SA home">
+        <img class="brand-logo" src="images/petrair-logo.png" alt="" width="42" height="40">
+        <span>Petrair <small>SA</small></span>
+      </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+      <div class="menu" id="menu">
+        <a href="#products" data-i18n="nav.products">Products</a>
+        <a href="#prices" data-i18n="nav.prices">Prices</a>
+        <a href="#operations" data-i18n="nav.operations">Operations</a>
+        <a href="#compliance" data-i18n="nav.compliance">Compliance</a>
+        <a href="#documents" data-i18n="nav.documents">Documents</a>
+        <label class="language-label">
+          <span data-i18n="nav.language">Language</span>
+          <select id="language-select" aria-label="Language">
+            <option value="en">English</option>
+            <option value="fr">Francais</option>
+            <option value="es">Espanol</option>
+            <option value="de">Deutsch</option>
+            <option value="ar">Arabic</option>
+            <option value="zh">Chinese</option>
+          </select>
+        </label>
+        <a href="#contact" class="menu-cta" data-i18n="nav.contact">Contact desk</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-media" aria-hidden="true">
+        <img src="images/petrair-hero-custom.jpg" alt="">
+      </div>
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow" data-i18n="hero.eyebrow">Physical trading from Geneva</p>
+          <h1 id="hero-title" data-i18n="hero.title">A global market for oil and energy products.</h1>
+          <p class="lead" data-i18n="hero.lead">Petrair SA optimises the supply and marketing of crude oil and refined products from Geneva across Europe, the Mediterranean, Africa and the Middle East.</p>
+          <div class="actions">
+            <a class="button primary" href="#contact" data-open-rfq data-i18n="hero.cta1">Request a quotation</a>
+            <a class="button secondary" href="#products" data-i18n="hero.cta2">Explore our trading</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section products premium-offering" id="products" aria-labelledby="products-title">
+      <div class="wrap">
+        <div class="section-head offering-head">
+          <div>
+            <p class="eyebrow" data-i18n="products.eyebrow">Our offering</p>
+            <h2 id="products-title" data-i18n="products.title">Our trading products and services</h2>
+          </div>
+          <div class="offering-copy">
+            <p data-i18n="products.text1">Petrair SA is engaged in the international trading of crude oil, refined petroleum products and selected energy commodities. The company focuses on identifying, structuring and executing physical commodity transactions with established counterparties across global markets.</p>
+            <p data-i18n="products.text2">Activities are guided by disciplined commercial evaluation, prudent risk management and a strong emphasis on transaction execution and counterparty reliability. By combining market expertise, commercial agility and professional operating standards, Petrair aims to build long-term trading relationships and develop a scalable platform capable of supporting repeat transaction flow across multiple products and jurisdictions.</p>
+            <p data-i18n="products.text3">The company's objective is to establish a credible and sustainable presence within international energy markets through consistent commercial performance, operational discipline and responsible growth.</p>
+          </div>
+        </div>
+        <div class="card-grid product-showcase">
+          <article class="product-card feature-card">
+            <img src="images/petrair-crude-custom.jpg" alt="Oil tanker at dusk representing Petrair SA crude oil trading corridors" loading="lazy" width="1100" height="720">
+            <div class="product-card-body">
+              <span class="product-index">01</span>
+              <h3 data-i18n="product.crude">Crude Oil</h3>
+              <p data-i18n="product.crudeText">Origination and distribution of light sweet and medium sour crude streams for refining systems and trading channels.</p>
+              <button class="text-button" type="button" data-spec="crude" data-i18n="product.viewSpec">View specification</button>
+            </div>
+          </article>
+          <article class="product-card">
+            <img src="images/petrair-jet-custom.jpg" alt="Jet A-1 fuel hydrant on an airport apron representing aviation fuel supply" loading="lazy" width="1100" height="720">
+            <div class="product-card-body">
+              <span class="product-index">02</span>
+              <h3>Jet A-1</h3>
+              <p data-i18n="product.jetText">Aviation turbine fuel handled against recognised specifications, bank-controlled documentation and independent quality inspection.</p>
+              <button class="text-button" type="button" data-spec="jet" data-i18n="product.viewSpec">View specification</button>
+            </div>
+          </article>
+          <article class="product-card">
+            <img src="images/petrair-diesel-custom-v2.jpg" alt="Refined-products terminal at dusk representing Petrair SA ULSD 10ppm trading" loading="lazy" width="1100" height="720">
+            <div class="product-card-body">
+              <span class="product-index">03</span>
+              <h3>ULSD 10ppm</h3>
+              <p data-i18n="product.dieselText">Ultra Low Sulphur Diesel, a high-quality automotive diesel meeting stringent environmental and performance standards.</p>
+              <button class="text-button" type="button" data-spec="diesel" data-i18n="product.viewSpec">View specification</button>
+            </div>
+          </article>
+          <article class="product-card">
+            <img src="images/petrair-lpg-custom-v2.jpg" alt="LPG spherical storage tanks at a coastal terminal at dusk" loading="lazy" width="1100" height="720">
+            <div class="product-card-body">
+              <span class="product-index">04</span>
+              <h3>LPG</h3>
+              <p data-i18n="product.lpgText">Liquefied Petroleum Gas, a versatile hydrocarbon fuel of propane and butane used across multiple sectors worldwide.</p>
+              <button class="text-button" type="button" data-spec="lpg" data-i18n="product.viewSpec">View specification</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section prices" id="prices" aria-labelledby="prices-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="prices.eyebrow">Energy market indicators</p>
+          <h2 id="prices-title" data-i18n="prices.title">Crude oil and refined-product benchmark prices.</h2>
+          <p data-i18n="prices.text">Streaming front-month futures for the benchmarks Petrair SA trades against. Changes are measured against the previous settlement or prior close from the feed.</p>
+        </div>
+        <div class="price-board" aria-live="polite">
+          <div class="price-board-head">
+            <span><span class="status-dot" id="price-status-dot"></span><span id="price-status">Loading</span></span>
+            <span id="price-updated">Not updated yet</span>
+          </div>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <thead>
+                <tr>
+                  <th data-i18n="prices.instrument">Instrument</th>
+                  <th data-i18n="prices.last">Last price</th>
+                  <th data-i18n="prices.change">Change vs prior close</th>
+                  <th class="hide-sm" data-i18n="prices.trend">Trend</th>
+                  <th data-i18n="prices.type">Type</th>
+                </tr>
+              </thead>
+              <tbody id="price-rows"></tbody>
+            </table>
+          </div>
+          <p class="price-foot" data-i18n="prices.foot">Source: front-month futures via configured public market feed. Prices are shown in USD per listed unit. Changes reference the previous settlement or prior close supplied by the feed. Indicative, non-tradable and not an offer to transact.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section supply" aria-labelledby="supply-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="supply.eyebrow">Supply chain capability</p>
+          <h2 id="supply-title" data-i18n="supply.title">Moving physical commodities safely, reliably and efficiently.</h2>
+          <p data-i18n="supply.text">Petrair connects sourcing, logistics coordination, storage/interface planning, inspection, finance and delivery documentation into one clear commercial story.</p>
+        </div>
+        <div class="capability-grid">
+          <article><strong>Sourcing</strong><p>Engagement with producers, refiners, sellers and qualified buyers across active corridors.</p></article>
+          <article><strong>Logistics</strong><p>Third-party shipping and logistics coordination for maritime and hub-based movements.</p></article>
+          <article><strong>Inspection</strong><p>Quality and quantity controls through recognised independent inspectors where applicable.</p></article>
+          <article><strong>Finance</strong><p>LC-backed, documentary settlement structures for eligible counterparties and transactions.</p></article>
+          <article><strong>Risk</strong><p>Back-to-back discipline, sanctions screening, origin controls and documented terms.</p></article>
+          <article><strong>Delivery</strong><p>Clear commercial documentation from enquiry through nomination, inspection and settlement.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section operations" id="operations" aria-labelledby="operations-title">
+      <div class="wrap split">
+        <div>
+          <p class="eyebrow" data-i18n="ops.eyebrow">How Petrair operates</p>
+          <h2 id="operations-title" data-i18n="ops.title">Trading, banking and inspection under one controlled process.</h2>
+          <p data-i18n="ops.text">Transactions are treated as documented physical operations, not casual enquiries. Product origin, counterparty status, inspection, insurance and banking steps are checked before commercial execution progresses.</p>
+        </div>
+        <div class="process-list" aria-label="Operating standards">
+          <div><span>01</span><strong>Counterparty qualification</strong><p>KYC, AML and sanctions screening before sensitive transaction details are exchanged.</p></div>
+          <div><span>02</span><strong>Documented terms</strong><p>Indicative terms are clarified by specification, quantity, delivery window, Incoterm and settlement route.</p></div>
+          <div><span>03</span><strong>Independent inspection</strong><p>Recognised inspection parties support quality, quantity and transfer documentation where applicable.</p></div>
+          <div><span>04</span><strong>Controlled settlement</strong><p>Bank-controlled documentation and LC-backed structures are used for eligible transactions.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reach" aria-labelledby="reach-title">
+      <div class="wrap">
+        <div class="section-head compact">
+          <p class="eyebrow" data-i18n="reach.eyebrow">Operational corridors</p>
+          <h2 id="reach-title" data-i18n="reach.title">Supply and marketing across established energy routes.</h2>
+          <p data-i18n="reach.text">We supply and market crude oil and refining products globally, coordinating maritime transport and product coverage through the Geneva desk and regional counterparties.</p>
+        </div>
+        <div class="map-band">
+          <div class="route-map" role="img" aria-label="Petrair SA route map from Geneva to European, Mediterranean, African, Middle Eastern and Asian energy corridors">
+            <img src="images/world-dots-crop.png" alt="" loading="lazy" width="1400" height="521">
+            <svg class="route-overlay" viewBox="0 0 1400 521" aria-hidden="true">
+              <defs>
+                <marker id="route-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z"></path>
+                </marker>
+              </defs>
+              <g class="route-lines">
+                <path d="M 690 190 C 635 160 585 158 538 178"></path>
+                <path d="M 690 190 C 640 215 608 252 574 300"></path>
+                <path d="M 690 190 C 620 236 548 276 496 332"></path>
+                <path d="M 690 190 C 736 202 775 226 820 255"></path>
+                <path d="M 690 190 C 804 180 934 216 1038 270"></path>
+              </g>
+              <g class="route-points">
+                <circle class="hub" cx="690" cy="190" r="8"></circle>
+                <circle cx="538" cy="178" r="5"></circle>
+                <circle cx="574" cy="300" r="5"></circle>
+                <circle cx="496" cy="332" r="5"></circle>
+                <circle cx="820" cy="255" r="5"></circle>
+                <circle cx="1038" cy="270" r="5"></circle>
+              </g>
+              <g class="route-labels">
+                <text x="704" y="178">Geneva desk</text>
+                <text x="470" y="162">Europe / Med</text>
+                <text x="500" y="294">North Africa</text>
+                <text x="410" y="360">West Africa</text>
+                <text x="836" y="250">Middle East</text>
+                <text x="1055" y="285">Asia</text>
+              </g>
+            </svg>
+          </div>
+          <ul>
+            <li><strong>Europe</strong><span>Core demand markets</span></li>
+            <li><strong>Europe & Mediterranean</strong><span>Active hubs</span></li>
+            <li><strong>North Africa</strong><span>Refined products</span></li>
+            <li><strong>West Africa</strong><span>Emerging markets</span></li>
+            <li><strong>Middle East</strong><span>Strategic sourcing</span></li>
+            <li><strong>Asia</strong><span>Growing demand centres</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section compliance" id="compliance" aria-labelledby="compliance-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="compliance.eyebrow">Compliance and risk</p>
+          <h2 id="compliance-title" data-i18n="compliance.title">Strict standards for serious counterparties.</h2>
+          <p data-i18n="compliance.text">The site avoids making public price promises or open offers. All commercial discussions remain subject to due diligence, product availability, documentation, sanctions controls and final contract terms.</p>
+        </div>
+        <div class="checks">
+          <div>Non-sanctioned origin policy</div>
+          <div>KYC and AML screening</div>
+          <div>Independent quality inspection</div>
+          <div>Bank-controlled settlement</div>
+          <div>Transaction insurance review</div>
+          <div>Document-controlled execution</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section assurance" aria-labelledby="assurance-title">
+      <div class="wrap split">
+        <div>
+          <p class="eyebrow" data-i18n="assurance.eyebrow">Counterparty assurance</p>
+          <h2 id="assurance-title" data-i18n="assurance.title">Official channels and mandate verification.</h2>
+          <p data-i18n="assurance.text">Energy trading attracts false mandate claims and unauthorised approaches. Petrair SA makes its official contact route obvious and asks counterparties to verify any unexpected communication before sharing documents or banking information.</p>
+        </div>
+        <div class="warning-panel">
+          <strong data-i18n="assurance.noticeTitle">Verification notice</strong>
+          <p><span data-i18n="assurance.noticeText">Petrair SA does not treat public website content as an offer, mandate, allocation or commitment to transact. If a third party claims to represent Petrair SA, verify the communication directly through</span> <a href="mailto:sales@petrairsa.com">sales@petrairsa.com</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section documents" id="documents" aria-labelledby="documents-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="documents.eyebrow">Document centre</p>
+          <h2 id="documents-title" data-i18n="documents.title">Reference documents for qualified counterparties.</h2>
+          <p data-i18n="documents.text">Use this section for official PDFs when they are ready. Until then, the links are clearly marked as requested-by-email so visitors do not hit broken placeholder documents.</p>
+        </div>
+        <div class="doc-grid">
+          <a href="mailto:sales@petrairsa.com?subject=Petrair%20SA%20company%20profile%20request">Company profile <span>Request by email</span></a>
+          <a href="mailto:sales@petrairsa.com?subject=Petrair%20SA%20KYC%20AML%20policy%20request">KYC / AML policy <span>Request by email</span></a>
+          <a href="mailto:sales@petrairsa.com?subject=Petrair%20SA%20product%20specifications%20request">Product specifications <span>Request by email</span></a>
+          <a href="mailto:sales@petrairsa.com?subject=Petrair%20SA%20terms%20request">General terms <span>Request by email</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section corporate" aria-labelledby="corporate-title">
+      <div class="wrap contact-grid">
+        <div>
+          <p class="eyebrow" data-i18n="corporate.eyebrow">Corporate information</p>
+          <h2 id="corporate-title" data-i18n="corporate.title">Registered Geneva company details.</h2>
+          <p data-i18n="corporate.text">Clear company details are important for trust, due diligence and AI/search interpretation.</p>
+        </div>
+        <dl class="corp-list">
+          <div><dt>Legal name</dt><dd>Petrair SA</dd></div>
+          <div><dt>Legal form</dt><dd>Societe Anonyme (SA)</dd></div>
+          <div><dt>Incorporation</dt><dd>Geneva, Switzerland</dd></div>
+          <div><dt>Registration</dt><dd>CH-660.0.667.992-7</dd></div>
+          <div><dt>UID / VAT</dt><dd>CHE-107.412.404</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap contact-grid">
+        <div>
+          <p class="eyebrow" data-i18n="contact.eyebrow">Trading desk</p>
+          <h2 id="contact-title" data-i18n="contact.title">Request a quotation.</h2>
+          <p data-i18n="contact.text">Send the desk a concise enquiry with product, quantity, delivery location, timing and settlement expectations. The form opens your email client so no sensitive data is stored on the website.</p>
+          <address>
+            Petrair SA<br>
+            Rue du Marche 18<br>
+            1204 Geneva, Switzerland<br>
+            <a href="mailto:sales@petrairsa.com">sales@petrairsa.com</a><br>
+            <a href="tel:+41223196403">+41 22 319 64 03</a>
+          </address>
+        </div>
+        <div class="rfq-panel">
+          <p class="eyebrow" data-i18n="quote.eyebrow">Quotation request</p>
+          <h3 data-i18n="quote.title">Start a trading enquiry with the Geneva desk.</h3>
+          <p data-i18n="quote.text">Product, quantity, destination, delivery timing and settlement expectations are enough to start a qualified review.</p>
+          <button class="button primary" type="button" data-open-rfq data-i18n="quote.button">Request a quotation</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div>
+        <img class="footer-logo" src="images/petrair-logo.png" alt="" width="40" height="38">
+        <strong>Petrair SA</strong>
+        <p data-i18n="footer.tagline">Geneva energy and commodities trading.</p>
+      </div>
+      <div>
+        <a href="#products" data-i18n="nav.products">Products</a>
+        <a href="#prices" data-i18n="nav.prices">Prices</a>
+        <a href="#operations" data-i18n="nav.operations">Operations</a>
+        <a href="#compliance" data-i18n="nav.compliance">Compliance</a>
+        <a href="#contact" data-i18n="footer.contact">Contact</a>
+      </div>
+      <p data-i18n="footer.legal">Copyright 2026 Petrair SA. Information only. Not an offer to transact.</p>
+    </div>
+  </footer>
+  <div class="modal" id="rfq-modal" hidden>
+    <div class="modal-panel rfq-modal-panel" role="dialog" aria-modal="true" aria-labelledby="rfq-modal-title">
+      <button class="modal-close rfq-modal-close" type="button" aria-label="Close RFQ form">×</button>
+      <p class="eyebrow" data-i18n="contact.eyebrow">Trading desk</p>
+      <h2 id="rfq-modal-title" data-i18n="contact.title">Request a quotation.</h2>
+      <form class="rfq-form" id="rfq-form">
+          <label><span data-i18n="form.product">Product</span>
+            <select name="Product">
+              <option>Crude Oil</option>
+              <option>Jet A-1</option>
+              <option>ULSD 10ppm</option>
+              <option>LPG</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label><span data-i18n="form.quantity">Quantity</span>
+            <input name="Quantity" autocomplete="off" placeholder="e.g. 50,000 MT per month">
+          </label>
+          <label><span data-i18n="form.destination">Destination</span>
+            <input name="Destination" autocomplete="shipping locality" placeholder="Port or region">
+          </label>
+          <label><span data-i18n="form.company">Company</span>
+            <input name="Company" autocomplete="organization">
+          </label>
+          <label><span data-i18n="form.name">Your name</span>
+            <input name="Name" autocomplete="name">
+          </label>
+          <label><span data-i18n="form.email">Email</span>
+            <input name="Email" type="email" autocomplete="email" required>
+          </label>
+          <label><span data-i18n="form.phone">Phone (optional)</span>
+            <div class="phone-fields">
+              <select name="CountryCode" aria-label="Country code">
+                <option value="+41">+41 CH</option>
+                <option value="+44">+44 UK</option>
+                <option value="+1">+1 US/CA</option>
+                <option value="+33">+33 FR</option>
+                <option value="+34">+34 ES</option>
+                <option value="+49">+49 DE</option>
+                <option value="+971">+971 UAE</option>
+                <option value="+966">+966 SA</option>
+                <option value="+234">+234 NG</option>
+                <option value="+27">+27 ZA</option>
+              </select>
+              <input name="Phone" autocomplete="tel" placeholder="Phone number">
+            </div>
+          </label>
+          <label><span data-i18n="form.message">Message</span>
+            <textarea name="Message" rows="4" placeholder="Specification, delivery window, Incoterm, payment terms"></textarea>
+          </label>
+          <button class="button primary" type="submit" data-i18n="form.submit">Open email enquiry</button>
+          <p class="form-note" id="form-note" role="status"></p>
+        </form>
+    </div>
+  </div>
+  <div class="modal" id="spec-modal" hidden>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" type="button" aria-label="Close specification">×</button>
+      <p class="eyebrow" id="modal-eyebrow">Specification</p>
+      <h2 id="modal-title">Product</h2>
+      <p id="modal-body"></p>
+      <table class="spec-table" id="modal-table"></table>
+      <p class="modal-note">Reference specification only. Delivered quality is governed by the final contract and independent certificate of quality where applicable.</p>
+    </div>
+  </div>
+  <script src="js/translations.js" defer></script>
+  <script src="js/script.js" defer></script>
+</body>
+</html>
