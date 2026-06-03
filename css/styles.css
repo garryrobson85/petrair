@@ -585,12 +585,13 @@ a { color: inherit; }
   transform: translateY(0);
 }
 
-.operations, .documents { background: #f0f3f6; }
+.documents { background: #f0f3f6; }
 .supply {
   position: relative;
   overflow: hidden;
+  padding-bottom: 84px;
   background:
-    linear-gradient(180deg, rgba(255,255,255,.92), rgba(248,250,251,.95)),
+    linear-gradient(180deg, rgba(255,255,255,.78), rgba(248,250,251,.86)),
     url("../images/supply-flow-bg.jpg") center / cover no-repeat;
 }
 .supply::before {
@@ -599,8 +600,9 @@ a { color: inherit; }
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(255,255,255,.96), rgba(255,255,255,.78) 46%, rgba(255,255,255,.94)),
-    radial-gradient(circle at 72% 34%, rgba(185,134,47,.12), transparent 34%);
+    linear-gradient(90deg, rgba(255,255,255,.9), rgba(255,255,255,.54) 48%, rgba(255,255,255,.84)),
+    radial-gradient(circle at 72% 34%, rgba(185,134,47,.16), transparent 34%),
+    linear-gradient(180deg, transparent 34%, rgba(255,255,255,.74));
 }
 .supply .wrap {
   position: relative;
@@ -634,23 +636,26 @@ a { color: inherit; }
   min-height: 270px;
   padding: 34px 20px 22px;
   background:
-    linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.58)),
+    linear-gradient(180deg, rgba(255,255,255,.84), rgba(255,255,255,.66)),
     radial-gradient(circle at 50% 0%, rgba(185,134,47,.12), transparent 44%);
   border: 1px solid var(--line);
   border-radius: 8px;
   box-shadow: 0 16px 44px rgba(17,24,39,.06);
 }
 .capability-flow article::after {
-  content: "→";
+  content: "";
   position: absolute;
-  top: -37px;
-  right: -20px;
-  color: var(--gold-dark);
-  font-size: 1.3rem;
-  font-weight: 900;
+  top: -31px;
+  right: -17px;
+  width: 28px;
+  height: 12px;
+  border-top: 2px solid var(--gold-dark);
+  border-right: 2px solid var(--gold-dark);
+  transform: skewX(28deg);
 }
 .capability-flow article:last-child::after {
   content: "";
+  border: 0;
 }
 .flow-step {
   position: absolute;
@@ -693,30 +698,97 @@ a { color: inherit; }
   grid-template-columns: .86fr 1.14fr;
   gap: 64px;
 }
+.operations {
+  position: relative;
+  overflow: hidden;
+  margin-top: -1px;
+  background:
+    linear-gradient(135deg, rgba(7,12,22,.96), rgba(18,31,49,.94)),
+    url("../images/supply-flow-bg.jpg") center / cover no-repeat;
+  color: #fff;
+}
+.operations::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 54px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, rgba(185,134,47,.65), transparent);
+}
+.operations::after {
+  content: "";
+  position: absolute;
+  inset: auto -10% -45% 42%;
+  height: 72%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(185,134,47,.16), transparent 58%);
+}
+.operations .wrap {
+  position: relative;
+  z-index: 1;
+}
+.operations h2,
+.operations strong {
+  color: #fff;
+}
+.operations .eyebrow {
+  color: var(--gold);
+}
+.operations p {
+  color: rgba(232,238,246,.76);
+}
 .process-list {
   display: grid;
   gap: 0;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(255,255,255,.18);
 }
 .process-list div {
   background: transparent;
   border: 0;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(255,255,255,.15);
   border-radius: 0;
-  padding: 22px 0 22px 72px;
+  padding: 24px 0 24px 86px;
   position: relative;
+}
+.process-list div::before {
+  content: "";
+  position: absolute;
+  left: 25px;
+  top: 56px;
+  bottom: -18px;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(185,134,47,.55), transparent);
+}
+.process-list div:last-child::before {
+  display: none;
 }
 .process-list span {
   position: absolute;
   left: 0;
-  top: 25px;
+  top: 24px;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid rgba(185,134,47,.72);
+  border-radius: 50%;
+  background: rgba(255,255,255,.05);
   color: var(--gold-dark);
   font-weight: 900;
   font-size: .78rem;
   letter-spacing: .12em;
+  box-shadow: 0 0 0 8px rgba(185,134,47,.08);
 }
-.process-list strong { display: block; margin-top: 8px; }
-.process-list p { margin: 6px 0 0; color: var(--muted); }
+.process-list strong {
+  display: block;
+  margin-top: 3px;
+}
+.process-list p {
+  margin: 6px 0 0;
+  color: rgba(232,238,246,.72);
+}
 
 .map-band {
   display: grid;
