@@ -624,7 +624,7 @@ a { color: inherit; }
   margin: 0;
   border-radius: 8px;
   overflow: hidden;
-  opacity: .82;
+  opacity: .75;
   box-shadow: 0 28px 90px rgba(17,24,39,.12);
 }
 .supply-art::after {
@@ -826,10 +826,7 @@ a { color: inherit; }
 }
 
 .map-band {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 300px;
-  gap: 0;
-  align-items: center;
+  display: block;
   background: var(--dark);
   color: #fff;
   border-radius: 8px;
@@ -838,83 +835,19 @@ a { color: inherit; }
 }
 .route-map {
   position: relative;
-  min-height: 250px;
+  min-height: 340px;
   border: 0;
-  border-right: 1px solid rgba(255,255,255,.1);
   border-radius: 0;
   overflow: hidden;
   background: #080d16;
 }
 .route-map img {
   width: 100%;
-  min-height: 250px;
-  height: 100%;
-  object-fit: cover;
-  opacity: .86;
-}
-.route-overlay {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-.route-lines path {
-  fill: none;
-  stroke: var(--gold);
-  stroke-width: 2.8;
-  stroke-linecap: round;
-  stroke-dasharray: 8 9;
-  filter: drop-shadow(0 0 7px rgba(185,134,47,.5));
-  marker-end: url(#route-arrow);
-}
-.route-overlay marker path,
-.route-points circle {
-  fill: var(--gold);
-}
-.route-points circle {
-  stroke: #fff;
-  stroke-width: 2;
-  filter: drop-shadow(0 0 8px rgba(185,134,47,.6));
-}
-.route-points .hub {
-  fill: #75d19f;
-  stroke: #fff;
-  stroke-width: 2.5;
-}
-.route-labels text {
-  fill: #f6f0e4;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 23px;
-  font-weight: 800;
-  paint-order: stroke;
-  stroke: rgba(8,13,22,.86);
-  stroke-width: 5px;
-  stroke-linejoin: round;
-}
-.map-band ul {
-  margin: 0;
-  padding: 26px;
-  list-style: none;
-  display: grid;
-  gap: 14px;
-}
-.map-band li {
-  border-left: 3px solid var(--gold);
-  padding-left: 12px;
-  color: #e7ebf1;
-  font-weight: 700;
-}
-.map-band li strong,
-.map-band li span {
+  height: auto;
   display: block;
+  object-fit: contain;
+  opacity: 1;
 }
-.map-band li span {
-  color: #aeb8c7;
-  font-size: .88rem;
-  font-weight: 700;
-}
-
 .compliance {
   position: relative;
   overflow: hidden;
@@ -1310,7 +1243,6 @@ address a { color: #fff; font-weight: 800; }
   .hero-grid, .split, .map-band, .contact-grid, .footer-grid {
     grid-template-columns: 1fr;
   }
-  .route-labels text { font-size: 27px; }
   .market-panel { max-width: 480px; }
   .card-grid, .doc-grid, .checks, .product-showcase { grid-template-columns: repeat(2, 1fr); }
   .capability-flow {
@@ -1394,7 +1326,6 @@ address a { color: #fff; font-weight: 800; }
   .map-band { padding: 20px; }
   .route-map { min-height: 220px; }
   .route-map img { min-height: 220px; }
-  .route-labels text { font-size: 32px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
