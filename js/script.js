@@ -17,53 +17,25 @@ const specContent = {
     eyebrow: "Crude oil",
     title: "Crude Oil",
     image: "images/petrair-crude-custom.jpg",
-    body: "Crude oil is one of the world's most actively traded energy commodities and serves as the primary feedstock for the global refining industry.\n\nPetrair's trading activities may encompass a variety of crude oil grades, including light, medium, and heavy crudes from different producing regions, depending on market availability, commercial opportunities, and counterparty requirements.",
-    rows: [
-      ["API gravity", "32-42 degrees typical"],
-      ["Sulphur", "0.1-1.5% grade dependent"],
-      ["Pricing", "Dated Brent / Platts-linked"],
-      ["Inspection", "Recognised inspector at load and discharge"],
-      ["Settlement", "LC / documentary"]
-    ]
+    body: "Crude oil is one of the world's most actively traded energy commodities and serves as the primary feedstock for the global refining industry.\n\nPetrair's trading activities may encompass a variety of crude oil grades, including light, medium, and heavy crudes from different producing regions, depending on market availability, commercial opportunities, and counterparty requirements.\n\nTransactions are approached through disciplined counterparty review, benchmark-aware pricing and document-led execution."
   },
   jet: {
     eyebrow: "Aviation fuel",
     title: "Jet A-1",
     image: "images/petrair-jet-custom.jpg",
-    body: "The internationally recognised grade of aviation turbine fuel used by commercial airlines, cargo operators and aviation service providers worldwide.",
-    rows: [
-      ["Density at 15C", "775.0-840.0 kg/m3"],
-      ["Flash point", "Min 38C"],
-      ["Freezing point", "Max -47C"],
-      ["Sulphur total", "Max 0.30% m/m"],
-      ["Net heat of combustion", "Min 42.8 MJ/kg"]
-    ]
+    body: "The internationally recognised grade of aviation turbine fuel used by commercial airlines, cargo operators and aviation service providers worldwide.\n\nJet A-1 enquiries are handled with attention to destination storage, delivery scheduling, documentary controls and independent inspection requirements.\n\nPetrair focuses on commercially credible movements where counterparties, terminals and payment routes can be clearly verified."
   },
   diesel: {
     eyebrow: "Diesel",
     title: "ULSD 10ppm",
     image: "images/petrair-diesel-custom-v2.jpg",
-    body: "Ultra Low Sulphur Diesel \u2014 a high-quality automotive diesel meeting stringent environmental and performance standards.",
-    rows: [
-      ["Cetane number", "Min 51.0"],
-      ["Density at 15C", "820.0-845.0 kg/m3"],
-      ["Sulphur", "Max 10.0 mg/kg"],
-      ["Flash point", "Above 55C"],
-      ["FAME content", "Max 7.0% v/v"]
-    ]
+    body: "Ultra Low Sulphur Diesel \u2014 a high-quality automotive diesel meeting stringent environmental and performance standards.\n\nPetrair evaluates ULSD opportunities across refined-products channels where quality, quantity, storage, inspection and banking documentation can be aligned before execution.\n\nThe focus is on practical, controlled transaction flow rather than speculative exposure."
   },
   lpg: {
     eyebrow: "Liquefied petroleum gas",
     title: "LPG",
     image: "images/petrair-lpg-custom-v2.jpg",
-    body: "Liquefied Petroleum Gas \u2014 a versatile hydrocarbon fuel of propane and butane used across multiple sectors worldwide.",
-    rows: [
-      ["Product", "Propane, butane or LPG mix"],
-      ["Storage", "Pressurised or refrigerated terminal infrastructure"],
-      ["Use", "Heating, industry, transport and petrochemical feedstock"],
-      ["Controls", "Quality, quantity and documentation by contract"],
-      ["Execution", "Subject to origin, terminal, vessel and banking review"]
-    ]
+    body: "Liquefied Petroleum Gas \u2014 a versatile hydrocarbon fuel of propane and butane used across multiple sectors worldwide.\n\nLPG trade flows depend on suitable terminal infrastructure, vessel compatibility, product handling requirements and clear documentary controls.\n\nPetrair reviews opportunities on a case-by-case basis with emphasis on counterparty reliability, origin controls and executable logistics."
   }
 };
 
@@ -368,7 +340,7 @@ const modal = document.querySelector("#spec-modal");
 const modalTitle = document.querySelector("#modal-title");
 const modalEyebrow = document.querySelector("#modal-eyebrow");
 const modalBody = document.querySelector("#modal-body");
-const modalTable = document.querySelector("#modal-table");
+const modalImage = document.querySelector("#modal-image");
 const modalClose = modal?.querySelector(".modal-close");
 const rfqModal = document.querySelector("#rfq-modal");
 const rfqModalClose = rfqModal?.querySelector(".rfq-modal-close");
@@ -379,21 +351,12 @@ function openSpec(key) {
   const panel = modal.querySelector(".modal-panel");
   if (spec.image) {
     panel?.style.setProperty("--spec-backdrop", `url("${spec.image}")`);
+    if (modalImage) modalImage.style.backgroundImage = `url("${spec.image}")`;
   }
   panel?.classList.remove("modal-panel-enter");
   modalEyebrow.textContent = spec.eyebrow;
   modalTitle.textContent = spec.title;
   modalBody.textContent = spec.body;
-  modalTable.textContent = "";
-  for (const row of spec.rows) {
-    const tr = document.createElement("tr");
-    const keyCell = document.createElement("td");
-    const valueCell = document.createElement("td");
-    keyCell.textContent = row[0];
-    valueCell.textContent = row[1];
-    tr.append(keyCell, valueCell);
-    modalTable.append(tr);
-  }
   modal.hidden = false;
   if (panel) {
     panel.offsetHeight;
@@ -416,8 +379,14 @@ function closeRfq() {
   if (rfqModal) rfqModal.hidden = true;
 }
 
-document.querySelectorAll("[data-spec]").forEach((button) => {
-  button.addEventListener("click", () => openSpec(button.dataset.spec));
+document.querySelectorAll("[data-spec]").forEach((card) => {
+  card.addEventListener("click", () => openSpec(card.dataset.spec));
+  card.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openSpec(card.dataset.spec);
+    }
+  });
 });
 modalClose?.addEventListener("click", closeSpec);
 modal?.addEventListener("click", (event) => {

@@ -173,40 +173,36 @@
           </div>
         </div>
         <div class="card-grid product-showcase">
-          <article class="product-card feature-card">
+          <article class="product-card" data-spec="crude" role="button" tabindex="0" aria-label="Open Crude Oil overview">
             <img src="images/petrair-crude-custom.jpg" alt="Oil tanker at dusk representing Petrair SA crude oil trading corridors" loading="lazy" width="1100" height="720">
             <div class="product-card-body">
               <span class="product-index">01</span>
               <h3 data-i18n="product.crude">Crude Oil</h3>
               <p data-i18n="product.crudeText">One of the world's most actively traded energy commodities and the primary feedstock for the global refining industry.</p>
-              <button class="text-button" type="button" data-spec="crude" data-i18n="product.viewSpec">View specification</button>
             </div>
           </article>
-          <article class="product-card">
+          <article class="product-card" data-spec="jet" role="button" tabindex="0" aria-label="Open Jet A-1 overview">
             <img src="images/petrair-jet-custom.jpg" alt="Jet A-1 fuel hydrant on an airport apron representing aviation fuel supply" loading="lazy" width="1100" height="720">
             <div class="product-card-body">
               <span class="product-index">02</span>
               <h3>Jet A-1</h3>
               <p data-i18n="product.jetText">The internationally recognised grade of aviation turbine fuel used by commercial airlines, cargo operators and aviation service providers worldwide.</p>
-              <button class="text-button" type="button" data-spec="jet" data-i18n="product.viewSpec">View specification</button>
             </div>
           </article>
-          <article class="product-card">
+          <article class="product-card" data-spec="diesel" role="button" tabindex="0" aria-label="Open ULSD 10ppm overview">
             <img src="images/petrair-diesel-custom-v2.jpg" alt="Refined-products terminal at dusk representing Petrair SA ULSD 10ppm trading" loading="lazy" width="1100" height="720">
             <div class="product-card-body">
               <span class="product-index">03</span>
               <h3>ULSD 10ppm</h3>
               <p data-i18n="product.dieselText">Ultra Low Sulphur Diesel, a high-quality automotive diesel meeting stringent environmental and performance standards.</p>
-              <button class="text-button" type="button" data-spec="diesel" data-i18n="product.viewSpec">View specification</button>
             </div>
           </article>
-          <article class="product-card">
+          <article class="product-card" data-spec="lpg" role="button" tabindex="0" aria-label="Open LPG overview">
             <img src="images/petrair-lpg-custom-v2.jpg" alt="LPG spherical storage tanks at a coastal terminal at dusk" loading="lazy" width="1100" height="720">
             <div class="product-card-body">
               <span class="product-index">04</span>
               <h3>LPG</h3>
               <p data-i18n="product.lpgText">Liquefied Petroleum Gas, a versatile hydrocarbon fuel of propane and butane used across multiple sectors worldwide.</p>
-              <button class="text-button" type="button" data-spec="lpg" data-i18n="product.viewSpec">View specification</button>
             </div>
           </article>
         </div>
@@ -484,12 +480,11 @@
   </div>
   <div class="modal" id="spec-modal" hidden>
     <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-      <button class="modal-close" type="button" aria-label="Close specification">×</button>
-      <p class="eyebrow" id="modal-eyebrow">Specification</p>
+      <button class="modal-close" type="button" aria-label="Close product overview">&times;</button>
+      <div class="modal-image" id="modal-image" aria-hidden="true"></div>
+      <p class="eyebrow" id="modal-eyebrow">Product overview</p>
       <h2 id="modal-title">Product</h2>
       <p id="modal-body"></p>
-      <table class="spec-table" id="modal-table"></table>
-      <p class="modal-note">Reference specification only. Delivered quality is governed by the final contract and independent certificate of quality where applicable.</p>
     </div>
   </div>
   <script src="js/translations.js" defer></script>
