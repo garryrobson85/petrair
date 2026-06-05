@@ -624,7 +624,7 @@ a { color: inherit; }
   margin: 0;
   border-radius: 8px;
   overflow: hidden;
-  opacity: .86;
+  opacity: .82;
   box-shadow: 0 28px 90px rgba(17,24,39,.12);
 }
 .supply-art::after {
@@ -639,7 +639,7 @@ a { color: inherit; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(1.18) contrast(1.12) brightness(.86);
+  filter: saturate(1.16) contrast(1.1) brightness(.9);
 }
 .capability-flow {
   position: relative;
