@@ -16,7 +16,8 @@ const specContent = {
   crude: {
     eyebrow: "Crude oil",
     title: "Crude Oil",
-    body: "Origination and distribution of light sweet and medium sour crude streams for Mediterranean and Northwest European refineries.",
+    image: "images/petrair-crude-custom.jpg",
+    body: "Crude oil is one of the world's most actively traded energy commodities and serves as the primary feedstock for the global refining industry.\n\nPetrair's trading activities may encompass a variety of crude oil grades, including light, medium, and heavy crudes from different producing regions, depending on market availability, commercial opportunities, and counterparty requirements.",
     rows: [
       ["API gravity", "32-42 degrees typical"],
       ["Sulphur", "0.1-1.5% grade dependent"],
@@ -28,7 +29,8 @@ const specContent = {
   jet: {
     eyebrow: "Aviation fuel",
     title: "Jet A-1",
-    body: "Aviation turbine fuel to AFQRJOS / DEF STAN 91-091 / ASTM D1655 reference, delivered against bank-controlled documentation with independent quality inspection.",
+    image: "images/petrair-jet-custom.jpg",
+    body: "The internationally recognised grade of aviation turbine fuel used by commercial airlines, cargo operators and aviation service providers worldwide.",
     rows: [
       ["Density at 15C", "775.0-840.0 kg/m3"],
       ["Flash point", "Min 38C"],
@@ -40,7 +42,8 @@ const specContent = {
   diesel: {
     eyebrow: "Diesel",
     title: "ULSD 10ppm",
-    body: "Ultra Low Sulphur Diesel meeting stringent automotive, environmental and performance standards for European, Mediterranean and West African networks.",
+    image: "images/petrair-diesel-custom-v2.jpg",
+    body: "Ultra Low Sulphur Diesel \u2014 a high-quality automotive diesel meeting stringent environmental and performance standards.",
     rows: [
       ["Cetane number", "Min 51.0"],
       ["Density at 15C", "820.0-845.0 kg/m3"],
@@ -52,7 +55,8 @@ const specContent = {
   lpg: {
     eyebrow: "Liquefied petroleum gas",
     title: "LPG",
-    body: "Liquefied Petroleum Gas, principally propane and butane, used across residential, industrial, transport and petrochemical sectors worldwide.",
+    image: "images/petrair-lpg-custom-v2.jpg",
+    body: "Liquefied Petroleum Gas \u2014 a versatile hydrocarbon fuel of propane and butane used across multiple sectors worldwide.",
     rows: [
       ["Product", "Propane, butane or LPG mix"],
       ["Storage", "Pressurised or refrigerated terminal infrastructure"],
@@ -372,6 +376,11 @@ const rfqModalClose = rfqModal?.querySelector(".rfq-modal-close");
 function openSpec(key) {
   const spec = specContent[key];
   if (!spec || !modal) return;
+  const panel = modal.querySelector(".modal-panel");
+  if (spec.image) {
+    panel?.style.setProperty("--spec-backdrop", `url("${spec.image}")`);
+  }
+  panel?.classList.remove("modal-panel-enter");
   modalEyebrow.textContent = spec.eyebrow;
   modalTitle.textContent = spec.title;
   modalBody.textContent = spec.body;
@@ -386,6 +395,10 @@ function openSpec(key) {
     modalTable.append(tr);
   }
   modal.hidden = false;
+  if (panel) {
+    panel.offsetHeight;
+    panel.classList.add("modal-panel-enter");
+  }
   modalClose?.focus();
 }
 

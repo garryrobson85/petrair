@@ -1158,15 +1158,51 @@ address a { color: #fff; font-weight: 800; }
 }
 .modal[hidden] { display: none; }
 .modal-panel {
+  --spec-backdrop: none;
   width: min(720px, 100%);
   max-height: min(760px, calc(100vh - 44px));
   overflow: auto;
+  isolation: isolate;
   background: #fff;
   color: var(--ink);
   border-radius: 8px;
   padding: 28px;
   position: relative;
   box-shadow: var(--shadow);
+}
+.modal-panel::before,
+.modal-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.modal-panel::before {
+  z-index: -2;
+  background-image:
+    linear-gradient(110deg, rgba(255,255,255,.96) 0%, rgba(255,255,255,.88) 48%, rgba(255,255,255,.72) 100%),
+    var(--spec-backdrop);
+  background-position: center;
+  background-size: cover;
+  opacity: .9;
+  transform: scale(1.035);
+}
+.modal-panel::after {
+  z-index: -1;
+  background:
+    radial-gradient(circle at 86% 14%, rgba(185,134,47,.26), transparent 30%),
+    linear-gradient(180deg, rgba(255,255,255,.3), rgba(255,255,255,.94) 70%);
+}
+.modal-panel-enter {
+  animation: modal-rise .32s ease both;
+}
+.modal-panel-enter::before {
+  animation: modal-image-settle .9s ease both;
+}
+.modal-panel #modal-body {
+  white-space: pre-line;
+  max-width: 58ch;
+  color: #344156;
 }
 .modal-close {
   position: absolute;
@@ -1194,9 +1230,60 @@ address a { color: #fff; font-weight: 800; }
   font-weight: 900;
   width: 42%;
 }
+.modal-panel-enter .spec-table tr {
+  animation: spec-row-in .42s ease both;
+}
+.modal-panel-enter .spec-table tr:nth-child(1) { animation-delay: .06s; }
+.modal-panel-enter .spec-table tr:nth-child(2) { animation-delay: .1s; }
+.modal-panel-enter .spec-table tr:nth-child(3) { animation-delay: .14s; }
+.modal-panel-enter .spec-table tr:nth-child(4) { animation-delay: .18s; }
+.modal-panel-enter .spec-table tr:nth-child(5) { animation-delay: .22s; }
 .modal-note {
   color: var(--muted);
   font-size: .9rem;
+}
+
+@keyframes modal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes modal-image-settle {
+  from {
+    opacity: .35;
+    transform: scale(1.09) translateX(10px);
+    filter: saturate(.85) contrast(.92);
+  }
+  to {
+    opacity: .9;
+    transform: scale(1.035) translateX(0);
+    filter: saturate(1.05) contrast(1.02);
+  }
+}
+
+@keyframes spec-row-in {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-panel-enter,
+  .modal-panel-enter::before,
+  .modal-panel-enter .spec-table tr {
+    animation: none;
+  }
 }
 
 @media (max-width: 900px) {
