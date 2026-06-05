@@ -495,20 +495,21 @@ a { color: inherit; }
   min-height: 386px;
   overflow: hidden;
   padding: 0 0 24px;
-  background: rgba(255,255,255,.94);
-  border: 1px solid rgba(217,222,230,.86);
+  background: #0b111c;
+  border: 1px solid rgba(185,134,47,.22);
   border-radius: 8px;
-  box-shadow: 0 18px 46px rgba(17,24,39,.08);
+  box-shadow: 0 18px 46px rgba(8,13,22,.16);
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  transform-origin: center;
+  transition: transform .38s ease, box-shadow .38s ease, border-color .38s ease;
 }
 .product-card:hover,
 .product-card:focus-visible {
-  transform: translateY(-8px);
-  border-color: rgba(185,134,47,.5);
-  box-shadow: 0 28px 70px rgba(17,24,39,.16);
+  transform: translateY(-10px) scale(1.035);
+  border-color: rgba(247,212,118,.62);
+  box-shadow: 0 34px 88px rgba(8,13,22,.32), 0 0 0 1px rgba(247,212,118,.18);
   outline: none;
 }
 .product-card img {
@@ -520,8 +521,8 @@ a { color: inherit; }
   transition: transform .6s ease, filter .6s ease;
 }
 .product-card:hover img {
-  transform: scale(1.045);
-  filter: saturate(1.06) contrast(1.04);
+  transform: scale(1.06);
+  filter: saturate(1.12) contrast(1.08) brightness(1.02);
 }
 .product-card-body {
   position: relative;
@@ -530,16 +531,25 @@ a { color: inherit; }
   flex: 1;
   flex-direction: column;
   padding: 24px 26px 0;
-  background: linear-gradient(180deg, #fff, #fbfcfd);
+  background:
+    radial-gradient(circle at 88% 10%, rgba(185,134,47,.18), transparent 34%),
+    linear-gradient(180deg, rgba(15,23,36,.98), #0b111c 74%);
 }
 .product-index {
-  color: var(--gold-dark);
+  color: #f1c96c;
   font-size: .72rem;
   font-weight: 900;
   letter-spacing: .16em;
 }
-.product-card h3 { margin: 8px 0 10px; font-size: 1.25rem; }
-.product-card p { color: var(--muted); margin: 0; }
+.product-card h3 {
+  margin: 8px 0 10px;
+  color: #fff;
+  font-size: 1.25rem;
+}
+.product-card p {
+  color: #c6d0dd;
+  margin: 0;
+}
 
 .reveal {
   opacity: 0;
@@ -1274,6 +1284,14 @@ address a { color: #fff; font-weight: 800; }
   .geneva-pulse::before,
   .geneva-pulse::after {
     animation: none;
+  }
+  .product-card,
+  .product-card img {
+    transition: none;
+  }
+  .product-card:hover,
+  .product-card:focus-visible {
+    transform: none;
   }
 }
 
