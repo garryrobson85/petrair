@@ -301,9 +301,14 @@ a { color: inherit; }
 .hero-brand img {
   position: relative;
   z-index: 1;
-  width: clamp(92px, 9vw, 124px);
+  width: clamp(92px, 8vw, 112px);
   height: auto;
-  filter: drop-shadow(0 16px 30px rgba(0,0,0,.34));
+  image-rendering: -webkit-optimize-contrast;
+  transform: translateZ(0);
+  filter:
+    contrast(1.08)
+    saturate(1.04)
+    drop-shadow(0 8px 14px rgba(0,0,0,.22));
 }
 .hero-brand span {
   position: relative;
@@ -728,7 +733,7 @@ a { color: inherit; }
   border-radius: 10px;
   background:
     rgba(8,13,22,.58)
-    url("../images/petrair-logo.png") center / 76% auto no-repeat;
+    url("../images/petrair-logo-hd.png") center / 76% auto no-repeat;
   border: 1px solid rgba(255,255,255,.24);
   box-shadow: 0 18px 42px rgba(0,0,0,.22);
   backdrop-filter: blur(8px);
@@ -958,7 +963,7 @@ a { color: inherit; }
   border-radius: 10px;
   background:
     rgba(8,13,22,.64)
-    url("../images/petrair-logo.png") center / 76% auto no-repeat;
+    url("../images/petrair-logo-hd.png") center / 76% auto no-repeat;
   border: 1px solid rgba(185,134,47,.38);
   box-shadow: 0 18px 46px rgba(0,0,0,.24);
   backdrop-filter: blur(8px);
@@ -1388,7 +1393,7 @@ address a { color: #fff; font-weight: 800; }
   border-radius: 10px;
   background:
     rgba(8,13,22,.62)
-    url("../images/petrair-logo.png") center / 76% auto no-repeat;
+    url("../images/petrair-logo-hd.png") center / 76% auto no-repeat;
   border: 1px solid rgba(255,255,255,.25);
   box-shadow: 0 18px 42px rgba(0,0,0,.24);
   backdrop-filter: blur(8px);
@@ -1519,6 +1524,10 @@ address a { color: #fff; font-weight: 800; }
   }
   .hero-brand img {
     width: 78px;
+    filter:
+      contrast(1.06)
+      saturate(1.03)
+      drop-shadow(0 6px 10px rgba(0,0,0,.2));
   }
   .product-card::before {
     font-size: .58rem;
