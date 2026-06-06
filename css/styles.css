@@ -145,6 +145,10 @@ a { color: inherit; }
   justify-content: center;
   gap: 18px;
 }
+.brand-strip {
+  position: relative;
+  overflow: hidden;
+}
 .menu {
   flex: 1;
   display: grid;
@@ -157,6 +161,7 @@ a { color: inherit; }
   align-items: center;
   justify-content: center;
   gap: 26px;
+  transform: translateX(-7vw);
 }
 .menu-tools {
   grid-column: 3;
@@ -238,10 +243,10 @@ a { color: inherit; }
   grid-template-columns: minmax(0, 1fr);
   gap: 44px;
   align-items: end;
-  padding: 0 0 86px;
+  padding: 86px 0;
 }
 .hero-copy {
-  padding-top: 142px;
+  padding-top: 0;
 }
 .hero h1 {
   margin: 14px 0 18px;
@@ -253,15 +258,15 @@ a { color: inherit; }
   letter-spacing: 0;
 }
 .hero-brand {
-  position: sticky;
-  top: 88px;
+  position: relative;
+  width: min(88vw, 1120px);
+  margin: 0 auto;
   isolation: isolate;
   display: inline-flex;
   align-items: center;
   gap: 22px;
-  margin-bottom: 34px;
+  margin-bottom: 0;
   padding: 20px clamp(160px, 24vw, 420px) 20px 22px;
-  width: min(88vw, 1120px);
   max-width: 100%;
   color: var(--ink);
   z-index: 25;
@@ -1502,6 +1507,7 @@ address a { color: #fff; font-weight: 800; }
     flex-direction: column;
     align-items: stretch;
     gap: 0;
+    transform: none;
   }
   .menu a { padding: 12px; }
   .language-label {
@@ -1510,11 +1516,9 @@ address a { color: #fff; font-weight: 800; }
     padding: 12px;
   }
   .hero { min-height: auto; }
-  .hero-copy { padding-top: 118px; }
+  .hero-copy { padding-top: 0; }
   .hero-brand {
-    top: 82px;
     gap: 14px;
-    margin-bottom: 24px;
     font-size: 1.5rem;
     width: 100%;
     padding: 14px 42px 14px 14px;
