@@ -132,11 +132,12 @@ a { color: inherit; }
   position: sticky;
   top: 0;
   z-index: 30;
-  background: rgba(8,13,22,.94);
-  border-bottom: 1px solid rgba(255,255,255,.08);
-  backdrop-filter: blur(18px);
+  background: transparent;
+  border-bottom: 0;
+  backdrop-filter: none;
 }
 .nav {
+  position: relative;
   width: min(var(--max), calc(100% - 40px));
   height: 50px;
   margin: 0 auto;
@@ -144,10 +145,25 @@ a { color: inherit; }
   align-items: center;
   justify-content: center;
   gap: 18px;
+  z-index: 2;
+}
+.nav::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: calc(-1 * max(20px, ((100vw - var(--max)) / 2)));
+  right: calc(-1 * max(20px, ((100vw - var(--max)) / 2)));
+  background: rgba(8,13,22,.94);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(18px);
 }
 .brand-strip {
   position: relative;
   overflow: hidden;
+  border-bottom: 1px solid rgba(33,70,99,.18);
+  background: transparent;
 }
 .menu {
   flex: 1;
@@ -261,7 +277,6 @@ a { color: inherit; }
   position: relative;
   width: min(88vw, 1120px);
   margin: 0 auto;
-  isolation: isolate;
   display: inline-flex;
   align-items: center;
   gap: 22px;
@@ -273,29 +288,6 @@ a { color: inherit; }
   font-weight: 900;
   text-transform: none;
 }
-.hero-brand::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  bottom: 0;
-  left: calc(-1 * max(20px, ((100vw - var(--max)) / 2)));
-  right: calc(-1 * clamp(160px, 24vw, 420px));
-  background:
-    linear-gradient(90deg,
-      rgba(8,13,22,0) 0%,
-      rgba(8,13,22,.55) 7%,
-      rgba(255,255,255,.9) 17%,
-      rgba(255,255,255,.94) 34%,
-      rgba(255,255,255,.82) 50%,
-      rgba(255,255,255,.34) 70%,
-      rgba(255,255,255,0) 100%),
-    radial-gradient(ellipse at 20% 50%, rgba(185,134,47,.16), transparent 42%);
-  box-shadow: none;
-  backdrop-filter: blur(7px);
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.62) 7%, #000 15%, #000 58%, rgba(0,0,0,.65) 76%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.62) 7%, #000 15%, #000 58%, rgba(0,0,0,.65) 76%, transparent 100%);
-}
 .wordmark-logo {
   position: relative;
   z-index: 1;
@@ -306,14 +298,17 @@ a { color: inherit; }
   filter:
     contrast(1.08)
     saturate(1.04)
-    drop-shadow(0 6px 10px rgba(0,0,0,.2));
+    drop-shadow(0 1px 0 rgba(255,255,255,.3))
+    drop-shadow(0 6px 10px rgba(0,0,0,.18));
 }
 .wordmark-image {
   position: relative;
   z-index: 1;
   width: clamp(188px, 23vw, 320px);
   height: auto;
-  filter: drop-shadow(0 6px 12px rgba(0,0,0,.14));
+  filter:
+    drop-shadow(0 1px 0 rgba(255,255,255,.35))
+    drop-shadow(0 6px 12px rgba(0,0,0,.12));
 }
 .brand-mission {
   position: relative;
@@ -328,6 +323,7 @@ a { color: inherit; }
   font-style: italic;
   font-weight: 500;
   line-height: 1.35;
+  text-shadow: 0 1px 0 rgba(255,255,255,.55);
 }
 .lead {
   max-width: 720px;
@@ -1530,10 +1526,6 @@ address a { color: #fff; font-weight: 800; }
     gap: 12px;
     width: 100%;
     padding: 7px 36px 7px 12px;
-  }
-  .hero-brand::before {
-    left: -14px;
-    right: -42px;
   }
   .wordmark-logo {
     width: 60px;
