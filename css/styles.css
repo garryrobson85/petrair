@@ -264,15 +264,13 @@ a { color: inherit; }
   isolation: isolate;
   display: inline-flex;
   align-items: center;
-  gap: 22px;
+  gap: 0;
   margin-bottom: 0;
-  padding: 20px clamp(160px, 24vw, 420px) 20px 22px;
+  padding: 10px clamp(170px, 23vw, 390px) 9px 24px;
   max-width: 100%;
   color: var(--ink);
   z-index: 25;
   font-weight: 900;
-  font-size: clamp(1.85rem, 3.4vw, 2.85rem);
-  letter-spacing: .02em;
   text-transform: none;
 }
 .hero-brand::before {
@@ -299,26 +297,38 @@ a { color: inherit; }
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.62) 7%, #000 15%, #000 58%, rgba(0,0,0,.65) 76%, transparent 100%);
   mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.62) 7%, #000 15%, #000 58%, rgba(0,0,0,.65) 76%, transparent 100%);
 }
-.hero-brand img {
+.wordmark {
   position: relative;
   z-index: 1;
-  width: clamp(92px, 8vw, 112px);
-  height: auto;
-  image-rendering: -webkit-optimize-contrast;
-  transform: translateZ(0);
-  filter:
-    contrast(1.08)
-    saturate(1.04)
-    drop-shadow(0 8px 14px rgba(0,0,0,.22));
+  display: inline-grid;
+  justify-items: center;
+  line-height: 1;
+  text-transform: uppercase;
 }
-.hero-brand span {
-  position: relative;
-  z-index: 1;
+.wordmark-main {
+  color: #173a72;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(2rem, 3.7vw, 3.55rem);
+  font-weight: 800;
+  letter-spacing: .2em;
 }
-.hero-brand small {
-  color: var(--gold-dark);
-  font-size: .68em;
-  letter-spacing: .14em;
+.wordmark-sub {
+  display: grid;
+  grid-template-columns: minmax(48px, 1fr) auto minmax(48px, 1fr);
+  align-items: center;
+  gap: 14px;
+  width: 88%;
+  margin-top: 4px;
+  color: #656a73;
+  font-size: clamp(.68rem, .9vw, .9rem);
+  font-weight: 800;
+  letter-spacing: .42em;
+}
+.wordmark-sub::before,
+.wordmark-sub::after {
+  content: "";
+  height: 1px;
+  background: rgba(101,106,115,.62);
 }
 .lead {
   max-width: 720px;
@@ -1518,21 +1528,22 @@ address a { color: #fff; font-weight: 800; }
   .hero { min-height: auto; }
   .hero-copy { padding-top: 0; }
   .hero-brand {
-    gap: 14px;
-    font-size: 1.5rem;
     width: 100%;
-    padding: 14px 42px 14px 14px;
+    padding: 8px 36px 8px 14px;
   }
   .hero-brand::before {
     left: -14px;
     right: -42px;
   }
-  .hero-brand img {
-    width: 78px;
-    filter:
-      contrast(1.06)
-      saturate(1.03)
-      drop-shadow(0 6px 10px rgba(0,0,0,.2));
+  .wordmark-main {
+    font-size: 1.72rem;
+    letter-spacing: .16em;
+  }
+  .wordmark-sub {
+    gap: 10px;
+    width: 84%;
+    font-size: .6rem;
+    letter-spacing: .32em;
   }
   .product-card::before {
     font-size: .58rem;
