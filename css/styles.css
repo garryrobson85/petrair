@@ -264,9 +264,9 @@ a { color: inherit; }
   isolation: isolate;
   display: inline-flex;
   align-items: center;
-  gap: 0;
+  gap: 22px;
   margin-bottom: 0;
-  padding: 10px clamp(170px, 23vw, 390px) 9px 24px;
+  padding: 9px clamp(170px, 23vw, 390px) 9px 18px;
   max-width: 100%;
   color: var(--ink);
   z-index: 25;
@@ -297,6 +297,18 @@ a { color: inherit; }
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.62) 7%, #000 15%, #000 58%, rgba(0,0,0,.65) 76%, transparent 100%);
   mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.62) 7%, #000 15%, #000 58%, rgba(0,0,0,.65) 76%, transparent 100%);
 }
+.wordmark-logo {
+  position: relative;
+  z-index: 1;
+  width: clamp(74px, 7vw, 98px);
+  height: auto;
+  image-rendering: -webkit-optimize-contrast;
+  transform: translateZ(0);
+  filter:
+    contrast(1.08)
+    saturate(1.04)
+    drop-shadow(0 6px 10px rgba(0,0,0,.2));
+}
 .wordmark {
   position: relative;
   z-index: 1;
@@ -306,29 +318,33 @@ a { color: inherit; }
   text-transform: uppercase;
 }
 .wordmark-main {
-  color: #173a72;
-  font-family: Arial, Helvetica, sans-serif;
+  color: #113a79;
+  font-family: "BankGothic Md BT", "Bahnschrift SemiBold", "Copperplate Gothic Light", "Segoe UI Semibold", Arial, Helvetica, sans-serif;
   font-size: clamp(2rem, 3.7vw, 3.55rem);
-  font-weight: 800;
-  letter-spacing: .2em;
+  font-weight: 700;
+  letter-spacing: .24em;
+  line-height: .86;
+  transform: scaleX(1.08);
+  transform-origin: center;
 }
 .wordmark-sub {
   display: grid;
-  grid-template-columns: minmax(48px, 1fr) auto minmax(48px, 1fr);
+  grid-template-columns: minmax(56px, 1fr) auto minmax(56px, 1fr);
   align-items: center;
-  gap: 14px;
-  width: 88%;
-  margin-top: 4px;
-  color: #656a73;
-  font-size: clamp(.68rem, .9vw, .9rem);
+  gap: 12px;
+  width: 94%;
+  margin-top: 7px;
+  color: #777b83;
+  font-family: "Bahnschrift", "Segoe UI", Arial, Helvetica, sans-serif;
+  font-size: clamp(.62rem, .82vw, .82rem);
   font-weight: 800;
-  letter-spacing: .42em;
+  letter-spacing: .48em;
 }
 .wordmark-sub::before,
 .wordmark-sub::after {
   content: "";
   height: 1px;
-  background: rgba(101,106,115,.62);
+  background: rgba(101,106,115,.78);
 }
 .lead {
   max-width: 720px;
@@ -1528,12 +1544,16 @@ address a { color: #fff; font-weight: 800; }
   .hero { min-height: auto; }
   .hero-copy { padding-top: 0; }
   .hero-brand {
+    gap: 12px;
     width: 100%;
-    padding: 8px 36px 8px 14px;
+    padding: 7px 36px 7px 12px;
   }
   .hero-brand::before {
     left: -14px;
     right: -42px;
+  }
+  .wordmark-logo {
+    width: 60px;
   }
   .wordmark-main {
     font-size: 1.72rem;
