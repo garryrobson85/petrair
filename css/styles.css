@@ -259,6 +259,8 @@ a { color: inherit; }
   letter-spacing: 0;
 }
 .hero-brand {
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   gap: 22px;
@@ -271,26 +273,41 @@ a { color: inherit; }
   font-size: clamp(1.85rem, 3.4vw, 2.85rem);
   letter-spacing: .02em;
   text-transform: none;
+}
+.hero-brand::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: calc(-1 * max(20px, ((100vw - var(--max)) / 2)));
+  right: calc(-1 * clamp(160px, 24vw, 420px));
   background:
     linear-gradient(90deg,
       rgba(255,255,255,0) 0%,
-      rgba(255,255,255,.72) 7%,
-      rgba(255,255,255,.95) 16%,
-      rgba(255,255,255,.92) 30%,
-      rgba(255,255,255,.78) 44%,
-      rgba(255,255,255,.48) 62%,
-      rgba(255,255,255,.18) 80%,
+      rgba(255,255,255,.4) 6%,
+      rgba(255,255,255,.9) 14%,
+      rgba(255,255,255,.95) 26%,
+      rgba(255,255,255,.82) 45%,
+      rgba(255,255,255,.5) 64%,
+      rgba(255,255,255,.18) 82%,
       rgba(255,255,255,0) 100%),
     radial-gradient(ellipse at 12% 50%, rgba(185,134,47,.13), transparent 46%);
   box-shadow: none;
   backdrop-filter: blur(7px);
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.7) 7%, #000 16%, #000 58%, rgba(0,0,0,.65) 76%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.7) 7%, #000 16%, #000 58%, rgba(0,0,0,.65) 76%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.62) 7%, #000 15%, #000 58%, rgba(0,0,0,.65) 76%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.62) 7%, #000 15%, #000 58%, rgba(0,0,0,.65) 76%, transparent 100%);
 }
 .hero-brand img {
+  position: relative;
+  z-index: 1;
   width: clamp(92px, 9vw, 124px);
   height: auto;
   filter: drop-shadow(0 16px 30px rgba(0,0,0,.34));
+}
+.hero-brand span {
+  position: relative;
+  z-index: 1;
 }
 .hero-brand small {
   color: var(--gold-dark);
@@ -546,20 +563,55 @@ a { color: inherit; }
   transition: transform .38s ease, box-shadow .38s ease, border-color .38s ease;
 }
 .product-card::before {
-  content: "";
+  content: "PETRAIR SA";
   position: absolute;
-  top: 16px;
-  left: 16px;
+  top: 26%;
+  left: 8%;
   z-index: 2;
-  width: 54px;
-  height: 50px;
-  border-radius: 8px;
-  background:
-    rgba(8,13,22,.62)
-    url("../images/petrair-logo.png") center / 74% auto no-repeat;
-  border: 1px solid rgba(255,255,255,.22);
-  box-shadow: 0 14px 34px rgba(0,0,0,.24);
-  backdrop-filter: blur(8px);
+  color: rgba(255,255,255,.26);
+  font-size: clamp(.62rem, .78vw, .82rem);
+  font-weight: 900;
+  letter-spacing: .18em;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow: 0 2px 8px rgba(0,0,0,.36);
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  transform: rotate(-3deg);
+  transition: opacity .35s ease, transform .5s ease;
+}
+.product-card:nth-child(1)::before {
+  --brand-tilt: -2deg;
+  top: 32%;
+  left: 12%;
+  color: rgba(255,255,255,.2);
+  transform: rotate(-2deg);
+}
+.product-card:nth-child(2)::before {
+  --brand-tilt: 1deg;
+  top: 20%;
+  left: 61%;
+  color: rgba(210,229,255,.22);
+  transform: rotate(1deg);
+}
+.product-card:nth-child(3)::before {
+  --brand-tilt: 2deg;
+  top: 37%;
+  left: 48%;
+  color: rgba(255,246,220,.2);
+  transform: rotate(2deg);
+}
+.product-card:nth-child(4)::before {
+  --brand-tilt: -1deg;
+  top: 24%;
+  left: 66%;
+  color: rgba(255,246,220,.24);
+  transform: rotate(-1deg);
+}
+.product-card:hover::before,
+.product-card:focus-visible::before {
+  opacity: .7;
+  transform: translateY(-2px) rotate(var(--brand-tilt, -3deg));
 }
 .product-card:hover,
 .product-card:focus-visible {
@@ -1461,14 +1513,17 @@ address a { color: #fff; font-weight: 800; }
     width: 100%;
     padding: 14px 42px 14px 14px;
   }
+  .hero-brand::before {
+    left: -14px;
+    right: -42px;
+  }
   .hero-brand img {
     width: 78px;
   }
   .product-card::before {
-    width: 46px;
-    height: 42px;
-    top: 12px;
-    left: 12px;
+    font-size: .58rem;
+    letter-spacing: .14em;
+    opacity: .55;
   }
   .supply-art::before,
   .route-map::before,
