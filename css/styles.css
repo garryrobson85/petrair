@@ -263,22 +263,27 @@ a { color: inherit; }
   align-items: center;
   gap: 22px;
   margin-bottom: 34px;
-  padding: 20px clamp(96px, 15vw, 220px) 20px 22px;
-  width: min(76vw, 900px);
+  padding: 20px clamp(160px, 24vw, 420px) 20px 22px;
+  width: min(88vw, 1120px);
   max-width: 100%;
   color: var(--ink);
   font-weight: 900;
   font-size: clamp(1.85rem, 3.4vw, 2.85rem);
   letter-spacing: .02em;
   text-transform: none;
-  border: 1px solid rgba(255,255,255,.48);
-  border-left: 4px solid var(--gold);
-  border-radius: 8px;
   background:
-    linear-gradient(90deg, rgba(255,255,255,.94) 0%, rgba(255,255,255,.86) 42%, rgba(255,255,255,.46) 72%, rgba(255,255,255,0) 100%),
-    radial-gradient(circle at 18% 50%, rgba(185,134,47,.14), transparent 42%);
-  box-shadow: 0 24px 70px rgba(0,0,0,.18);
-  backdrop-filter: blur(10px);
+    linear-gradient(90deg,
+      rgba(255,255,255,.95) 0%,
+      rgba(255,255,255,.92) 26%,
+      rgba(255,255,255,.78) 44%,
+      rgba(255,255,255,.48) 62%,
+      rgba(255,255,255,.18) 80%,
+      rgba(255,255,255,0) 100%),
+    radial-gradient(ellipse at 12% 50%, rgba(185,134,47,.13), transparent 46%);
+  box-shadow: none;
+  backdrop-filter: blur(7px);
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 58%, rgba(0,0,0,.65) 76%, transparent 100%);
+  mask-image: linear-gradient(90deg, #000 0%, #000 58%, rgba(0,0,0,.65) 76%, transparent 100%);
 }
 .hero-brand img {
   width: clamp(92px, 9vw, 124px);
