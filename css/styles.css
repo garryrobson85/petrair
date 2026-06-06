@@ -283,15 +283,14 @@ a { color: inherit; }
   right: calc(-1 * clamp(160px, 24vw, 420px));
   background:
     linear-gradient(90deg,
-      rgba(255,255,255,0) 0%,
-      rgba(255,255,255,.4) 6%,
-      rgba(255,255,255,.9) 14%,
-      rgba(255,255,255,.95) 26%,
-      rgba(255,255,255,.82) 45%,
-      rgba(255,255,255,.5) 64%,
-      rgba(255,255,255,.18) 82%,
+      rgba(8,13,22,0) 0%,
+      rgba(8,13,22,.55) 7%,
+      rgba(255,255,255,.9) 17%,
+      rgba(255,255,255,.94) 34%,
+      rgba(255,255,255,.82) 50%,
+      rgba(255,255,255,.34) 70%,
       rgba(255,255,255,0) 100%),
-    radial-gradient(ellipse at 12% 50%, rgba(185,134,47,.13), transparent 46%);
+    radial-gradient(ellipse at 20% 50%, rgba(185,134,47,.16), transparent 42%);
   box-shadow: none;
   backdrop-filter: blur(7px);
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.62) 7%, #000 15%, #000 58%, rgba(0,0,0,.65) 76%, transparent 100%);
@@ -309,42 +308,26 @@ a { color: inherit; }
     saturate(1.04)
     drop-shadow(0 6px 10px rgba(0,0,0,.2));
 }
-.wordmark {
+.wordmark-image {
   position: relative;
   z-index: 1;
-  display: inline-grid;
-  justify-items: center;
-  line-height: 1;
-  text-transform: uppercase;
+  width: clamp(188px, 23vw, 320px);
+  height: auto;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,.14));
 }
-.wordmark-main {
-  color: #113a79;
-  font-family: "BankGothic Md BT", "Bahnschrift SemiBold", "Copperplate Gothic Light", "Segoe UI Semibold", Arial, Helvetica, sans-serif;
-  font-size: clamp(2rem, 3.7vw, 3.55rem);
-  font-weight: 700;
-  letter-spacing: .24em;
-  line-height: .86;
-  transform: scaleX(1.08);
-  transform-origin: center;
-}
-.wordmark-sub {
-  display: grid;
-  grid-template-columns: minmax(56px, 1fr) auto minmax(56px, 1fr);
-  align-items: center;
-  gap: 12px;
-  width: 94%;
-  margin-top: 7px;
-  color: #777b83;
-  font-family: "Bahnschrift", "Segoe UI", Arial, Helvetica, sans-serif;
-  font-size: clamp(.62rem, .82vw, .82rem);
-  font-weight: 800;
-  letter-spacing: .48em;
-}
-.wordmark-sub::before,
-.wordmark-sub::after {
-  content: "";
-  height: 1px;
-  background: rgba(101,106,115,.78);
+.brand-mission {
+  position: relative;
+  z-index: 1;
+  max-width: 460px;
+  margin: 0 0 0 clamp(8px, 2vw, 24px);
+  padding-left: clamp(14px, 2vw, 24px);
+  border-left: 1px solid rgba(33,70,99,.2);
+  color: rgba(17,24,39,.72);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(.84rem, 1vw, 1rem);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.35;
 }
 .lead {
   max-width: 720px;
@@ -1555,15 +1538,11 @@ address a { color: #fff; font-weight: 800; }
   .wordmark-logo {
     width: 60px;
   }
-  .wordmark-main {
-    font-size: 1.72rem;
-    letter-spacing: .16em;
+  .wordmark-image {
+    width: 172px;
   }
-  .wordmark-sub {
-    gap: 10px;
-    width: 84%;
-    font-size: .6rem;
-    letter-spacing: .32em;
+  .brand-mission {
+    display: none;
   }
   .product-card::before {
     font-size: .58rem;
