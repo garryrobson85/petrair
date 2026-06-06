@@ -10,7 +10,7 @@
   <link rel="canonical" href="https://petrair.org/">
   <link rel="icon" type="image/png" href="images/petrair-logo-256.png">
   <link rel="preload" as="image" href="images/petrair-hero-custom.jpg">
-  <link rel="stylesheet" href="css/styles.css?v=20260606-12">
+  <link rel="stylesheet" href="css/styles.css?v=20260606-13">
   <link rel="manifest" href="site.webmanifest">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Petrair SA">
@@ -101,10 +101,6 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
-    <div class="notice">
-      <span>Geneva, Switzerland</span>
-      <span>Information only. Not an offer to transact.</span>
-    </div>
     <div class="market-ticker" aria-label="Energy market indicators">
       <a class="ticker-label" href="#prices">Market indicators</a>
       <div class="ticker-window" aria-live="polite">
@@ -114,29 +110,29 @@
       </div>
     </div>
     <nav class="nav" aria-label="Main navigation">
-      <a class="brand" href="#top" aria-label="Petrair SA home">
-        <img class="brand-logo" src="images/petrair-logo-hd.png" alt="" width="34" height="32">
-        <span>Petrair <small>SA</small></span>
-      </a>
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
       <div class="menu" id="menu">
-        <a href="#products" data-i18n="nav.products">Products</a>
-        <a href="#prices" data-i18n="nav.prices">Prices</a>
-        <a href="#operations" data-i18n="nav.operations">Operations</a>
-        <a href="#compliance" data-i18n="nav.compliance">Compliance</a>
-        <a href="#documents" data-i18n="nav.documents">Documents</a>
-        <label class="language-label">
-          <span data-i18n="nav.language">Language</span>
-          <select id="language-select" aria-label="Language">
-            <option value="en">English</option>
-            <option value="fr">Francais</option>
-            <option value="es">Espanol</option>
-            <option value="de">Deutsch</option>
-            <option value="ar">Arabic</option>
-            <option value="zh">Chinese</option>
-          </select>
-        </label>
-        <a href="#contact" class="menu-cta" data-i18n="nav.contact">Contact desk</a>
+        <div class="menu-links">
+          <a href="#products" data-i18n="nav.products">Products</a>
+          <a href="#prices" data-i18n="nav.prices">Prices</a>
+          <a href="#operations" data-i18n="nav.operations">Operations</a>
+          <a href="#compliance" data-i18n="nav.compliance">Compliance</a>
+          <a href="#documents" data-i18n="nav.documents">Documents</a>
+        </div>
+        <div class="menu-tools">
+          <label class="language-label">
+            <span data-i18n="nav.language">Language</span>
+            <select id="language-select" aria-label="Language">
+              <option value="en">English</option>
+              <option value="fr">Francais</option>
+              <option value="es">Espanol</option>
+              <option value="de">Deutsch</option>
+              <option value="ar">Arabic</option>
+              <option value="zh">Chinese</option>
+            </select>
+          </label>
+          <a href="#contact" class="menu-cta" data-i18n="nav.contact">Contact desk</a>
+        </div>
       </div>
     </nav>
   </header>
