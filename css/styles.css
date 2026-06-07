@@ -278,10 +278,10 @@ a { color: inherit; }
   width: min(88vw, 1120px);
   margin: 0 auto;
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 22px;
   margin-bottom: 0;
-  padding: 9px clamp(170px, 23vw, 390px) 9px 18px;
+  padding: 8px 18px 8px 18px;
   max-width: 100%;
   color: var(--ink);
   z-index: 25;
@@ -314,7 +314,7 @@ a { color: inherit; }
   position: relative;
   z-index: 1;
   max-width: 460px;
-  margin: 0 0 0 clamp(8px, 2vw, 24px);
+  margin: 4px 0 0 auto;
   padding-left: clamp(14px, 2vw, 24px);
   border-left: 1px solid rgba(33,70,99,.2);
   color: rgba(17,24,39,.72);
@@ -1525,7 +1525,8 @@ address a { color: #fff; font-weight: 800; }
   .hero-brand {
     gap: 12px;
     width: 100%;
-    padding: 7px 36px 7px 12px;
+    padding: 7px 12px;
+    align-items: center;
   }
   .wordmark-logo {
     width: 60px;
@@ -1534,7 +1535,12 @@ address a { color: #fff; font-weight: 800; }
     width: 172px;
   }
   .brand-mission {
-    display: none;
+    display: block;
+    max-width: 260px;
+    margin-left: auto;
+    padding-left: 12px;
+    font-size: .72rem;
+    line-height: 1.25;
   }
   .product-card::before {
     font-size: .58rem;
@@ -1589,6 +1595,19 @@ address a { color: #fff; font-weight: 800; }
   .section { padding: 68px 0; }
   .hero-grid { padding: 70px 0; }
   .hero h1 { font-size: clamp(2.35rem, 15vw, 4rem); }
+  .hero-brand {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .brand-mission {
+    flex-basis: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 4px 0 0;
+    border-left: 0;
+    border-top: 1px solid rgba(33,70,99,.14);
+    font-size: .72rem;
+  }
   .lead { font-size: 1rem; }
   .card-grid, .doc-grid, .checks, .rfq-form, .product-showcase { grid-template-columns: 1fr; }
   .capability-flow {
