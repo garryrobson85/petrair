@@ -179,6 +179,7 @@ a { color: inherit; }
   border-radius: 6px;
   transform: translateY(-50%);
   transition: filter .28s ease, transform .28s ease;
+  animation: header-logo-pulse 3.8s ease-in-out infinite;
 }
 .nav-brand img {
   width: 38px;
@@ -333,7 +334,7 @@ a { color: inherit; }
 .wordmark-image {
   position: relative;
   z-index: 1;
-  width: clamp(188px, 23vw, 320px);
+  width: clamp(172px, 20vw, 280px);
   height: auto;
   transition: filter .28s ease, transform .28s ease;
   filter:
@@ -1527,6 +1528,19 @@ address a { color: #fff; font-weight: 800; }
   }
 }
 
+@keyframes header-logo-pulse {
+  0%, 100% {
+    filter:
+      drop-shadow(0 0 5px rgba(58,154,255,.28))
+      drop-shadow(0 0 12px rgba(58,154,255,.14));
+  }
+  50% {
+    filter:
+      drop-shadow(0 0 8px rgba(90,177,255,.46))
+      drop-shadow(0 0 22px rgba(90,177,255,.24));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .modal-panel-enter,
   .modal-panel-enter::before,
@@ -1536,10 +1550,12 @@ address a { color: #fff; font-weight: 800; }
   }
   .product-card,
   .product-card img,
+  .nav-brand,
   .wordmark-logo,
   .footer-logo {
     transition: none;
   }
+  .nav-brand,
   .hero-brand:hover .wordmark-logo,
   .wordmark-logo:hover,
   .footer-logo:hover {
