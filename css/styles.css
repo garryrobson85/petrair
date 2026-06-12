@@ -371,8 +371,8 @@ a { color: inherit; }
 }
 .brand-type {
   position: absolute;
-  left: clamp(90px, 8.8vw, 106px);
-  top: clamp(66px, 6.35vw, 74px);
+  left: clamp(58px, 5.9vw, 70px);
+  top: clamp(82px, 7.8vw, 92px);
   z-index: 2;
   display: grid;
   justify-items: start;
@@ -385,7 +385,7 @@ a { color: inherit; }
   font-family: "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", "Arial Black", Arial, Helvetica, sans-serif;
   font-size: clamp(1.45rem, 2.6vw, 1.95rem);
   font-weight: 900;
-  letter-spacing: .16em;
+  letter-spacing: .13em;
   line-height: .84;
   text-transform: uppercase;
   text-shadow: 0 1px 0 rgba(255,255,255,.55);
@@ -1693,12 +1693,12 @@ address a { color: #fff; font-weight: 800; }
     width: 106px;
   }
   .brand-type {
-    left: 82px;
-    top: 57px;
+    left: 54px;
+    top: 76px;
   }
   .brand-name {
     font-size: 1.35rem;
-    letter-spacing: .14em;
+    letter-spacing: .12em;
   }
   .brand-sa {
     width: 186px;
