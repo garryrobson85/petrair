@@ -403,7 +403,6 @@ a { color: inherit; }
   font-weight: 400;
   letter-spacing: .1em;
   line-height: .9;
-  text-transform: uppercase;
   text-shadow: 0 1px 0 rgba(255,255,255,.55);
 }
 .brand-sa {
@@ -413,10 +412,10 @@ a { color: inherit; }
   gap: 10px;
   width: min(100%, 216px);
   color: var(--gold-dark);
-  font-family: "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", Arial, Helvetica, sans-serif;
-  font-size: clamp(.66rem, 1.18vw, .92rem);
-  font-weight: 800;
-  letter-spacing: .34em;
+  font-family: "Gugi", "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", Arial, Helvetica, sans-serif;
+  font-size: clamp(.68rem, 1.12vw, .88rem);
+  font-weight: 400;
+  letter-spacing: .28em;
 }
 .brand-sa span {
   height: 1px;
