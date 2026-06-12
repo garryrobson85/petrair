@@ -336,25 +336,78 @@ a { color: inherit; }
   pointer-events: none;
   background: linear-gradient(90deg, rgba(185,134,47,0), rgba(185,134,47,.58), rgba(185,134,47,0));
 }
-.brand-lockup-image {
-  display: block;
-  width: clamp(246px, 29vw, 332px);
-  height: auto;
-  filter:
-    contrast(1.03)
-    saturate(1.02)
-    drop-shadow(0 10px 18px rgba(0,0,0,.08));
-  transition: filter .28s ease, transform .28s ease, opacity .28s ease;
+.brand-lockup {
+  position: relative;
+  width: clamp(306px, 31vw, 354px);
+  min-height: clamp(118px, 11.6vw, 134px);
 }
-.hero-brand:hover .brand-lockup-image {
-  transform: translateY(-1px);
+.brand-p-logo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: clamp(120px, 12vw, 142px);
+  height: auto;
+  image-rendering: -webkit-optimize-contrast;
+  transform: translateZ(0);
+  transform-origin: center;
   filter:
     contrast(1.08)
-    saturate(1.1)
-    drop-shadow(0 0 10px rgba(58,154,255,.34))
-    drop-shadow(0 0 24px rgba(58,154,255,.22))
-    drop-shadow(0 0 16px rgba(185,134,47,.18))
-    drop-shadow(0 14px 24px rgba(0,0,0,.14));
+    saturate(1.04)
+    drop-shadow(0 1px 0 rgba(255,255,255,.3))
+    drop-shadow(0 8px 15px rgba(0,0,0,.16));
+  transition: filter .28s ease, transform .28s ease;
+}
+.hero-brand:hover .brand-p-logo,
+.brand-p-logo:hover {
+  animation: logo-glow-pulse 1.9s ease-in-out infinite;
+  transform: translateZ(0) scale(1.035);
+  filter:
+    contrast(1.12)
+    saturate(1.12)
+    drop-shadow(0 0 8px rgba(58,154,255,.58))
+    drop-shadow(0 0 22px rgba(58,154,255,.34))
+    drop-shadow(0 10px 18px rgba(0,0,0,.22));
+}
+.brand-type {
+  position: absolute;
+  left: clamp(90px, 8.8vw, 106px);
+  top: clamp(66px, 6.35vw, 74px);
+  z-index: 2;
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  line-height: 1;
+}
+.brand-name {
+  display: block;
+  color: #092a5f;
+  font-family: "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", "Arial Black", Arial, Helvetica, sans-serif;
+  font-size: clamp(1.45rem, 2.6vw, 1.95rem);
+  font-weight: 900;
+  letter-spacing: .16em;
+  line-height: .84;
+  text-transform: uppercase;
+  text-shadow: 0 1px 0 rgba(255,255,255,.55);
+}
+.brand-sa {
+  display: grid;
+  grid-template-columns: minmax(38px, 1fr) auto minmax(38px, 1fr);
+  align-items: center;
+  gap: 10px;
+  width: min(100%, 216px);
+  color: var(--gold-dark);
+  font-family: "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", Arial, Helvetica, sans-serif;
+  font-size: clamp(.66rem, 1.18vw, .92rem);
+  font-weight: 800;
+  letter-spacing: .34em;
+}
+.brand-sa span {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(185,134,47,0), rgba(185,134,47,.78));
+}
+.brand-sa span:last-child {
+  background: linear-gradient(90deg, rgba(185,134,47,.78), rgba(185,134,47,0));
 }
 .brand-mission {
   position: relative;
@@ -1548,12 +1601,13 @@ address a { color: #fff; font-weight: 800; }
   .product-card,
   .product-card img,
   .nav-brand,
-  .brand-lockup-image,
+  .brand-p-logo,
   .footer-logo {
     transition: none;
   }
   .nav-brand,
-  .hero-brand:hover .brand-lockup-image,
+  .hero-brand:hover .brand-p-logo,
+  .brand-p-logo:hover,
   .footer-logo:hover {
     animation: none;
   }
@@ -1631,8 +1685,25 @@ address a { color: #fff; font-weight: 800; }
     align-items: center;
     border-radius: 8px;
   }
-  .brand-lockup-image {
-    width: min(100%, 292px);
+  .brand-lockup {
+    width: 300px;
+    min-height: 116px;
+  }
+  .brand-p-logo {
+    width: 106px;
+  }
+  .brand-type {
+    left: 82px;
+    top: 57px;
+  }
+  .brand-name {
+    font-size: 1.35rem;
+    letter-spacing: .14em;
+  }
+  .brand-sa {
+    width: 186px;
+    font-size: .62rem;
+    letter-spacing: .3em;
   }
   .brand-mission {
     display: block;
