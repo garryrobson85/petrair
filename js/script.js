@@ -442,6 +442,6 @@ form?.addEventListener("submit", (event) => {
 
   const subject = encodeURIComponent(`Petrair SA enquiry - ${data.get("Product") || "Trading"}`);
   const body = encodeURIComponent(lines.join("\n"));
-  window.location.href = `mailto:sales@petrairsa.com?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:info@petrair.ch?subject=${subject}&body=${body}`;
   note.textContent = "Opening your email client with the enquiry prepared.";
 });
