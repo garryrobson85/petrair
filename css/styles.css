@@ -17,6 +17,18 @@
 }
 
 @font-face {
+  font-family: "FoobarPro";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    url("../fonts/FoobarproRegular-zILD") format("truetype"),
+    url("../fonts/FoobarproRegular-zILD.ttf") format("truetype"),
+    url("../fonts/FoobarproRegular-zILD.otf") format("opentype"),
+    url("../fonts/FoobarproRegular-zILD.woff") format("woff");
+}
+
+@font-face {
   font-family: "Gugi";
   font-style: normal;
   font-weight: 400;
@@ -398,7 +410,7 @@ a { color: inherit; }
 .brand-name {
   display: block;
   color: #092a5f;
-  font-family: "Gugi", "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", "Arial Black", Arial, Helvetica, sans-serif;
+  font-family: "FoobarPro", "Gugi", "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", "Arial Black", Arial, Helvetica, sans-serif;
   font-size: clamp(1.45rem, 2.6vw, 1.95rem);
   font-weight: 400;
   letter-spacing: .1em;
@@ -412,7 +424,7 @@ a { color: inherit; }
   gap: 10px;
   width: min(100%, 216px);
   color: var(--gold-dark);
-  font-family: "Gugi", "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", Arial, Helvetica, sans-serif;
+  font-family: "FoobarPro", "Gugi", "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", Arial, Helvetica, sans-serif;
   font-size: clamp(.68rem, 1.12vw, .88rem);
   font-weight: 400;
   letter-spacing: .28em;
