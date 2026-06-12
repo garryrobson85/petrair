@@ -303,13 +303,13 @@ a { color: inherit; }
 }
 .hero-brand {
   position: relative;
-  width: min(100%, 760px);
+  width: min(100%, 620px);
   margin: 0;
   display: grid;
-  grid-template-columns: minmax(220px, 330px) minmax(220px, 1fr);
+  grid-template-columns: minmax(290px, 360px) minmax(180px, 1fr);
   align-items: center;
-  gap: clamp(22px, 4vw, 42px);
-  padding: clamp(18px, 2.8vw, 28px) clamp(24px, 4vw, 44px);
+  gap: clamp(16px, 3vw, 28px);
+  padding: clamp(12px, 2vw, 18px) clamp(18px, 3vw, 28px);
   max-width: 100%;
   color: var(--ink);
   z-index: 25;
@@ -339,14 +339,16 @@ a { color: inherit; }
   background: linear-gradient(90deg, rgba(185,134,47,0), rgba(185,134,47,.58), rgba(185,134,47,0));
 }
 .brand-lockup {
-  display: grid;
-  justify-items: center;
-  gap: 8px;
+  position: relative;
+  width: clamp(286px, 31vw, 360px);
+  min-height: clamp(124px, 13vw, 152px);
 }
 .wordmark-logo {
-  position: relative;
+  position: absolute;
+  left: 0;
+  top: 0;
   z-index: 1;
-  width: clamp(118px, 13vw, 172px);
+  width: clamp(118px, 12vw, 148px);
   height: auto;
   image-rendering: -webkit-optimize-contrast;
   transform: translateZ(0);
@@ -359,18 +361,23 @@ a { color: inherit; }
     drop-shadow(0 6px 10px rgba(0,0,0,.18));
 }
 .brand-type {
+  position: absolute;
+  left: clamp(82px, 8.4vw, 104px);
+  top: clamp(50px, 5vw, 62px);
+  z-index: 2;
   display: grid;
-  justify-items: center;
-  gap: 4px;
+  justify-items: start;
+  gap: 8px;
   line-height: 1;
 }
 .brand-name {
   display: block;
   color: #0a2a5b;
-  font-size: clamp(1.95rem, 4vw, 3.1rem);
+  font-family: "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", "Arial Black", Arial, Helvetica, sans-serif;
+  font-size: clamp(1.55rem, 3vw, 2.32rem);
   font-weight: 900;
-  letter-spacing: .22em;
-  line-height: .86;
+  letter-spacing: .18em;
+  line-height: .82;
   text-transform: uppercase;
   background: linear-gradient(90deg, #061b42 0%, #123d78 58%, #1671c5 100%);
   -webkit-background-clip: text;
@@ -380,14 +387,15 @@ a { color: inherit; }
 }
 .brand-sa {
   display: grid;
-  grid-template-columns: minmax(54px, 1fr) auto minmax(54px, 1fr);
+  grid-template-columns: minmax(36px, 1fr) auto minmax(36px, 1fr);
   align-items: center;
-  gap: 12px;
-  width: min(100%, 280px);
+  gap: 9px;
+  width: min(100%, 190px);
   color: rgba(65,72,80,.86);
-  font-size: clamp(.82rem, 1.8vw, 1.18rem);
+  font-family: "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", Arial, Helvetica, sans-serif;
+  font-size: clamp(.64rem, 1.15vw, .9rem);
   font-weight: 800;
-  letter-spacing: .36em;
+  letter-spacing: .32em;
 }
 .brand-sa span {
   height: 1px;
@@ -415,13 +423,13 @@ a { color: inherit; }
 .brand-mission {
   position: relative;
   z-index: 1;
-  max-width: 360px;
+  max-width: 280px;
   margin: 0;
   padding: 0 0 0 clamp(16px, 2vw, 24px);
   border-left: 1px solid rgba(185,134,47,.36);
   color: rgba(17,24,39,.76);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(.84rem, 1vw, 1rem);
+  font-size: clamp(.74rem, .9vw, .88rem);
   font-style: italic;
   font-weight: 500;
   line-height: 1.35;
@@ -1683,27 +1691,29 @@ address a { color: #fff; font-weight: 800; }
     width: 100%;
     grid-template-columns: 1fr;
     justify-items: start;
-    padding: 16px 18px;
+    padding: 14px 16px;
     align-items: center;
     border-radius: 8px;
   }
-  .wordmark-logo {
-    width: 96px;
-  }
   .brand-lockup {
-    justify-items: start;
+    width: 286px;
+    min-height: 116px;
+  }
+  .wordmark-logo {
+    width: 106px;
   }
   .brand-type {
-    justify-items: start;
+    left: 74px;
+    top: 45px;
   }
   .brand-name {
-    font-size: 2rem;
-    letter-spacing: .18em;
+    font-size: 1.55rem;
+    letter-spacing: .16em;
   }
   .brand-sa {
-    width: 210px;
-    font-size: .78rem;
-    letter-spacing: .3em;
+    width: 160px;
+    font-size: .64rem;
+    letter-spacing: .28em;
   }
   .brand-mission {
     display: block;
