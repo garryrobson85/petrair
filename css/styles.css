@@ -362,8 +362,8 @@ a { color: inherit; }
 }
 .brand-type {
   position: absolute;
-  left: clamp(112px, 10.8vw, 130px);
-  top: clamp(54px, 5.25vw, 62px);
+  left: clamp(86px, 8.2vw, 102px);
+  top: clamp(58px, 5.55vw, 66px);
   z-index: 2;
   display: grid;
   justify-items: start;
@@ -1700,8 +1700,8 @@ address a { color: #fff; font-weight: 800; }
     width: 96px;
   }
   .brand-type {
-    left: 104px;
-    top: 49px;
+    left: 82px;
+    top: 51px;
   }
   .brand-name {
     font-size: 1.22rem;
