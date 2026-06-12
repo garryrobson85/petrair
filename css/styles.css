@@ -303,10 +303,11 @@ a { color: inherit; }
 }
 .hero-brand {
   position: relative;
-  width: min(100%, 560px);
+  width: fit-content;
+  max-width: min(100%, 720px);
   margin: 0;
   display: grid;
-  grid-template-columns: minmax(300px, 340px) minmax(170px, 1fr);
+  grid-template-columns: auto minmax(190px, 250px);
   align-items: center;
   gap: clamp(12px, 2.2vw, 20px);
   padding: 10px clamp(14px, 2.2vw, 22px) 10px 13px;
@@ -338,98 +339,31 @@ a { color: inherit; }
   pointer-events: none;
   background: linear-gradient(90deg, rgba(185,134,47,0), rgba(185,134,47,.58), rgba(185,134,47,0));
 }
-.brand-lockup {
-  position: relative;
-  width: clamp(318px, 31vw, 356px);
-  min-height: clamp(104px, 10.4vw, 120px);
-}
-.wordmark-logo {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 1;
-  width: clamp(108px, 10.4vw, 128px);
+.brand-lockup-image {
+  display: block;
+  width: clamp(246px, 29vw, 332px);
   height: auto;
-  image-rendering: -webkit-optimize-contrast;
-  transform: translateZ(0);
-  transform-origin: center;
+  mix-blend-mode: multiply;
+  filter:
+    contrast(1.06)
+    saturate(1.04)
+    drop-shadow(0 10px 18px rgba(0,0,0,.1));
   transition: filter .28s ease, transform .28s ease;
+}
+.hero-brand:hover .brand-lockup-image {
+  transform: translateY(-1px);
   filter:
     contrast(1.08)
-    saturate(1.04)
-    drop-shadow(0 1px 0 rgba(255,255,255,.3))
-    drop-shadow(0 6px 10px rgba(0,0,0,.18));
-}
-.brand-type {
-  position: absolute;
-  left: clamp(88px, 8.35vw, 104px);
-  top: clamp(54px, 5.15vw, 61px);
-  z-index: 2;
-  display: grid;
-  justify-items: start;
-  gap: 7px;
-  line-height: 1;
-}
-.brand-name {
-  display: block;
-  color: #0a2a5b;
-  font-family: "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", "Arial Black", Arial, Helvetica, sans-serif;
-  font-size: clamp(1.48rem, 2.52vw, 1.92rem);
-  font-weight: 900;
-  letter-spacing: .155em;
-  line-height: .84;
-  text-transform: uppercase;
-  transform: skewX(-4deg);
-  transform-origin: left center;
-  background: linear-gradient(96deg, #061b42 0%, #0a2d62 46%, #155c9d 72%, #4e8cc7 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow:
-    0 1px 0 rgba(255,255,255,.55),
-    0 10px 18px rgba(10,45,98,.08);
-}
-.brand-sa {
-  display: grid;
-  grid-template-columns: minmax(36px, 1fr) auto minmax(36px, 1fr);
-  align-items: center;
-  gap: 10px;
-  width: min(100%, 214px);
-  color: var(--gold-dark);
-  font-family: "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", Arial, Helvetica, sans-serif;
-  font-size: clamp(.66rem, 1.18vw, .92rem);
-  font-weight: 800;
-  letter-spacing: .34em;
-}
-.brand-sa span {
-  height: 1px;
-  background: linear-gradient(90deg, rgba(185,134,47,0), rgba(185,134,47,.78));
-}
-.brand-sa span:last-child {
-  background: linear-gradient(90deg, rgba(185,134,47,.78), rgba(185,134,47,0));
-}
-.hero-brand:hover .wordmark-logo,
-.wordmark-logo:hover {
-  animation: logo-glow-pulse 1.9s ease-in-out infinite;
-  transform: translateZ(0) scale(1.035);
-  filter:
-    contrast(1.12)
-    saturate(1.12)
-    drop-shadow(0 0 8px rgba(58,154,255,.58))
-    drop-shadow(0 0 22px rgba(58,154,255,.34))
-    drop-shadow(0 10px 18px rgba(0,0,0,.22));
-}
-.hero-brand:hover .brand-name {
-  text-shadow:
-    0 1px 0 rgba(255,255,255,.65),
-    0 0 18px rgba(58,154,255,.16);
+    saturate(1.08)
+    drop-shadow(0 0 14px rgba(58,154,255,.18))
+    drop-shadow(0 12px 20px rgba(0,0,0,.12));
 }
 .brand-mission {
   position: relative;
   z-index: 1;
-  max-width: 250px;
+  max-width: 238px;
   margin: 0;
-  padding: 0 0 0 clamp(12px, 1.5vw, 18px);
+  padding: 0 0 0 clamp(10px, 1.35vw, 16px);
   border-left: 1px solid rgba(185,134,47,.36);
   color: rgba(17,24,39,.76);
   font-family: Georgia, "Times New Roman", serif;
@@ -1616,13 +1550,12 @@ address a { color: #fff; font-weight: 800; }
   .product-card,
   .product-card img,
   .nav-brand,
-  .wordmark-logo,
+  .brand-lockup-image,
   .footer-logo {
     transition: none;
   }
   .nav-brand,
-  .hero-brand:hover .wordmark-logo,
-  .wordmark-logo:hover,
+  .hero-brand:hover .brand-lockup-image,
   .footer-logo:hover {
     animation: none;
   }
@@ -1693,31 +1626,15 @@ address a { color: #fff; font-weight: 800; }
   .hero-brand {
     gap: 12px;
     width: 100%;
+    max-width: 100%;
     grid-template-columns: 1fr;
     justify-items: start;
     padding: 12px 14px;
     align-items: center;
     border-radius: 8px;
   }
-  .brand-lockup {
-    width: 300px;
-    min-height: 106px;
-  }
-  .wordmark-logo {
-    width: 100px;
-  }
-  .brand-type {
-    left: 82px;
-    top: 48px;
-  }
-  .brand-name {
-    font-size: 1.34rem;
-    letter-spacing: .135em;
-  }
-  .brand-sa {
-    width: 180px;
-    font-size: .62rem;
-    letter-spacing: .3em;
+  .brand-lockup-image {
+    width: min(100%, 292px);
   }
   .brand-mission {
     display: block;
