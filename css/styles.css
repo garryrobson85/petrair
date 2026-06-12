@@ -340,15 +340,15 @@ a { color: inherit; }
 }
 .brand-lockup {
   position: relative;
-  width: clamp(286px, 31vw, 360px);
-  min-height: clamp(124px, 13vw, 152px);
+  width: clamp(334px, 34vw, 420px);
+  min-height: clamp(128px, 13vw, 154px);
 }
 .wordmark-logo {
   position: absolute;
   left: 0;
   top: 0;
   z-index: 1;
-  width: clamp(118px, 12vw, 148px);
+  width: clamp(118px, 11vw, 140px);
   height: auto;
   image-rendering: -webkit-optimize-contrast;
   transform: translateZ(0);
@@ -362,8 +362,8 @@ a { color: inherit; }
 }
 .brand-type {
   position: absolute;
-  left: clamp(82px, 8.4vw, 104px);
-  top: clamp(50px, 5vw, 62px);
+  left: clamp(128px, 12.3vw, 154px);
+  top: clamp(64px, 6.1vw, 76px);
   z-index: 2;
   display: grid;
   justify-items: start;
@@ -374,15 +374,12 @@ a { color: inherit; }
   display: block;
   color: #0a2a5b;
   font-family: "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", "Arial Black", Arial, Helvetica, sans-serif;
-  font-size: clamp(1.55rem, 3vw, 2.32rem);
+  font-size: clamp(1.44rem, 2.55vw, 2rem);
   font-weight: 900;
-  letter-spacing: .18em;
-  line-height: .82;
+  letter-spacing: .2em;
+  line-height: .86;
   text-transform: uppercase;
-  background: linear-gradient(90deg, #061b42 0%, #123d78 58%, #1671c5 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: #0a2d62;
   text-shadow: 0 1px 0 rgba(255,255,255,.55);
 }
 .brand-sa {
@@ -390,7 +387,7 @@ a { color: inherit; }
   grid-template-columns: minmax(36px, 1fr) auto minmax(36px, 1fr);
   align-items: center;
   gap: 9px;
-  width: min(100%, 190px);
+  width: min(100%, 228px);
   color: rgba(65,72,80,.86);
   font-family: "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", Arial, Helvetica, sans-serif;
   font-size: clamp(.64rem, 1.15vw, .9rem);
@@ -1696,22 +1693,22 @@ address a { color: #fff; font-weight: 800; }
     border-radius: 8px;
   }
   .brand-lockup {
-    width: 286px;
-    min-height: 116px;
+    width: 318px;
+    min-height: 118px;
   }
   .wordmark-logo {
-    width: 106px;
+    width: 104px;
   }
   .brand-type {
-    left: 74px;
-    top: 45px;
+    left: 118px;
+    top: 55px;
   }
   .brand-name {
-    font-size: 1.55rem;
-    letter-spacing: .16em;
+    font-size: 1.34rem;
+    letter-spacing: .17em;
   }
   .brand-sa {
-    width: 160px;
+    width: 190px;
     font-size: .64rem;
     letter-spacing: .28em;
   }
