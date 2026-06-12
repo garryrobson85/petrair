@@ -57,9 +57,9 @@ a { color: inherit; }
   align-items: center;
   min-height: 38px;
   overflow: hidden;
-  background: #162235;
+  background: #26384d;
   color: #eef3f8;
-  border-top: 1px solid rgba(255,255,255,.08);
+  border-top: 1px solid rgba(255,255,255,.14);
 }
 .ticker-label {
   flex: 0 0 auto;
@@ -132,8 +132,8 @@ a { color: inherit; }
   position: sticky;
   top: 0;
   z-index: 30;
-  background: rgba(8,13,22,.94);
-  border-bottom: 1px solid rgba(255,255,255,.08);
+  background: rgba(30,45,63,.96);
+  border-bottom: 1px solid rgba(255,255,255,.14);
   backdrop-filter: blur(18px);
 }
 .nav {
@@ -216,16 +216,16 @@ a { color: inherit; }
 }
 .menu a {
   text-decoration: none;
-  color: #d6dde7;
+  color: #edf2f7;
   font-size: .84rem;
   font-weight: 800;
 }
-.menu a:hover { color: #fff; }
+.menu a:hover { color: #f7d476; }
 .language-label {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #b8c1ce;
+  color: #d7dee8;
   font-size: .66rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -233,9 +233,9 @@ a { color: inherit; }
 }
 .language-label select {
   min-height: 32px;
-  border: 1px solid rgba(255,255,255,.16);
+  border: 1px solid rgba(255,255,255,.22);
   border-radius: 6px;
-  background: rgba(255,255,255,.08);
+  background: rgba(255,255,255,.12);
   color: #fff;
   padding: 5px 9px;
   font: inherit;
