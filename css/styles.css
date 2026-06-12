@@ -316,11 +316,8 @@ a { color: inherit; }
   z-index: 25;
   font-weight: 900;
   text-transform: none;
-  background:
-    linear-gradient(135deg, rgba(255,255,255,.98) 0%, rgba(251,250,246,.96) 58%, rgba(236,229,213,.86) 100%),
-    radial-gradient(circle at 18% 22%, rgba(58,154,255,.13), transparent 32%),
-    linear-gradient(90deg, rgba(185,134,47,.16), transparent 44%);
-  border: 1px solid rgba(255,255,255,.68);
+  background: #fbfaf6;
+  border: 1px solid rgba(255,255,255,.78);
   border-left: 4px solid rgba(185,134,47,.95);
   border-radius: 8px;
   box-shadow:
@@ -343,20 +340,21 @@ a { color: inherit; }
   display: block;
   width: clamp(246px, 29vw, 332px);
   height: auto;
-  mix-blend-mode: multiply;
   filter:
-    contrast(1.06)
-    saturate(1.04)
-    drop-shadow(0 10px 18px rgba(0,0,0,.1));
-  transition: filter .28s ease, transform .28s ease;
+    contrast(1.03)
+    saturate(1.02)
+    drop-shadow(0 10px 18px rgba(0,0,0,.08));
+  transition: filter .28s ease, transform .28s ease, opacity .28s ease;
 }
 .hero-brand:hover .brand-lockup-image {
   transform: translateY(-1px);
   filter:
     contrast(1.08)
-    saturate(1.08)
-    drop-shadow(0 0 14px rgba(58,154,255,.18))
-    drop-shadow(0 12px 20px rgba(0,0,0,.12));
+    saturate(1.1)
+    drop-shadow(0 0 10px rgba(58,154,255,.34))
+    drop-shadow(0 0 24px rgba(58,154,255,.22))
+    drop-shadow(0 0 16px rgba(185,134,47,.18))
+    drop-shadow(0 14px 24px rgba(0,0,0,.14));
 }
 .brand-mission {
   position: relative;
