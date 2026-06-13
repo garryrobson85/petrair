@@ -17,6 +17,15 @@
 }
 
 @font-face {
+  font-family: "Azonix";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    url("../fonts/Azonix.otf") format("opentype");
+}
+
+@font-face {
   font-family: "FoobarPro";
   font-style: normal;
   font-weight: 400;
@@ -329,13 +338,10 @@ a { color: inherit; }
 .hero-brand {
   position: relative;
   width: fit-content;
-  max-width: min(100%, 720px);
+  max-width: min(100%, 560px);
   margin: 0;
-  display: grid;
-  grid-template-columns: auto minmax(190px, 250px);
-  align-items: center;
-  gap: clamp(12px, 2.2vw, 20px);
-  padding: 10px clamp(14px, 2.2vw, 22px) 10px 13px;
+  display: block;
+  padding: clamp(16px, 2.4vw, 24px) clamp(22px, 3.4vw, 42px) clamp(18px, 2.4vw, 26px);
   max-width: 100%;
   color: var(--ink);
   z-index: 25;
@@ -363,16 +369,17 @@ a { color: inherit; }
 }
 .brand-lockup {
   position: relative;
-  width: clamp(306px, 31vw, 354px);
-  min-height: clamp(118px, 11.6vw, 134px);
+  width: clamp(292px, 34vw, 420px);
+  min-height: 0;
+  display: grid;
+  justify-items: center;
 }
 .brand-p-logo {
-  position: absolute;
-  left: 0;
-  top: 0;
+  position: relative;
   z-index: 1;
-  width: clamp(120px, 12vw, 142px);
+  width: clamp(112px, 13vw, 158px);
   height: auto;
+  margin: 0 auto clamp(6px, .8vw, 10px);
   image-rendering: -webkit-optimize-contrast;
   transform: translateZ(0);
   transform-origin: center;
@@ -395,43 +402,59 @@ a { color: inherit; }
     drop-shadow(0 10px 18px rgba(0,0,0,.22));
 }
 .brand-type {
-  position: absolute;
-  left: clamp(58px, 5.9vw, 70px);
-  top: clamp(82px, 7.8vw, 92px);
+  position: relative;
   z-index: 2;
   display: grid;
-  justify-items: start;
-  gap: 8px;
+  justify-items: center;
+  gap: clamp(6px, .8vw, 9px);
   line-height: 1;
+  width: 100%;
 }
 .brand-name {
   display: block;
   color: #092a5f;
-  font-family: "FoobarPro", "Gugi", "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", "Arial Black", Arial, Helvetica, sans-serif;
-  font-size: clamp(1.45rem, 2.6vw, 1.95rem);
+  font-family: "Azonix", "FoobarPro", "Gugi", "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", "Arial Black", Arial, Helvetica, sans-serif;
+  font-size: clamp(1.9rem, 4.1vw, 3.25rem);
   font-weight: 400;
-  letter-spacing: .1em;
+  letter-spacing: .16em;
   line-height: .9;
   text-shadow: 0 1px 0 rgba(255,255,255,.55);
 }
 .brand-sa {
   display: grid;
-  grid-template-columns: minmax(38px, 1fr) auto minmax(38px, 1fr);
+  grid-template-columns: minmax(70px, 1fr) auto minmax(70px, 1fr);
   align-items: center;
-  gap: 10px;
-  width: min(100%, 216px);
-  color: var(--gold-dark);
-  font-family: "FoobarPro", "Gugi", "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", Arial, Helvetica, sans-serif;
-  font-size: clamp(.68rem, 1.12vw, .88rem);
+  gap: clamp(12px, 2vw, 22px);
+  width: min(100%, 330px);
+  color: #5f6570;
+  font-family: "Azonix", "FoobarPro", "Gugi", "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", Arial, Helvetica, sans-serif;
+  font-size: clamp(.72rem, 1.28vw, 1rem);
   font-weight: 400;
-  letter-spacing: .28em;
+  letter-spacing: .34em;
 }
 .brand-sa span {
   height: 1px;
-  background: linear-gradient(90deg, rgba(185,134,47,0), rgba(185,134,47,.78));
+  background: linear-gradient(90deg, rgba(95,101,112,0), rgba(95,101,112,.72));
 }
 .brand-sa span:last-child {
-  background: linear-gradient(90deg, rgba(185,134,47,.78), rgba(185,134,47,0));
+  background: linear-gradient(90deg, rgba(95,101,112,.72), rgba(95,101,112,0));
+}
+.brand-diamond {
+  width: 8px;
+  height: 8px;
+  margin: 4px 0 2px;
+  background: #14255d;
+  transform: rotate(45deg);
+}
+.brand-trading-line {
+  display: block;
+  color: #141b2b;
+  font-size: clamp(.54rem, .88vw, .72rem);
+  font-weight: 900;
+  letter-spacing: .36em;
+  line-height: 1.45;
+  text-align: center;
+  text-transform: uppercase;
 }
 .brand-mission {
   position: relative;
@@ -1700,34 +1723,34 @@ address a { color: #fff; font-weight: 800; }
     padding-top: 14px;
   }
   .hero-brand {
-    gap: 12px;
     width: 100%;
     max-width: 100%;
-    grid-template-columns: 1fr;
     justify-items: start;
-    padding: 12px 14px;
+    padding: 16px 14px 18px;
     align-items: center;
     border-radius: 8px;
   }
   .brand-lockup {
-    width: 300px;
-    min-height: 116px;
+    width: min(100%, 330px);
   }
   .brand-p-logo {
-    width: 106px;
+    width: 112px;
   }
   .brand-type {
-    left: 54px;
-    top: 76px;
+    width: 100%;
   }
   .brand-name {
-    font-size: 1.35rem;
-    letter-spacing: .12em;
+    font-size: 2rem;
+    letter-spacing: .14em;
   }
   .brand-sa {
-    width: 186px;
-    font-size: .62rem;
+    width: min(100%, 250px);
+    font-size: .68rem;
     letter-spacing: .3em;
+  }
+  .brand-trading-line {
+    font-size: .54rem;
+    letter-spacing: .22em;
   }
   .brand-mission {
     display: block;
