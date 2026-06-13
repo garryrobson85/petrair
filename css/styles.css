@@ -22,10 +22,7 @@
   font-weight: 400;
   font-display: swap;
   src:
-    url("../fonts/FoobarproRegular-zILD") format("truetype"),
-    url("../fonts/FoobarproRegular-zILD.ttf") format("truetype"),
-    url("../fonts/FoobarproRegular-zILD.otf") format("opentype"),
-    url("../fonts/FoobarproRegular-zILD.woff") format("woff");
+    url("../fonts/FoobarproRegular-zlLD.otf") format("opentype");
 }
 
 @font-face {
