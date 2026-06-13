@@ -338,13 +338,13 @@ a { color: inherit; }
 .hero-brand {
   position: relative;
   width: fit-content;
-  max-width: min(100%, 760px);
+  max-width: min(100%, 860px);
   margin: 0;
   display: grid;
-  grid-template-columns: auto minmax(190px, 250px);
+  grid-template-columns: auto minmax(250px, 330px);
   align-items: center;
-  gap: clamp(16px, 2.8vw, 30px);
-  padding: 14px clamp(18px, 3vw, 32px) 14px clamp(16px, 2.6vw, 24px);
+  gap: clamp(22px, 3.4vw, 42px);
+  padding: 10px clamp(26px, 4vw, 46px) 10px clamp(22px, 3.4vw, 34px);
   max-width: 100%;
   color: var(--ink);
   z-index: 25;
@@ -372,7 +372,7 @@ a { color: inherit; }
 }
 .brand-lockup {
   position: relative;
-  width: clamp(220px, 24vw, 310px);
+  width: clamp(220px, 21vw, 275px);
   min-height: 0;
   display: grid;
   justify-items: center;
@@ -408,7 +408,7 @@ a { color: inherit; }
 .brand-mission {
   position: relative;
   z-index: 1;
-  max-width: 238px;
+  max-width: 285px;
   margin: 0;
   padding: 0 0 0 clamp(10px, 1.35vw, 16px);
   border-left: 1px solid rgba(185,134,47,.36);
@@ -1680,8 +1680,8 @@ address a { color: #fff; font-weight: 800; }
     border-radius: 8px;
   }
   .brand-lockup {
-    width: min(100%, 340px);
-    min-height: 120px;
+    width: min(100%, 255px);
+    min-height: 0;
   }
   .brand-mission {
     display: block;
