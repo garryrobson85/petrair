@@ -338,13 +338,13 @@ a { color: inherit; }
 .hero-brand {
   position: relative;
   width: fit-content;
-  max-width: min(100%, 860px);
+  max-width: min(100%, 940px);
   margin: 0;
   display: grid;
-  grid-template-columns: auto minmax(250px, 330px);
+  grid-template-columns: auto minmax(340px, 430px);
   align-items: center;
-  gap: clamp(22px, 3.4vw, 42px);
-  padding: 10px clamp(26px, 4vw, 46px) 10px clamp(22px, 3.4vw, 34px);
+  gap: clamp(28px, 4.2vw, 58px);
+  padding: 6px clamp(34px, 5vw, 62px) 6px clamp(26px, 4vw, 42px);
   max-width: 100%;
   color: var(--ink);
   z-index: 25;
@@ -372,7 +372,7 @@ a { color: inherit; }
 }
 .brand-lockup {
   position: relative;
-  width: clamp(220px, 21vw, 275px);
+  width: clamp(198px, 18.5vw, 242px);
   min-height: 0;
   display: grid;
   justify-items: center;
@@ -408,7 +408,7 @@ a { color: inherit; }
 .brand-mission {
   position: relative;
   z-index: 1;
-  max-width: 285px;
+  max-width: 340px;
   margin: 0;
   padding: 0 0 0 clamp(10px, 1.35vw, 16px);
   border-left: 1px solid rgba(185,134,47,.36);
@@ -820,17 +820,17 @@ a { color: inherit; }
   margin: 0;
   border-radius: 8px;
   overflow: hidden;
-  opacity: .75;
+  opacity: 1;
   box-shadow: 0 28px 90px rgba(17,24,39,.12);
 }
 .supply-art::before {
   content: "";
   position: absolute;
-  top: 26px;
-  left: 28px;
+  top: 10px;
+  left: 18px;
   z-index: 2;
-  width: 74px;
-  height: 68px;
+  width: 58px;
+  height: 52px;
   border-radius: 10px;
   background:
     rgba(8,13,22,.58)
@@ -844,8 +844,8 @@ a { color: inherit; }
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(255,255,255,.72), rgba(255,255,255,.2) 48%, rgba(255,255,255,.68)),
-    linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.76));
+    linear-gradient(90deg, rgba(255,255,255,.5), rgba(255,255,255,.08) 48%, rgba(255,255,255,.46)),
+    linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,.42));
 }
 .supply-art img {
   width: 100%;
@@ -1675,12 +1675,12 @@ address a { color: #fff; font-weight: 800; }
     width: 100%;
     max-width: 100%;
     justify-items: start;
-    padding: 16px 14px 18px;
+    padding: 10px 14px 12px;
     align-items: center;
     border-radius: 8px;
   }
   .brand-lockup {
-    width: min(100%, 255px);
+    width: min(100%, 225px);
     min-height: 0;
   }
   .brand-mission {
