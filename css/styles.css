@@ -338,10 +338,13 @@ a { color: inherit; }
 .hero-brand {
   position: relative;
   width: fit-content;
-  max-width: min(100%, 560px);
+  max-width: min(100%, 760px);
   margin: 0;
-  display: block;
-  padding: clamp(16px, 2.4vw, 24px) clamp(22px, 3.4vw, 42px) clamp(18px, 2.4vw, 26px);
+  display: grid;
+  grid-template-columns: auto minmax(190px, 250px);
+  align-items: center;
+  gap: clamp(16px, 2.8vw, 30px);
+  padding: 14px clamp(18px, 3vw, 32px) 14px clamp(16px, 2.6vw, 24px);
   max-width: 100%;
   color: var(--ink);
   z-index: 25;
@@ -369,15 +372,16 @@ a { color: inherit; }
 }
 .brand-lockup {
   position: relative;
-  width: clamp(292px, 34vw, 420px);
-  min-height: 0;
+  width: clamp(286px, 30vw, 380px);
+  min-height: clamp(126px, 13vw, 154px);
   display: grid;
   justify-items: center;
+  transition: filter .28s ease, transform .28s ease;
 }
 .brand-p-logo {
   position: relative;
   z-index: 1;
-  width: clamp(112px, 13vw, 158px);
+  width: clamp(100px, 10.8vw, 128px);
   height: auto;
   margin: 0 auto clamp(6px, .8vw, 10px);
   image-rendering: -webkit-optimize-contrast;
@@ -392,8 +396,11 @@ a { color: inherit; }
 }
 .hero-brand:hover .brand-p-logo,
 .brand-p-logo:hover {
-  animation: logo-glow-pulse 1.9s ease-in-out infinite;
   transform: translateZ(0) scale(1.035);
+}
+.hero-brand:hover .brand-lockup,
+.brand-lockup:hover {
+  animation: logo-glow-pulse 1.9s ease-in-out infinite;
   filter:
     contrast(1.12)
     saturate(1.12)
@@ -414,7 +421,7 @@ a { color: inherit; }
   display: block;
   color: #092a5f;
   font-family: "Azonix", "FoobarPro", "Gugi", "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", "Arial Black", Arial, Helvetica, sans-serif;
-  font-size: clamp(1.9rem, 4.1vw, 3.25rem);
+  font-size: clamp(1.7rem, 3.2vw, 2.58rem);
   font-weight: 400;
   letter-spacing: .16em;
   line-height: .9;
@@ -422,13 +429,13 @@ a { color: inherit; }
 }
 .brand-sa {
   display: grid;
-  grid-template-columns: minmax(70px, 1fr) auto minmax(70px, 1fr);
+  grid-template-columns: minmax(58px, 1fr) auto minmax(58px, 1fr);
   align-items: center;
   gap: clamp(12px, 2vw, 22px);
-  width: min(100%, 330px);
+  width: min(100%, 288px);
   color: #5f6570;
   font-family: "Azonix", "FoobarPro", "Gugi", "Eurostile Extended", "Microgramma D Extended", "Bank Gothic", Arial, Helvetica, sans-serif;
-  font-size: clamp(.72rem, 1.28vw, 1rem);
+  font-size: clamp(.66rem, 1.08vw, .84rem);
   font-weight: 400;
   letter-spacing: .34em;
 }
@@ -438,23 +445,6 @@ a { color: inherit; }
 }
 .brand-sa span:last-child {
   background: linear-gradient(90deg, rgba(95,101,112,.72), rgba(95,101,112,0));
-}
-.brand-diamond {
-  width: 8px;
-  height: 8px;
-  margin: 4px 0 2px;
-  background: #14255d;
-  transform: rotate(45deg);
-}
-.brand-trading-line {
-  display: block;
-  color: #141b2b;
-  font-size: clamp(.54rem, .88vw, .72rem);
-  font-weight: 900;
-  letter-spacing: .36em;
-  line-height: 1.45;
-  text-align: center;
-  text-transform: uppercase;
 }
 .brand-mission {
   position: relative;
@@ -1732,6 +1722,7 @@ address a { color: #fff; font-weight: 800; }
   }
   .brand-lockup {
     width: min(100%, 330px);
+    min-height: 126px;
   }
   .brand-p-logo {
     width: 112px;
@@ -1747,10 +1738,6 @@ address a { color: #fff; font-weight: 800; }
     width: min(100%, 250px);
     font-size: .68rem;
     letter-spacing: .3em;
-  }
-  .brand-trading-line {
-    font-size: .54rem;
-    letter-spacing: .22em;
   }
   .brand-mission {
     display: block;
